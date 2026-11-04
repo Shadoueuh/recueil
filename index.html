@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recueil de sottises insensées et incongrues</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="barre">
+  <a class="marque" href="#accueil">Sottises insensées</a>
+  <div class="outils">
+    <a class="nav-accueil" id="nav-galerie" href="#galerie">Galerie</a>
+    <a class="nav-accueil" id="nav-auteurs" href="#auteurs">Auteurs</a>
+    <a class="outil" id="retour-barre" href="#accueil" hidden>Sommaire</a>
+    <button class="outil" id="taille" type="button" hidden aria-label="Changer la taille du texte">Aa</button>
+    <button class="outil" id="theme" type="button" aria-label="Passer en mode nuit">Nuit</button>
+  </div>
+  <div class="progression" id="progression"></div>
+</header>
+
+<main>
+  <!-- ACCUEIL -->
+  <section id="vue-accueil">
+    <div class="hero">
+      <h1 class="titre-hero" aria-label="Recueil de sottises insensées et incongrues">
+        <span class="mot">Recueil</span><span class="mot">de</span><span class="mot">sottises</span><span class="mot">insensées</span><span class="mot">et</span><span class="mot">incongrues</span>
+      </h1>
+      <p class="chapeau">Des textes longs, démesurés et parfaitement inutiles, écrits à quatre mains par Jules et Simon. Choisissez-en un, installez-vous, et ne cherchez pas de logique.</p>
+    </div>
+
+    <div class="entete-section">
+      <h2>Sommaire</h2>
+      <div class="filtres" role="group" aria-label="Filtrer par auteur" id="filtres"></div>
+    </div>
+    <ol class="sommaire" id="sommaire"></ol>
+
+    <div id="bloc-galerie">
+      <div class="entete-section" id="galerie"><h2>Galerie des affiches</h2></div>
+      <ul class="galerie" id="liste-galerie"></ul>
+    </div>
+
+    <div class="entete-section" id="auteurs"><h2>Les auteurs</h2></div>
+    <div class="auteurs" id="auteurs"></div>
+  </section>
+
+  <!-- LECTURE -->
+  <article id="vue-lecture" hidden>
+    <div class="lecture">
+      <a class="retour" href="#accueil">Retour au sommaire</a>
+      <h1 id="l-titre"></h1>
+      <p class="infos" id="l-infos"></p>
+      <div class="affiche-texte" id="l-affiche" hidden></div>
+      <div class="corps" id="l-corps"></div>
+      <p class="signature" id="l-signature"></p>
+    </div>
+    <nav class="suite" id="l-suite" aria-label="Autres textes"></nav>
+    <p class="fin"><a class="retour" href="#accueil">Retour au sommaire</a></p>
+  </article>
+</main>
+
+<dialog class="visionneuse" id="visionneuse" aria-label="Affiche en grand">
+  <div id="v-image"></div>
+  <div class="bas"><span id="v-legende"></span><button type="button" id="v-fermer">Fermer</button></div>
+</dialog>
+
+<footer>Recueil de sottises insensées et incongrues · Jules &amp; Simon</footer>
+
+<script>
+/* =========================================================
+   VOS TEXTES
+   Chaque texte est un fichier .txt dans le dossier « textes ».
+   Écrivez-y normalement : une ligne vide entre deux paragraphes.
+
+   - titre   : le titre affiché
+   - auteur  : doit correspondre à un nom dans AUTEURS
+   - fichier : le chemin du .txt
+   - affiche (facultatif) : le chemin de l'image dans « affiches ».
+     Un texte avec une affiche apparaît dans la galerie et reçoit
+     une vignette encadrée dans le sommaire.
+
+   Attention : les .txt sont chargés avec fetch, qui ne marche pas
+   en ouvrant index.html par double-clic. En local, utilisez
+   l'extension Live Server de VS Code (clic droit > Open with Live
+   Server). En ligne (Netlify, GitHub Pages), ça marche tout seul.
+   ========================================================= */
+
+const AUTEURS = {
+  Jules: "Bio à écrire. Quelques lignes pour dire qui vous êtes, ce que vous écrivez et pourquoi vos textes sont aussi longs.",
+  Simon: "Bio à écrire. Quelques lignes pour dire qui vous êtes, ce que vous écrivez et pourquoi vos textes sont aussi longs."
+};
+
+const TEXTES = [
+  {titre :"Le Kirkversary",                 auteur: "Jules", fichier: "recueil/kirkversary.txt",                 affiche: "affiches/kirkversary.jpg" },
+  { titre: "Chasse à l'Homme Cosmique",          auteur: "Jules", fichier: "textes/chasse-a-l-homme-cosmique.txt",       affiche: "affiches/chasse_a_l_homme.png" },
+  { titre: "La Route de la Pénitence Infernale", auteur: "Jules", fichier: "textes/route-de-la-penitence-infernale.txt", affiche: "affiches/route_infernale.png" },
+  { titre: "Le démantèlement galactique",        auteur: "Jules", fichier: "textes/demantelement-galactique.txt" },
+  { titre: "La Farandole Saturnienne",           auteur: "Simon", fichier: "textes/farandole-saturnienne.txt",           affiche: "affiches/farandole.png" },
+  { titre: "La Parade d'Astérion",               auteur: "Simon", fichier: "textes/parade-d-asterion.txt" },
+  { titre: "La baignoire cosmique",              auteur: "Simon", fichier: "textes/baignoire-cosmique.txt" },
+];
+
+/* ========= Le reste fait tourner le site ========= */
+
+const slug = t => "texte-" + t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const paragraphes = t => t.trim().split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+const nbMots = t => t.trim() ? t.trim().split(/\s+/).length : 0;
+const tempsLecture = t => Math.max(1, Math.round(nbMots(t) / 230));
+const echappe = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+TEXTES.forEach((t, i) => { t.id = slug(t.titre); t.index = i; });
+
+const $ = id => document.getElementById(id);
+let filtreActif = "Tous";
+
+function rendreFiltres() {
+  const noms = ["Tous", ...Object.keys(AUTEURS)];
+  $("filtres").innerHTML = noms.map(n =>
+    `<button class="filtre" type="button" aria-pressed="${n === filtreActif}" data-nom="${echappe(n)}">${echappe(n)}</button>`
+  ).join("");
+  $("filtres").querySelectorAll("button").forEach(b => b.onclick = () => {
+    filtreActif = b.dataset.nom; rendreFiltres(); rendreSommaire();
+  });
+}
+
+function rendreSommaire() {
+  const liste = TEXTES.filter(t => filtreActif === "Tous" || t.auteur === filtreActif);
+  $("sommaire").innerHTML = liste.map(t => {
+    const premier = paragraphes(t.contenu)[0];
+    const debut = premier ? premier.split(/\s+/).slice(0, 26).join(" ") + "…" : "Texte à venir.";
+    return `<li><a class="ligne" href="#${t.id}">
+      <span class="num">${String(t.index + 1).padStart(2, "0")}</span>
+      <h3>${echappe(t.titre)}</h3>
+      <span class="meta">${echappe(t.auteur)}, ${tempsLecture(t.contenu)} min${t.affiche ? ", avec affiche" : ""}</span>
+      ${t.affiche ? cadre(t, "vignette") : ""}
+      <p class="extrait">${echappe(debut)}</p>
+    </a></li>`;
+  }).join("");
+}
+
+/* Une affiche dans son cadre. Si l'image ne charge pas, on affiche le titre à la place. */
+function cadre(t, classe = "") {
+  return `<span class="cadre ${classe}">
+    <img src="${echappe(t.affiche)}" alt="Affiche de ${echappe(t.titre)}" loading="lazy" onerror="this.parentNode.classList.add('vide')">
+    <span class="remplace">${echappe(t.titre)}</span>
+  </span>`;
+}
+
+function rendreGalerie() {
+  const avec = TEXTES.filter(t => t.affiche);
+  $("bloc-galerie").hidden = avec.length === 0;
+  $("nav-galerie").hidden = avec.length === 0;
+  $("liste-galerie").innerHTML = avec.map(t => `<li>
+    <button type="button" data-id="${t.id}" aria-label="Agrandir l'affiche de ${echappe(t.titre)}">${cadre(t)}</button>
+    <h3>${echappe(t.titre)}</h3>
+    <a href="#${t.id}">Lire le texte</a>
+  </li>`).join("");
+  $("liste-galerie").querySelectorAll("button").forEach(b => b.onclick = () => ouvrirAffiche(TEXTES.find(x => x.id === b.dataset.id)));
+}
+
+function ouvrirAffiche(t) {
+  const img = new Image();
+  img.alt = "Affiche de " + t.titre;
+  img.onerror = () => { $("v-image").innerHTML = `<p class="vide-message">L'image « ${echappe(t.affiche)} » est introuvable. Vérifiez qu'elle est bien dans le dossier à côté de index.html.</p>`; };
+  img.src = t.affiche;
+  $("v-image").replaceChildren(img);
+  $("v-legende").textContent = t.titre + ", par " + t.auteur;
+  const d = $("visionneuse");
+  if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+}
+$("v-fermer").onclick = () => $("visionneuse").close();
+$("visionneuse").addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+
+function rendreAuteurs() {
+  $("auteurs").innerHTML = Object.entries(AUTEURS).map(([nom, bio]) => {
+    const n = TEXTES.filter(t => t.auteur === nom).length;
+    return `<div class="auteur"><h3>${echappe(nom)}</h3><p>${echappe(bio)}</p>
+      <span class="compte">${n} texte${n > 1 ? "s" : ""} dans le recueil</span></div>`;
+  }).join("");
+}
+
+function rendreLecture(t) {
+  $("l-titre").textContent = t.titre;
+  const m = nbMots(t.contenu);
+  $("l-infos").innerHTML = `Par <strong>${echappe(t.auteur)}</strong>, ${m.toLocaleString("fr-FR")} mots, environ ${tempsLecture(t.contenu)} min de lecture`;
+  $("l-affiche").hidden = !t.affiche;
+  if (t.affiche) {
+    $("l-affiche").innerHTML = `<button type="button" aria-label="Agrandir l'affiche">${cadre(t)}</button><span>L'affiche de ce texte. Cliquez pour l'agrandir.</span>`;
+    $("l-affiche").querySelector("button").onclick = () => ouvrirAffiche(t);
+  }
+  const paras = paragraphes(t.contenu);
+  $("l-corps").innerHTML = paras.length ? paras.map(p => `<p>${echappe(p)}</p>`).join("") : "<p>Ce texte est encore vide.</p>";
+  $("l-signature").textContent = "Par " + t.auteur;
+  const prec = TEXTES[t.index - 1], suiv = TEXTES[t.index + 1];
+  $("l-suite").innerHTML =
+    (prec ? `<a href="#${prec.id}"><small>Texte précédent</small><span>${echappe(prec.titre)}</span></a>` : "") +
+    (suiv ? `<a class="suivant" href="#${suiv.id}"><small>Texte suivant</small><span>${echappe(suiv.titre)}</span></a>` : "");
+  document.title = t.titre + " · Sottises insensées";
+}
+
+function router() {
+  const h = location.hash.slice(1);
+  const t = TEXTES.find(x => x.id === h);
+  $("vue-accueil").hidden = !!t;
+  $("vue-lecture").hidden = !t;
+  $("taille").hidden = !t;
+  $("retour-barre").hidden = !t;
+  $("nav-auteurs").hidden = !!t;
+  $("nav-galerie").hidden = !!t || !TEXTES.some(x => x.affiche);
+  if (t) rendreLecture(t);
+  else document.title = "Recueil de sottises insensées et incongrues";
+  const ancre = (h === "galerie" || h === "auteurs") && document.getElementById(h);
+  if (ancre) ancre.scrollIntoView();
+  else window.scrollTo(0, 0);
+  majProgression();
+}
+
+function majProgression() {
+  if ($("vue-lecture").hidden) { $("progression").style.width = 0; return; }
+  const max = document.documentElement.scrollHeight - innerHeight;
+  $("progression").style.width = (max > 0 ? Math.min(100, scrollY / max * 100) : 100) + "%";
+}
+
+/* Préférences du lecteur (gardées dans son navigateur si possible) */
+const lire = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const ecrire = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+
+function appliquerTheme(nuit) {
+  document.documentElement.dataset.theme = nuit ? "nuit" : "jour";
+  $("theme").textContent = nuit ? "Jour" : "Nuit";
+  $("theme").setAttribute("aria-label", nuit ? "Passer en mode jour" : "Passer en mode nuit");
+}
+let nuit = lire("theme") ? lire("theme") === "nuit" : matchMedia("(prefers-color-scheme: dark)").matches;
+appliquerTheme(nuit);
+$("theme").onclick = () => { nuit = !nuit; appliquerTheme(nuit); ecrire("theme", nuit ? "nuit" : "jour"); };
+
+const tailles = ["1.05rem", "1.2rem", "1.38rem"];
+let taille = Number(lire("taille") ?? 1) || 1;
+document.documentElement.style.setProperty("--taille-texte", tailles[taille]);
+$("taille").onclick = () => {
+  taille = (taille + 1) % tailles.length;
+  document.documentElement.style.setProperty("--taille-texte", tailles[taille]);
+  ecrire("taille", taille);
+  majProgression();
+};
+
+async function chargerTextes() {
+  await Promise.all(TEXTES.map(async t => {
+    const r = await fetch(t.fichier);
+    if (!r.ok) throw new Error(`Le fichier « ${t.fichier} » est introuvable (erreur ${r.status}).`);
+    t.contenu = (await r.text()).replace(/\r\n/g, "\n");
+  }));
+}
+
+function afficherErreur(message) {
+  $("vue-accueil").hidden = false;
+  $("sommaire").innerHTML = `<li class="erreur"><strong>Les textes n'ont pas pu être chargés.</strong> ${echappe(message)}
+    ${location.protocol === "file:" ? "<br>Vous avez ouvert la page par double-clic : ouvrez-la plutôt avec Live Server dans VS Code." : ""}</li>`;
+}
+
+addEventListener("hashchange", router);
+addEventListener("scroll", majProgression, { passive: true });
+addEventListener("resize", majProgression);
+
+chargerTextes()
+  .then(() => { rendreFiltres(); rendreSommaire(); rendreGalerie(); rendreAuteurs(); router(); })
+  .catch(e => afficherErreur(location.protocol === "file:" ? "Le navigateur bloque la lecture des fichiers .txt en local." : e.message));
+</script>
+</body>
+</html>
