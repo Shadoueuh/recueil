@@ -718,3 +718,45 @@ footer {
     line-height: 1.6;
     list-style: none;
 }
+
+/* Photos des auteurs, à côté de la bio */
+.auteur { display: flex; gap: 1.4rem; align-items: flex-start; }
+.portrait {
+  width: 12rem; flex: none; aspect-ratio: 4 / 5; object-fit: cover;
+  padding: 5px; background: var(--papier); border: 1.5px solid var(--encre);
+  box-shadow: 4px 4px 0 var(--moutarde);
+}
+.auteur:nth-child(odd) .portrait { transform: rotate(-2deg); }
+.auteur:nth-child(even) .portrait { transform: rotate(2deg); }
+@media (max-width: 480px) { .auteur { flex-direction: column; } .portrait { width: 70%; } .auteur h3 { font-size: 2.3rem; } }
+
+
+/* ===== Visionneuse plein écran avec zoom ===== */
+.visionneuse {
+  width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; inset: 0;
+  background: rgba(23, 17, 43, .97); overflow: hidden;
+}
+.visionneuse[open] { display: flex; flex-direction: column; }
+.v-scene {
+  flex: 1; position: relative; overflow: hidden; touch-action: none; cursor: zoom-in; user-select: none;
+}
+.v-scene.zoome { cursor: grab; }
+.v-scene.glisse { cursor: grabbing; }
+.visionneuse #v-image img {
+  position: absolute; left: 0; top: 0; max-width: none; max-height: none; margin: 0; border: 0;
+  transform-origin: 0 0; will-change: transform; -webkit-user-drag: none;
+}
+.visionneuse #v-image .vide-message { margin: 20vh auto 0; }
+.visionneuse .bas {
+  flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem;
+  padding: .8rem clamp(1rem, 3vw, 2rem); margin: 0; color: #ECE8F8; border-top: 1px solid #352C55;
+}
+.v-aide { color: #A9A0C8; font-size: .85rem; flex: 1; }
+.v-boutons { display: flex; gap: .4rem; margin-left: auto; }
+.visionneuse .v-boutons button {
+  background: transparent; color: #ECE8F8; border: 1px solid #4A3F72; border-radius: 999px;
+  padding: .4rem .9rem; cursor: pointer; min-width: 2.4rem;
+}
+.visionneuse .v-boutons button:hover { border-color: #C6C565; }
+.visionneuse .v-boutons #v-fermer { background: #ECE8F8; color: #22183F; border-color: #ECE8F8; }
+@media (max-width: 640px) { .v-aide { display: none; } }
