@@ -41,7 +41,7 @@ const PHOTOS = {
 /* =========================================================
    LE BESTIAIRE
    - nom         : le nom affiché sur la fiche
-   - type        : "Créature", "Lieu" ou "Objet" (ou un type à vous)
+   - type        : "Créature", "Lieu", "Objet", "Châtiment" (ou un type à vous)
    - mots        : les mots à repérer dans les textes. Le premier trouvé
                    devient un lien vers la fiche, et la fiche liste
                    automatiquement les textes où il apparaît.
@@ -71,6 +71,16 @@ const BESTIAIRE = [
     description: "Brique d'argile molle, à façonner à volonté. Indispensable en cas d'ennui morbide pendant une traque cosmique." },
   { nom: "L'unique tube de colle UHU", type: "Objet", mots: ["colle UHU"],
     description: "Seul tube de colle disponible pour bâtir un édifice d'un million de milliards de mètres. À utiliser avec la sagesse cumulée des moines shaolin." },
+  { nom: "Le train bolchévique", type: "Objet", mots: ["train Bolchévique"],
+    description: "Convoi gigantesque dont l'itinéraire et la cargaison peuvent changer du tout au tout sans le moindre préavis. Personne ne sait vraiment qui tient la locomotive." },
+  { nom: "Les cornichons de mer", type: "Créature", mots: ["cornichons de mer"],
+    description: "Espèce marine voyageant en vrac, cargaison d'origine du train bolchévique. On ignore s'ils sont saumurés de naissance." },
+  { nom: "Les châteaux de sable éternels", type: "Châtiment", mots: ["chateaux de sable", "châteaux de sable"],
+    description: "Le sort des candidats malchanceux : chaque atome changé en grain de sable, puis dispersé au gré du vent pour l'éternité." },
+  { nom: "Le podium à vie", type: "Objet", mots: ["podium"],
+    description: "Récompense suprême des vainqueurs d'Indre-et-Loire. Il est formellement interdit d'en descendre, jusqu'à la fin de ses jours." },
+  { nom: "L'apnée éternelle", type: "Châtiment", mots: ["apnée éternelle"],
+    description: "Punition des perdants d'Indre-et-Loire : de l'apnée au fond de la mer Baltique, pour toujours. Aucune remontée n'est prévue au règlement." },
 ];
 
 const TEXTES = [
