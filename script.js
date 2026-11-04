@@ -11,7 +11,7 @@
    1. VOS DONNÉES
 
    VOS TEXTES
-   Chaque texte est un fichier .txt dans le dossier « textes ».
+   Chaque texte est un fichier .txt dans le dossier « recueil ».
    Écrivez-y normalement : une ligne vide entre deux paragraphes.
 
    - titre   : le titre affiché
@@ -80,8 +80,8 @@ const TEXTES = [
   { titre: "Le Démantèlement Galactique", auteur: "Jules", fichier: "recueil/demantelement-galactique.txt" },
   { titre: "Le Tournoi du Lesotho Démoniaque", auteur: "Jules", fichier: "recueil/tournoi-lesotho.txt" },
   { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt" },
-  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt" },
-  { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt" },
+  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", affiche:'affiches/secte_hindu.png' },
+  { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", affiche:'affiches/tournoi-membres.png'},
   { titre: "La Farandole Saturnienne", auteur: "Simon", fichier: "recueil/farandole-saturnienne.txt", affiche: "affiches/farandole.png" },
   { titre: "La Parade d'Astérion", auteur: "Simon", fichier: "recueil/parade-d-asterion.txt" },
   { titre: "La baignoire cosmique", auteur: "Simon", fichier: "recueil/baignoire-cosmique.txt" },
@@ -521,6 +521,33 @@ const RE_NOMBRE = new RegExp(
   "((?:\\s+(?:de\\s+)?" + MOT_MULT + ")*)", "giu");
 const RE_COSMOS = /(plan[eè]tes?|galaxies?|univers|multi-?vers(?:es?)?|trous? noirs?|saturne|soleils?|astres?|satellites?|ann[ée]es?[- ]lumi[eè]res?|cosmos|cosmiques?|voie lact[ée]e|androm[eè]de|intergalactiques?|interstellaires?|nébuleuses?|météorites?)/gi;
 
+/* Détecteur de « spécificité absurde » : les détails beaucoup trop précis
+   (codes, chiffres au centime près, mesures, lieux et marques nommés,
+   insistance sur la précision) sont une forme de sottise à part entière. */
+const RE_CODE = /(?<![\p{L}\d])(?=[\p{L}\d₀-₉-]*[\d₀-₉])(?=[\p{L}\d₀-₉-]*\p{L})[\p{L}\d₀-₉][\p{L}\d₀-₉.,-]*[\p{L}\d₀-₉](?![\p{L}\d])/gu;
+const RE_ORDINAL = /^\d+(?:e|er|ère|eme|ème|nd|nde)$/i;
+const RE_UNITE_COLLEE = /^(?:\d+(?:[.,]\d+)?(?:€|%|km|m|cm|mm|kg|t|g|s|h|min)|(?:km|m|cm)\d)$/i;
+const RE_NUM_PRECIS = /(?<![\p{L}\d])\d{1,3}(?:[   ]\d{3})+(?!\d)|(?<![\p{L}\d])\d+(?:[.,]\d+)?(?![\p{L}\d])/gu;
+const RE_MESURE = /\d(?:[\d   .,]*\d)?\s*(?:%|€|km\/h|km3|km²|km|m²|m|cm|mm|kg|t|g|s|h|ans?|jours?|minutes?|secondes?|heures?|picosecondes?|chevaux|becquerels?|mégajoules|tonnes|litres?|shillings|années?[- ]lumières?)(?![\p{L}])/giu;
+const RE_NOM_PROPRE = /(?<=[\p{L}\d,;)'’”»] )\p{Lu}[\p{Ll}\p{Lu}'’-]{2,}/gu;
+const RE_INSISTANCE = /(?<![\p{L}])(?:précisément|exactement|strictement|spécifiquement|minutieusement|et je dis bien|pas moins de|au minimum|minimum|record)(?![\p{L}])/giu;
+
+function specificite(texte) {
+  let points = 0;
+  for (const m of texte.matchAll(RE_CODE)) {
+    const c = m[0].replace(/[.,]$/, "");
+    if (!RE_ORDINAL.test(c) && !RE_UNITE_COLLEE.test(c)) points += 5;   // c6c565, D341, F-35, H2O…
+  }
+  for (const m of texte.matchAll(RE_NUM_PRECIS)) {
+    const chiffres = m[0].replace(/\D/g, "").replace(/^0+/, "").replace(/0+$/, "");
+    if (chiffres.length > 1) points += Math.min(chiffres.length - 1, 4);  // 4567, 1.63, 154 892…
+  }
+  points += (texte.match(RE_MESURE) || []).length;                       // 15 mm, 1.63€, 13 années-lumière…
+  points += new Set(texte.match(RE_NOM_PROPRE) || []).size;              // Netto, Poitiers, Sodebo…
+  points += 2 * (texte.match(RE_INSISTANCE) || []).length;               // « précisément », « et je dis bien »…
+  return points;
+}
+
 function sottisometre(texte) {
   const mots = nbMots(texte);
   if (!mots) return null;
@@ -540,10 +567,12 @@ function sottisometre(texte) {
     }
   }
   const cosmos = (texte.match(RE_COSMOS) || []).length;
-  const a = Math.min(nb / mots * 100 / 3, 1);
-  const b = Math.min(cosmos / mots * 100 / 2, 1);
-  const c = max > 0 ? Math.min(Math.log10(max) / 30, 1) : 0;
-  const score = Math.round((0.4 * a + 0.25 * b + 0.35 * c) * 100) / 10;
+  // Quatre critères ramenés entre 0 et 1, puis pondérés
+  const densiteChiffres = Math.min(nb / mots * 100 / 3, 1);                 // 3 chiffres pour 100 mots = plafond
+  const densiteCosmique = Math.min(cosmos / mots * 100 / 2, 1);             // 2 références pour 100 mots = plafond
+  const demesure = max > 0 ? Math.min(Math.log10(max) / 30, 1) : 0;         // 10^30 et au-delà = plafond
+  const precision = Math.min(specificite(texte) / mots * 100 / 8, 1);       // 8 points pour 100 mots = plafond
+  const score = Math.round((0.25 * densiteChiffres + 0.15 * densiteCosmique + 0.25 * demesure + 0.35 * precision) * 100) / 10;
   const verdict = score < 3 ? "Presque raisonnable" : score < 6 ? "Franchement insensé" : score < 8.5 ? "Délire cosmique" : "Au-delà du multivers";
   return { score, verdict, nb, cosmos, maxTxt };
 }
