@@ -760,3 +760,10 @@ footer {
 .visionneuse .v-boutons button:hover { border-color: #C6C565; }
 .visionneuse .v-boutons #v-fermer { background: #ECE8F8; color: #22183F; border-color: #ECE8F8; }
 @media (max-width: 640px) { .v-aide { display: none; } }
+
+
+/* Titre « Les deux auteurs au travail » */
+.titre-auteurs { font-size: clamp(2.4rem, 6.5vw, 5.2rem); margin: 1.5rem 0 2rem; border-top: 2px solid var(--encre); padding-top: 2rem; }
+.titre-auteurs .mot { animation: none !important; }
+.titre-auteurs .mot:nth-child(5) { transform: rotate(4deg) translateY(.08em); background: var(--moutarde); color: #22183F; padding: 0 .12em; border-radius: .12em; }
+@media (max-width: 480px) { .auteurs { gap: 3.5rem; } }

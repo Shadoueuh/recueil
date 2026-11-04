@@ -52,10 +52,12 @@
         <ul class="galerie" id="liste-galerie"></ul>
       </div>
 
-      <div class="entete-section" id="auteurs">
-        <h2>Les auteurs</h2>
+      <div id="auteurs">
+        <h2 class="titre-hero titre-auteurs" aria-label="Les deux auteurs au travail">
+          <span class="mot">Les</span><span class="mot">deux</span><span class="mot">auteurs</span><span class="mot">au</span><span class="mot">travail</span>
+        </h2>
       </div>
-      <div class="auteurs" id="auteurs"></div>
+      <div class="auteurs" id="liste-auteurs"></div>
     </section>
 
     <!-- LECTURE -->
@@ -329,7 +331,7 @@
     addEventListener("resize", () => { if ($("visionneuse").open) ajusterZoom(false); });
 
     function rendreAuteurs() {
-      $("auteurs").innerHTML = Object.entries(AUTEURS).map(([nom, bio]) => {
+      $("liste-auteurs").innerHTML = Object.entries(AUTEURS).map(([nom, bio]) => {
         const n = TEXTES.filter(t => t.auteur === nom).length;
         const photo = PHOTOS[nom]
           ? `<img class="portrait" src="${echappe(PHOTOS[nom])}" alt="Photo de ${echappe(nom)}" loading="lazy" onerror="this.remove()">`
