@@ -74,16 +74,16 @@ const BESTIAIRE = [
 ];
 
 const TEXTES = [
-  { titre: "Le Kirkversary", auteur: "Jules", fichier: "recueil/kirkversary.txt", affiche: "affiches/kirkversary.jpg" },
-  { titre: "Chasse à l'Homme Cosmique", auteur: "Jules", fichier: "recueil/chasse-a-l-homme-cosmique.txt", affiche: "affiches/chasse_a_l_homme.png" },
-  { titre: "La Route de la Pénitence Infernale", auteur: "Jules", fichier: "recueil/route-infernale.txt", affiche: "affiches/route_infernale.png" },
+  { titre: "Le Kirkversary", auteur: "Jules", fichier: "recueil/kirkversary.txt", affiche: "affiches/kirkversary.webp" },
+  { titre: "Chasse à l'Homme Cosmique", auteur: "Jules", fichier: "recueil/chasse-a-l-homme-cosmique.txt", affiche: "affiches/chasse-a-l-homme.webp" },
+  { titre: "La Route de la Pénitence Infernale", auteur: "Jules", fichier: "recueil/route-infernale.txt", affiche: "affiches/route-infernale.webp" },
   { titre: "Le Démantèlement Galactique", auteur: "Jules", fichier: "recueil/demantelement-galactique.txt" },
   { titre: "Le Tournoi du Lesotho Démoniaque", auteur: "Jules", fichier: "recueil/tournoi-lesotho.txt" },
-  { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt", affiche:"affiches/train-bolchevique.png" },
-  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", affiche:'affiches/secte_hindu.png' },
-  { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", affiche:'affiches/tournoi-membres.png'},
+  { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt", affiche:"affiches/train-bolchevique.webp" },
+  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", affiche:'affiches/secte_hindu.webp' },
+  { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", affiche:'affiches/tournoi-membres.webp'},
   { titre: "Le Podium d'Indre-et-Loire", auteur: "Jules", fichier: "recueil/indre-et-loire.txt"},
-  { titre: "La Farandole Saturnienne", auteur: "Simon", fichier: "recueil/farandole-saturnienne.txt", affiche: "affiches/farandole.png" },
+  { titre: "La Farandole Saturnienne", auteur: "Simon", fichier: "recueil/farandole-saturnienne.txt", affiche: "affiches/farandole.webp" },
   { titre: "La Parade d'Astérion", auteur: "Simon", fichier: "recueil/parade-d-asterion.txt" },
   { titre: "La baignoire cosmique", auteur: "Simon", fichier: "recueil/baignoire-cosmique.txt" },
 ];
