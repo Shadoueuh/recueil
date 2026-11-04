@@ -82,6 +82,7 @@ const TEXTES = [
   { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt" },
   { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", affiche:'affiches/secte_hindu.png' },
   { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", affiche:'affiches/tournoi-membres.png'},
+  { titre: "Le Podium d'Indre-et-Loire", auteur: "Jules", fichier: "recueil/indre-et-loire.txt"},
   { titre: "La Farandole Saturnienne", auteur: "Simon", fichier: "recueil/farandole-saturnienne.txt", affiche: "affiches/farandole.png" },
   { titre: "La Parade d'Astérion", auteur: "Simon", fichier: "recueil/parade-d-asterion.txt" },
   { titre: "La baignoire cosmique", auteur: "Simon", fichier: "recueil/baignoire-cosmique.txt" },
@@ -543,10 +544,24 @@ function specificite(texte) {
     if (chiffres.length > 1) points += Math.min(chiffres.length - 1, 4);  // 4567, 1.63, 154 892…
   }
   points += (texte.match(RE_MESURE) || []).length;                       // 15 mm, 1.63€, 13 années-lumière…
-  points += new Set(texte.match(RE_NOM_PROPRE) || []).size;              // Netto, Poitiers, Sodebo…
+  points += nomsPropres(texte).length;              // Netto, Poitiers, Sodebo…
   points += 2 * (texte.match(RE_INSISTANCE) || []).length;               // « précisément », « et je dis bien »…
   return points;
 }
+
+/* Le nombre tel qu'il est écrit, avec son unité collée (13.7s, 1.63€, 77 %)
+   et jusqu'à 4 mots de contexte, sans s'arrêter sur un « de » ou un « la ». */
+const PETITS_MOTS = /^(?:de|du|des|d'|d’|à|au|aux|en|et|ou|la|le|les|l'|l’|un|une|par|pour|sur|dans|avec)$/i;
+function extraitNombre(texte, debut, nombre) {
+  let reste = texte.slice(debut + nombre.length);
+  const colle = reste.match(/^[^\s.,;:!?()«»"“”]*/)[0];
+  reste = reste.slice(colle.length);
+  const mots = (reste.match(/^(?:[ \u00a0\u202f]+[^\s.,;:!?()«»"“”]+){0,4}/)[0].trim().split(/\s+/)).filter(Boolean);
+  while (mots.length && PETITS_MOTS.test(mots[mots.length - 1])) mots.pop();
+  return [nombre + colle, ...mots].join(" ").replace(/\s+/g, " ").trim();
+}
+
+const nomsPropres = texte => [...new Set(texte.match(RE_NOM_PROPRE) || [])];
 
 function sottisometre(texte) {
   const mots = nbMots(texte);
@@ -562,8 +577,7 @@ function sottisometre(texte) {
     }
     if (v > max) {
       max = v;
-      const suite = texte.slice(m.index + m[0].length).match(/^(?:\s+[^\s.,;:!?()]+){0,3}/)[0];
-      maxTxt = (m[0] + suite).replace(/\s+/g, " ").trim();
+      maxTxt = extraitNombre(texte, m.index, m[0]);
     }
   }
   const cosmos = (texte.match(RE_COSMOS) || []).length;
@@ -574,7 +588,7 @@ function sottisometre(texte) {
   const precision = Math.min(specificite(texte) / mots * 100 / 8, 1);       // 8 points pour 100 mots = plafond
   const score = Math.round((0.25 * densiteChiffres + 0.15 * densiteCosmique + 0.25 * demesure + 0.35 * precision) * 100) / 10;
   const verdict = score < 3 ? "Presque raisonnable" : score < 6 ? "Franchement insensé" : score < 8.5 ? "Délire cosmique" : "Au-delà du multivers";
-  return { score, verdict, nb, cosmos, maxTxt };
+  return { score, verdict, nb, cosmos, maxTxt, propres: nomsPropres(texte) };
 }
 
 function rendreSottisometre(t) {
@@ -593,6 +607,7 @@ function rendreSottisometre(t) {
       ${r.maxTxt ? `<div><dt>Le chiffre le plus démesuré</dt><dd>${echappe(r.maxTxt)}</dd></div>` : ""}
       <div><dt>Chiffres cités</dt><dd>${r.nb}</dd></div>
       <div><dt>Références cosmiques</dt><dd>${r.cosmos}</dd></div>
+      <div><dt>Noms propres</dt><dd title="${echappe(r.propres.join(", "))}">${r.propres.length}</dd></div>
     </dl>`;
 }
 
