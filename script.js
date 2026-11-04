@@ -148,7 +148,22 @@ function rendreGalerie() {
   $("liste-galerie").querySelectorAll("button").forEach(b => b.onclick = () => ouvrirAffiche(TEXTES.find(x => x.id === b.dataset.id)));
 }
 
+/* Les textes qui ont une affiche, dans l'ordre du sommaire */
+const textesAvecAffiche = () => TEXTES.filter(x => x.affiche);
+let afficheCourante = null;
+
+function changerAffiche(sens) {
+  const liste = textesAvecAffiche();
+  if (liste.length < 2 || !afficheCourante) return;
+  const i = liste.indexOf(afficheCourante);
+  ouvrirAffiche(liste[(i + sens + liste.length) % liste.length]);
+}
+
 function ouvrirAffiche(t) {
+  afficheCourante = t;
+  const liste = textesAvecAffiche();
+  $("v-navigation").hidden = liste.length < 2;
+  $("v-compteur").textContent = (liste.indexOf(t) + 1) + " / " + liste.length;
   const img = new Image();
   img.alt = "Affiche de " + t.titre;
   img.draggable = false;
@@ -159,7 +174,7 @@ function ouvrirAffiche(t) {
   $("v-image").replaceChildren(img);
   $("v-legende").textContent = t.titre + ", par " + t.auteur;
   const d = $("visionneuse");
-  if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+  if (!d.open) { if (d.showModal) d.showModal(); else d.setAttribute("open", ""); }
   if (img.complete && img.naturalWidth) ajusterZoom(false);
 }
 
@@ -269,6 +284,8 @@ scene.addEventListener("dblclick", e => {
 $("v-plus").onclick = () => { const [x, y] = centreScene(); zoomerVers(x, y, 1.5, true); };
 $("v-moins").onclick = () => { const [x, y] = centreScene(); zoomerVers(x, y, 1 / 1.5, true); };
 $("v-ajuster").onclick = () => ajusterZoom(true);
+$("v-prec").onclick = () => changerAffiche(-1);
+$("v-suiv").onclick = () => changerAffiche(1);
 $("v-fermer").onclick = () => $("visionneuse").close();
 
 $("visionneuse").addEventListener("keydown", e => {
@@ -278,8 +295,8 @@ $("visionneuse").addEventListener("keydown", e => {
   const actions = {
     "+": () => zoomerVers(x, y, 1.5, true), "=": () => zoomerVers(x, y, 1.5, true),
     "-": () => zoomerVers(x, y, 1 / 1.5, true), "0": () => ajusterZoom(true),
-    ArrowLeft: () => { zoom.x += pas; bornerZoom(); appliquerZoom(true); },
-    ArrowRight: () => { zoom.x -= pas; bornerZoom(); appliquerZoom(true); },
+    ArrowLeft: () => { if (zoom.s <= zoom.min * 1.01) changerAffiche(-1); else { zoom.x += pas; bornerZoom(); appliquerZoom(true); } },
+    ArrowRight: () => { if (zoom.s <= zoom.min * 1.01) changerAffiche(1); else { zoom.x -= pas; bornerZoom(); appliquerZoom(true); } },
     ArrowUp: () => { zoom.y += pas; bornerZoom(); appliquerZoom(true); },
     ArrowDown: () => { zoom.y -= pas; bornerZoom(); appliquerZoom(true); },
   };
@@ -794,6 +811,48 @@ function apresRenduLecture(t) {
 }
 
 
+/* ---------- Le logo « Sottises » désarticulé ----------
+   Lettre par lettre, chacune de travers ; le « o » est Saturne,
+   le dernier « s » tombe sur le surligneur moutarde.
+   Les positions sont mesurées avec la police du site, d'où le
+   dessin une fois la police chargée. */
+function dessinerLogo(svg) {
+  if (!svg) return;
+  const ns = "http://www.w3.org/2000/svg";
+  svg.replaceChildren();
+  const el = (tag, attrs, parent = svg) => { const e = document.createElementNS(ns, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  const lettres = [["S", -6, 0], ["o", 0, 0], ["t", 5, 4], ["t", -4, -3], ["i", 7, 5], ["s", -5, -2], ["e", 8, 6], ["s", -9, 0]];
+  const base = 128, taille = 96, ecart = 5;
+  let x = 14;
+  lettres.forEach(([c, rot, dy], i) => {
+    if (c === "o") {
+      const g = el("g", { transform: `translate(${x + 44} ${base - 32})` });
+      const anneau = d => el("path", { d, fill: "none", stroke: "#C6C565", "stroke-width": 8, "stroke-linecap": "round", transform: "rotate(-18)" }, g);
+      anneau("M -44 0 A 44 12 0 0 1 44 0");
+      el("circle", { r: 28, fill: "#5B47C9" }, g);
+      el("circle", { cx: -9, cy: -10, r: 6, fill: "#7A69DA" }, g);
+      anneau("M -44 0 A 44 12 0 0 0 44 0");
+      x += 92;
+      return;
+    }
+    const g = el("g", {});
+    const t = el("text", { x, y: base + dy, class: "logo-lettre", "font-size": taille }, g);
+    t.textContent = c;
+    const w = t.getComputedTextLength();
+    const pivot = `rotate(${rot} ${x + w / 2} ${base - 34})`;
+    t.setAttribute("transform", pivot);
+    if (i === lettres.length - 1) {
+      g.insertBefore(el("rect", { x: x - 6, y: base - 72, width: w + 12, height: 84, rx: 4, fill: "#C6C565", transform: pivot }, g), t);
+      t.classList.add("sur-moutarde");
+    }
+    x += w + ecart;
+  });
+  const largeur = x + 14;
+  svg.setAttribute("viewBox", `0 0 ${largeur} 200`);
+  const sous = el("text", { x: largeur / 2, y: 186, "text-anchor": "middle", class: "logo-sous-titre" });
+  sous.textContent = "insensées et incongrues";
+}
+
 /* =========================================================
    4. DÉMARRAGE
    ========================================================= */
@@ -803,6 +862,8 @@ addEventListener("scroll", majProgression, { passive: true });
 addEventListener("resize", majProgression);
 addEventListener("scroll", memoriserPosition, { passive: true });
 addEventListener("pagehide", () => { if (voixDispo) speechSynthesis.cancel(); });
+
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(() => dessinerLogo($("logo-mot")));
 
 chargerTextes()
   .then(() => { rendreFiltres(); rendreSommaire(); rendreGalerie(); rendreAuteurs(); rendreBestiaire(); initRecherche(); initEcoute(); router(); })

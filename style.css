@@ -877,3 +877,35 @@ mark { background: var(--moutarde); color: #22183F; padding: 0 .1em; }
 }
 .l-ecoute { position: sticky; top: 3.6rem; z-index: 5; background: var(--papier); padding: .6rem 0; margin-top: -.6rem; }
 .l-ecoute.actif { border-bottom: 1px solid var(--trait); }
+
+/* Visionneuse : affiche précédente / suivante */
+.v-navigation { display: flex; align-items: center; gap: .5rem; }
+.v-compteur { color: #A9A0C8; font-size: .9rem; min-width: 3.2rem; text-align: center; font-variant-numeric: tabular-nums; }
+.visionneuse .v-navigation button {
+  background: #C6C565; color: #22183F; border: 1px solid #C6C565; border-radius: 999px;
+  padding: .4rem 1rem; cursor: pointer; font-weight: 600;
+}
+.visionneuse .v-navigation button:hover { background: #ECE8F8; border-color: #ECE8F8; }
+@media (max-width: 640px) {
+  .visionneuse .bas { justify-content: center; }
+  .v-navigation { order: -1; width: 100%; justify-content: center; }
+  #v-legende { width: 100%; text-align: center; }
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+.marque { display: inline-flex; align-items: center; gap: .55rem; }
+.marque-saturne { width: 2rem; height: 2rem; flex: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .marque-saturne { transition: transform .5s cubic-bezier(.2, 1.4, .4, 1); }
+  .marque:hover .marque-saturne { transform: rotate(-25deg); }
+}
+
+footer { display: flex; flex-direction: column; align-items: center; gap: .6rem; padding-top: 3.5rem; padding-bottom: 2.5rem; text-align: center; }
+footer p { margin: 0; }
+.logo-pied { display: block; width: min(30rem, 100%); color: var(--encre); text-decoration: none; }
+.logo-pied svg { display: block; width: 100%; height: auto; overflow: visible; }
+.logo-lettre { font-family: var(--display); font-weight: 800; fill: currentColor; }
+.logo-lettre.sur-moutarde { fill: #22183F; }
+.logo-sous-titre { font-family: var(--lecture); font-style: italic; font-size: 21px; fill: var(--gris); }

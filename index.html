@@ -10,13 +10,22 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
     rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <header class="barre">
-    <a class="marque" href="#accueil">Sottises insensées</a>
+    <a class="marque" href="#accueil" aria-label="Sottises insensées, retour à l'accueil">
+      <svg class="marque-saturne" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M3 32 A29 9 0 0 1 61 32" fill="none" stroke="#C6C565" stroke-width="7" stroke-linecap="round" transform="rotate(-18 32 32)"/>
+        <circle cx="32" cy="32" r="19" fill="#5B47C9"/>
+        <circle cx="26" cy="25" r="5" fill="#7A69DA"/>
+        <path d="M3 32 A29 9 0 0 0 61 32" fill="none" stroke="#C6C565" stroke-width="7" stroke-linecap="round" transform="rotate(-18 32 32)"/>
+      </svg>
+      <span>Sottises insensées</span>
+    </a>
     <div class="outils">
       <a class="nav-accueil" id="nav-galerie" href="#galerie">Galerie</a>
       <a class="nav-accueil" id="nav-auteurs" href="#auteurs">Auteurs</a>
@@ -112,7 +121,12 @@
     <div class="v-scene" id="v-scene"><div id="v-image"></div></div>
     <div class="bas">
       <span id="v-legende"></span>
-      <span class="v-aide">Molette ou pincement pour zoomer, glisser pour se déplacer, double-clic pour zoomer d'un coup</span>
+      <span class="v-aide">Molette ou pincement pour zoomer, glisser pour se déplacer, flèches ← → pour changer d'affiche</span>
+      <div class="v-navigation" id="v-navigation">
+        <button type="button" id="v-prec">‹ Précédente</button>
+        <span class="v-compteur" id="v-compteur"></span>
+        <button type="button" id="v-suiv">Suivante ›</button>
+      </div>
       <div class="v-boutons">
         <button type="button" id="v-moins" aria-label="Dézoomer">−</button>
         <button type="button" id="v-ajuster">Ajuster</button>
@@ -122,7 +136,12 @@
     </div>
   </dialog>
 
-  <footer>Recueil de sottises insensées et incongrues · Jules &amp; Simon</footer>
+  <footer>
+    <a class="logo-pied" href="#accueil" aria-label="Sottises insensées et incongrues, retour à l'accueil">
+      <svg id="logo-mot" role="img" aria-label="Sottises insensées et incongrues"></svg>
+    </a>
+    <p>Recueil de sottises insensées et incongrues, par Jules &amp; Simon</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
