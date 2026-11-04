@@ -795,3 +795,85 @@ main { padding-left: var(--marge); padding-right: var(--marge); }
 
 /* Colonne de lecture plus large */
 .lecture, .suite, .fin { max-width: 50rem; }
+
+/* =========================================================
+   BONUS : recherche, sottisomètre, bestiaire, reprise, écoute
+   ========================================================= */
+.outil.plein { background: var(--encre); color: var(--papier); border-color: var(--encre); }
+.outil.plein:hover { background: var(--violet); border-color: var(--violet); }
+
+/* Reprendre la lecture */
+.reprendre, .l-reprise {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem;
+  padding: 1rem 1.2rem; margin: 0 0 2.5rem; background: var(--papier-2);
+  border-left: 4px solid var(--moutarde);
+}
+.reprendre span, .l-reprise span { flex: 1 1 18rem; }
+.l-reprise { margin: 0 0 2rem; }
+
+/* Recherche */
+.recherche { margin: 1.5rem 0 .5rem; }
+.recherche label { display: block; font-weight: 600; margin-bottom: .5rem; }
+.r-champ { display: flex; gap: .6rem; }
+.r-champ input {
+  flex: 1; font: inherit; font-size: 1.1rem; color: var(--encre); background: var(--papier);
+  border: 1.5px solid var(--encre); padding: .75rem 1rem; box-shadow: 4px 4px 0 var(--moutarde);
+}
+.r-champ input:focus { outline: none; box-shadow: 4px 4px 0 var(--violet); }
+.r-champ input::-webkit-search-cancel-button { display: none; }
+.resultats { list-style: none; padding: 0; margin: 1rem 0 4rem; }
+.resultats .bilan { color: var(--gris); padding: .5rem 0 1rem; }
+.resultats .aucun { padding: 2rem 0; color: var(--gris); font-family: var(--lecture); font-size: 1.15rem; }
+.resultat { display: block; text-decoration: none; padding: 1.4rem 0; border-bottom: 1px solid var(--trait); }
+.resultat:hover .r-titre { color: var(--violet); }
+.r-titre { display: block; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; letter-spacing: -.02em; }
+.r-meta { display: block; color: var(--gris); margin: .2rem 0 .6rem; }
+.r-extrait { display: block; font-family: var(--lecture); font-size: 1.08rem; line-height: 1.55; color: var(--gris); max-width: 46em; margin-top: .35rem; }
+mark { background: var(--moutarde); color: #22183F; padding: 0 .1em; }
+
+/* Sottisomètre */
+.sottisometre { margin: -1.5rem 0 2rem; padding: 1.2rem 1.3rem; border: 1.5px solid var(--encre); box-shadow: 4px 4px 0 var(--moutarde); background: var(--papier); }
+.s-ligne { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+.s-label { font-weight: 800; letter-spacing: -.01em; }
+.s-jauge { flex: 1 1 8rem; height: .8rem; background: var(--papier-2); border: 1px solid var(--trait); position: relative; overflow: hidden; }
+.s-jauge span { position: absolute; inset: 0 auto 0 0; background: repeating-linear-gradient(-45deg, var(--violet) 0 6px, var(--moutarde) 6px 12px); }
+.s-score { font-size: 1.6rem; font-weight: 800; letter-spacing: -.03em; }
+.s-score small { font-size: .9rem; font-weight: 600; color: var(--gris); }
+.s-verdict { font-family: var(--lecture); font-style: italic; color: var(--violet); font-size: 1.1rem; }
+.s-stats { display: flex; flex-wrap: wrap; gap: .8rem 2rem; margin: 1rem 0 0; }
+.s-stats div { min-width: 8rem; }
+.s-stats dt { color: var(--gris); font-size: .9rem; }
+.s-stats dd { margin: .1rem 0 0; font-weight: 600; font-size: 1.05rem; }
+.s-stats div:first-child { flex: 1 1 100%; }
+.s-stats div:first-child dd { font-family: var(--lecture); font-weight: 500; font-size: 1.25rem; }
+
+/* Lecture à voix haute */
+.l-ecoute { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 0 0 2rem; }
+.l-ecoute .outil { padding: .5rem 1.1rem; }
+.l-ecoute-aide { color: var(--gris); font-size: .9rem; }
+.corps p.en-lecture { background: color-mix(in srgb, var(--moutarde) 28%, transparent); box-shadow: -.6rem 0 0 color-mix(in srgb, var(--moutarde) 28%, transparent), .6rem 0 0 color-mix(in srgb, var(--moutarde) 28%, transparent); }
+
+/* Liens vers le bestiaire dans les textes */
+.lien-bestiaire { color: inherit; text-decoration: underline; text-decoration-color: var(--moutarde); text-decoration-thickness: .18em; text-underline-offset: .15em; }
+.lien-bestiaire:hover { color: var(--violet); text-decoration-color: var(--violet); }
+
+/* Bestiaire */
+.titre-bestiaire .mot { animation: none !important; }
+.titre-bestiaire .mot:nth-child(4) { transform: rotate(-3deg) translateY(.06em); background: var(--moutarde); color: #22183F; padding: 0 .12em; border-radius: .12em; }
+.bestiaire { list-style: none; padding: 0; margin: 2rem 0 5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+.fiche {
+  height: 100%; padding: 1.4rem 1.4rem 1.2rem; background: var(--papier); border: 1.5px solid var(--encre);
+  box-shadow: 4px 4px 0 var(--moutarde); scroll-margin-top: 6rem;
+}
+.f-type { color: var(--violet); font-weight: 600; font-size: .95rem; }
+.fiche h3 { font-size: 1.6rem; letter-spacing: -.025em; line-height: 1.05; margin: .3rem 0 .7rem; }
+.fiche p { font-family: var(--lecture); font-size: 1.08rem; line-height: 1.55; margin: 0 0 1rem; }
+.fiche .f-textes { font-family: var(--display); font-size: .95rem; color: var(--gris); margin: 0; }
+.fiche .f-textes a { color: var(--encre); }
+.fiche .f-textes a:hover { color: var(--violet); }
+@media (prefers-reduced-motion: no-preference) {
+  .fiche.flash { animation: flash 1.6s ease; }
+  @keyframes flash { 0%, 40% { box-shadow: 8px 8px 0 var(--violet); transform: rotate(-1deg); } 100% { box-shadow: 4px 4px 0 var(--moutarde); transform: none; } }
+}
+.l-ecoute { position: sticky; top: 3.6rem; z-index: 5; background: var(--papier); padding: .6rem 0; margin-top: -.6rem; }
+.l-ecoute.actif { border-bottom: 1px solid var(--trait); }
