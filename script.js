@@ -49,38 +49,90 @@ const PHOTOS = {
    Ces premières fiches sont une base : réécrivez-les à votre sauce.
    ========================================================= */
 const BESTIAIRE = [
-  { nom: "Les galaxies stoïciennes", type: "Lieu", mots: ["galaxies stoïciennes"],
-    description: "Un amas de galaxies dont les habitants pratiquent le stoïcisme avec un sérieux absolu. De toute leur vie, ils ne prononcent qu'un seul mot : « hmmm »." },
-  { nom: "Petit Pois industriel", type: "Lieu", mots: ["Petit Pois industriel"],
-    description: "Galaxie miniature, ronde, compacte et d'un vert foncé surprenant. Elle doit son nom à sa ressemblance troublante avec un légume en conserve." },
-  { nom: "Balactica", type: "Lieu", mots: ["Balactica"],
-    description: "Planète au système dangereusement proche du nôtre. Ses habitants ont tous au moins 26 doigts de pied, mais aucun pouce aux mains." },
-  { nom: "La pipistrelle-loutre", type: "Créature", mots: ["loutre de mer", "pipistrelle"],
-    description: "Hybride créé dans un laboratoire secret du Grand Nord : une pipistrelle atteinte de psoriasis croisée avec une loutre de mer à trois pattes et 17 nageoires." },
-  { nom: "Les gobelins à carreaux", type: "Créature", mots: ["gobelins"],
-    description: "Petits gobelins malicieux en pantalon rouge à carreaux vert pomme. Ils ne se sont pas coupé l'ongle de l'auriculaire du pied gauche depuis la 13e lune d'hiver." },
-  { nom: "Les mules indonésiennes", type: "Créature", mots: ["mules Indonésiennes"],
-    description: "Seule monture capable de faire le tour des anneaux de Saturne en 13,7 secondes. Résistante aux bombardements de mini-frigos en feu." },
-  { nom: "Le béluga géant", type: "Créature", mots: ["beluga", "béluga"],
-    description: "Béluga géant, albinos et aveugle, dont la salive sert de liant au carton prémâché sur les plus grands chantiers de l'univers." },
-  { nom: "Le dernier Lombax", type: "Créature", mots: ["Lombax"],
-    description: "Dernier survivant de son espèce, perdu quelque part dans le multivers. Il ne connaît qu'une phrase, mais traduit tout le reste en morse avec ses ongles de pouce." },
-  { nom: "La toupie géante", type: "Objet", mots: ["toupie géante"],
-    description: "Engin à l'inertie démentielle, conçu pour emmener tous les dinosaures de la Terre coloniser une autre planète. Le plan comporte quelques failles." },
-  { nom: "La brique d'argile de Mauritanie", type: "Objet", mots: ["argile"],
-    description: "Brique d'argile molle, à façonner à volonté. Indispensable en cas d'ennui morbide pendant une traque cosmique." },
-  { nom: "L'unique tube de colle UHU", type: "Objet", mots: ["colle UHU"],
-    description: "Seul tube de colle disponible pour bâtir un édifice d'un million de milliards de mètres. À utiliser avec la sagesse cumulée des moines shaolin." },
-  { nom: "Le train bolchévique", type: "Objet", mots: ["train Bolchévique"],
-    description: "Convoi gigantesque dont l'itinéraire et la cargaison peuvent changer du tout au tout sans le moindre préavis. Personne ne sait vraiment qui tient la locomotive." },
-  { nom: "Les cornichons de mer", type: "Créature", mots: ["cornichons de mer"],
-    description: "Espèce marine voyageant en vrac, cargaison d'origine du train bolchévique. On ignore s'ils sont saumurés de naissance." },
-  { nom: "Les châteaux de sable éternels", type: "Châtiment", mots: ["chateaux de sable", "châteaux de sable"],
-    description: "Le sort des candidats malchanceux : chaque atome changé en grain de sable, puis dispersé au gré du vent pour l'éternité." },
-  { nom: "Le podium à vie", type: "Objet", mots: ["podium"],
-    description: "Récompense suprême des vainqueurs d'Indre-et-Loire. Il est formellement interdit d'en descendre, jusqu'à la fin de ses jours." },
-  { nom: "L'apnée éternelle", type: "Châtiment", mots: ["apnée éternelle"],
-    description: "Punition des perdants d'Indre-et-Loire : de l'apnée au fond de la mer Baltique, pour toujours. Aucune remontée n'est prévue au règlement." },
+  {
+    nom: "Les galaxies stoïciennes", type: "Lieu", mots: ["galaxies stoïciennes"],
+    description: "Un amas de galaxies dont les habitants pratiquent le stoïcisme avec un sérieux absolu. De toute leur vie, ils ne prononcent qu'un seul mot : « hmmm »."
+  },
+  {
+    nom: "Petit Pois industriel", type: "Lieu", mots: ["Petit Pois industriel"],
+    description: "Galaxie miniature, ronde, compacte et d'un vert foncé surprenant. Elle doit son nom à sa ressemblance troublante avec un légume en conserve."
+  },
+  {
+    nom: "Balactica", type: "Lieu", mots: ["Balactica"],
+    description: "Planète au système dangereusement proche du nôtre. Ses habitants ont tous au moins 26 doigts de pied, mais aucun pouce aux mains."
+  },
+  {
+    nom: "La pipistrelle-loutre", type: "Créature", mots: ["loutre de mer", "pipistrelle"],
+    description: "Hybride créé dans un laboratoire secret du Grand Nord : une pipistrelle atteinte de psoriasis croisée avec une loutre de mer à trois pattes et 17 nageoires."
+  },
+  {
+    nom: "Les gobelins à carreaux", type: "Créature", mots: ["gobelins"],
+    description: "Petits gobelins malicieux en pantalon rouge à carreaux vert pomme. Ils ne se sont pas coupé l'ongle de l'auriculaire du pied gauche depuis la 13e lune d'hiver."
+  },
+  {
+    nom: "Les mules indonésiennes", type: "Créature", mots: ["mules Indonésiennes"],
+    description: "Seule monture capable de faire le tour des anneaux de Saturne en 13,7 secondes. Résistante aux bombardements de mini-frigos en feu."
+  },
+  {
+    nom: "Le béluga géant", type: "Créature", mots: ["beluga", "béluga"],
+    description: "Béluga géant, albinos et aveugle, dont la salive sert de liant au carton prémâché sur les plus grands chantiers de l'univers."
+  },
+  {
+    nom: "Le dernier Lombax", type: "Créature", mots: ["Lombax"],
+    description: "Dernier survivant de son espèce, perdu quelque part dans le multivers. Il ne connaît qu'une phrase, mais traduit tout le reste en morse avec ses ongles de pouce."
+  },
+  {
+    nom: "La toupie géante", type: "Objet", mots: ["toupie géante"],
+    description: "Engin à l'inertie démentielle, conçu pour emmener tous les dinosaures de la Terre coloniser une autre planète. Le plan comporte quelques failles."
+  },
+  {
+    nom: "La brique d'argile de Mauritanie", type: "Objet", mots: ["argile"],
+    description: "Brique d'argile molle, à façonner à volonté. Indispensable en cas d'ennui morbide pendant une traque cosmique."
+  },
+  {
+    nom: "L'unique tube de colle UHU", type: "Objet", mots: ["colle UHU"],
+    description: "Seul tube de colle disponible pour bâtir un édifice d'un million de milliards de mètres. À utiliser avec la sagesse cumulée des moines shaolin."
+  },
+  {
+    nom: "Le train bolchévique", type: "Objet", mots: ["train Bolchévique"],
+    description: "Convoi gigantesque dont l'itinéraire et la cargaison peuvent changer du tout au tout sans le moindre préavis. Personne ne sait vraiment qui tient la locomotive."
+  },
+  {
+    nom: "Les cornichons de mer", type: "Créature", mots: ["cornichons de mer"],
+    description: "Espèce marine voyageant en vrac, cargaison d'origine du train bolchévique. On ignore s'ils sont saumurés de naissance."
+  },
+  {
+    nom: "Les châteaux de sable éternels", type: "Châtiment", mots: ["chateaux de sable", "châteaux de sable"],
+    description: "Le sort des candidats malchanceux : chaque atome changé en grain de sable, puis dispersé au gré du vent pour l'éternité."
+  },
+  {
+    nom: "Le podium à vie", type: "Objet", mots: ["podium"],
+    description: "Récompense suprême des vainqueurs d'Indre-et-Loire. Il est formellement interdit d'en descendre, jusqu'à la fin de ses jours."
+  },
+  {
+    nom: "L'apnée éternelle", type: "Châtiment", mots: ["apnée éternelle"],
+    description: "Punition des perdants d'Indre-et-Loire : de l'apnée au fond de la mer Baltique, pour toujours. Aucune remontée n'est prévue au règlement."
+  },
+  {
+    nom: "Les gargouilles mangeuses de migrants", type: "Créature", mots: ["gargouilles cannibales géantes mangeuses de migrants"],
+    description: "Des gargouilles sauvages sans pitié, robustes et extrêmement dangeureuses. Elles se nourissent uniquement de migrants, c'est à se demander comment elles sont encore en vie !"
+  },
+  {
+    nom: "Le mammouths radioactif nucléaire", type: "Créature", mots: ["mammouths radioactif nucléaire"],
+    description: "Une espèce atypique de mammouth qui s'est éteinte il y a très longtemps. Ils sont pourvu d'un nombre absurde de membres,de défenses en Uranium et de crachats hautement toxiques."
+  },
+  {
+    nom: "Les boules de chair difformes", type: "Châtiment", mots: ["boules de chair"],
+    description: "Les gargouilles, transformées en boules de chair, sont condamnées à être accrochées à un sapin de Noël chez un proche de Michael Jackson."
+  },
+  {
+    nom: "Le grands gros et gras rat gris et rabougri", type: "Créature", mots: ["grands gros et gras rat gris et rabougri"],
+    description: "Le juge des crimes financiers de Montceau-les-Mines, il a suivi des affaires mondialement connues. Impitoyable et impartial, il a beaucoup d'imagination quant à ses punitions."
+  },
+  {
+    nom: "La rédaction absurde et déraisonnable", type: "Châtiment", mots: ["écrire"],
+    description: "Les repris de justice doivent écrire un nombre incalculable de fois une phrase idiote, avec de l'encre limitée par les ressources"
+  },
 ];
 
 const TEXTES = [
@@ -89,18 +141,14 @@ const TEXTES = [
   { titre: "La Route de la Pénitence Infernale", auteur: "Jules", fichier: "recueil/route-infernale.txt", affiche: "affiches/route-infernale.webp" },
   { titre: "Le Démantèlement Galactique", auteur: "Jules", fichier: "recueil/demantelement-galactique.txt" },
   { titre: "Le Tournoi du Lesotho Démoniaque", auteur: "Jules", fichier: "recueil/tournoi-lesotho.txt" },
-  { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt", affiche:"affiches/train-bolchevique.webp" },
-  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", affiche:'affiches/secte_hindu.webp' },
-  { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", affiche:'affiches/tournoi-membres.webp'},
-  { titre: "Le Podium d'Indre-et-Loire", auteur: "Jules", fichier: "recueil/indre-et-loire.txt"},
+  { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt", affiche: "affiches/train-bolchevique.webp" },
+  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", affiche: 'affiches/secte_hindu.webp' },
+  { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", affiche: 'affiches/tournoi-membres.webp' },
+  { titre: "Le Podium d'Indre-et-Loire", auteur: "Jules", fichier: "recueil/indre-et-loire.txt" },
   { titre: "La Farandole Saturnienne", auteur: "Simon", fichier: "recueil/farandole-saturnienne.txt", affiche: "affiches/farandole.webp" },
   { titre: "La Parade d'Astérion", auteur: "Simon", fichier: "recueil/parade-d-asterion.txt" },
   { titre: "La baignoire cosmique", auteur: "Simon", fichier: "recueil/baignoire-cosmique.txt" },
 ];
-
-/* =========================================================
-   2. FONCTIONNEMENT DE BASE (pas besoin d'y toucher)
-   ========================================================= */
 
 const slug = t => "texte-" + t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const paragraphes = t => t.trim().split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
