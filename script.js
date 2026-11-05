@@ -11,13 +11,15 @@
    1. VOS DONNÉES
 
    VOS TEXTES
-   Chaque texte est un fichier .txt dans le dossier « recueil ».
+   Chaque texte est un fichier texte dans le dossier « recueil ».
+   Il faut aussi l'ajouter à TEXTES ci-dessous pour qu'il apparaisse sur le site.
    Écrivez-y normalement : une ligne vide entre deux paragraphes.
 
    - titre   : le titre affiché
    - auteur  : doit correspondre à un nom dans AUTEURS
-   - fichier : le chemin du .txt
-   - affiche (facultatif) : le chemin de l'image dans « affiches ».
+   - fichier : le chemin du fichier texte
+   - resume  : résumé saugrenu affiché dans le sommaire
+   - affiche (facultatif) : le chemin de l'image placée dans « affiches ».
      Un texte avec une affiche apparaît dans la galerie et reçoit
      une vignette encadrée dans le sommaire.
 
@@ -133,21 +135,73 @@ const BESTIAIRE = [
     nom: "La rédaction absurde et déraisonnable", type: "Châtiment", mots: ["écrire"],
     description: "Les repris de justice doivent écrire un nombre incalculable de fois une phrase idiote, avec de l'encre limitée par les ressources"
   },
+  {
+    nom: "Les poissons kilométriques", type: "Créature", mots: ["poissons longs de 1 km"],
+    description: "Une humanité transformée en poissons d'un kilomètre de long, mobilisée pour une farandole qui dépasse largement les anneaux de Saturne."
+  },
+  {
+    nom: "Les lutins-mouches souriantes", type: "Créature", mots: ["lutins-mouches souriantes"],
+    description: "Êtres microscopiques si nombreux qu'ils peuvent former une figure cosmique à l'effigie d'un célèbre youtubeur."
+  },
+  {
+    nom: "La baignoire cosmique", type: "Objet", mots: ["baignoire gargantuesque"],
+    description: "Vaisseau sanitaire démesuré, conçu pour traverser le cosmos avec une cargaison de promesses et quelques imprévus."
+  },
+  {
+    nom: "Les enceintes volantes du Père Noël", type: "Objet", mots: ["enceintes Marshall géantes"],
+    description: "Moyen de transport aérien choisi pour conduire les enfants jusqu'à l'atelier de Noël, sans passer par les voies habituelles."
+  },
+  {
+    nom: "Les pinceaux planétaires", type: "Objet", mots: ["3,6 × 10⁸⁹ pinceaux", "pinceaux de tailles diverses"],
+    description: "Collection de pinceaux couvrant toutes les échelles imaginables, réunie pour repeindre la carte du monde jusque sur la planète elle-même."
+  },
+  {
+    nom: "Le cochon-tirelire aspirateur", type: "Créature", mots: ["cochon tirelire immense"],
+    description: "Un cochon vivant doté d'une fente suffisamment puissante pour aspirer la population terrestre et l'expédier vers une scène stellaire."
+  },
+  {
+    nom: "La Laponie du marché de Noël", type: "Lieu", mots: ["Laponie"],
+    description: "Destination annoncée comme une visite festive, mais dont le programme réserve une tout autre organisation du travail."
+  },
+  {
+    nom: "Le sous-marin des abysses", type: "Lieu", mots: ["sous-marin posé à 30km de profondeur marine"],
+    description: "Laboratoire de quarantaine installé à une profondeur qui complique sérieusement les retours à la surface."
+  },
+  {
+    nom: "L'igloo cajou de Sibérie", type: "Lieu", mots: ["igloo gigantesque", "trafic de noix de cajou"],
+    description: "Construction polaire hors gabarit, destinée à abriter un commerce de noix de cajou à l'échelle continentale."
+  },
+  {
+    nom: "Les usines confiseuses interplanétaires", type: "Objet", mots: ["usine gigantesque"],
+    description: "Installations de confiserie aux proportions déraisonnables, au cœur d'un tournoi où les sponsors ont eux-mêmes droit à leurs épreuves."
+  },
+  {
+    nom: "La contrebasse géante", type: "Objet", mots: ["contrebasse géante"],
+    description: "Instrument de huit mètres utilisé pour lancer un trafic qui joue sur deux extrêmes météorologiques."
+  },
 ];
 
 const TEXTES = [
-  { titre: "Le Kirkversary", auteur: "Jules", fichier: "recueil/kirkversary.txt", affiche: "affiches/kirkversary.webp" },
-  { titre: "Chasse à l'Homme Cosmique", auteur: "Jules", fichier: "recueil/chasse-a-l-homme-cosmique.txt", affiche: "affiches/chasse-a-l-homme.webp" },
-  { titre: "La Route de la Pénitence Infernale", auteur: "Jules", fichier: "recueil/route-infernale.txt", affiche: "affiches/route-infernale.webp" },
-  { titre: "Le Démantèlement Galactique", auteur: "Jules", fichier: "recueil/demantelement-galactique.txt" },
-  { titre: "Le Tournoi du Lesotho Démoniaque", auteur: "Jules", fichier: "recueil/tournoi-lesotho.txt" },
-  { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt", affiche: "affiches/train-bolchevique.webp" },
-  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", affiche: 'affiches/secte_hindu.webp' },
-  { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", affiche: 'affiches/tournoi-membres.webp' },
-  { titre: "Le Podium d'Indre-et-Loire", auteur: "Jules", fichier: "recueil/indre-et-loire.txt" },
-  { titre: "La Farandole Saturnienne", auteur: "Simon", fichier: "recueil/farandole-saturnienne.txt", affiche: "affiches/farandole.webp" },
-  { titre: "La Parade d'Astérion", auteur: "Simon", fichier: "recueil/parade-d-asterion.txt" },
-  { titre: "La baignoire cosmique", auteur: "Simon", fichier: "recueil/baignoire-cosmique.txt" },
+  { titre: "Le Kirkversary", auteur: "Jules", fichier: "recueil/kirkversary.txt", resume: "Un hommage lancé à toute vitesse devient une guerre intergalactique, puis un Noël très mal organisé.", affiche: "affiches/kirkversary.webp" },
+  { titre: "Chasse à l'Homme Cosmique", auteur: "Jules", fichier: "recueil/chasse-a-l-homme-cosmique.txt", resume: "Un innocent fuit une émission financée par un État entier, avec quinze nombrils pleins d'objets de survie.", affiche: "affiches/chasse-a-l-homme.webp" },
+  { titre: "La Route de la Pénitence Infernale", auteur: "Jules", fichier: "recueil/route-infernale.txt", resume: "Des spéculateurs immobiliers sont conviés à une réunion routière où la punition se coule en béton.", affiche: "affiches/route-infernale.webp" },
+  { titre: "Le Démantèlement Galactique", auteur: "Jules", fichier: "recueil/demantelement-galactique.txt", resume: "Un caporal presque paralysé doit faire tomber un cartel intergalactique avec l'ADN improbable d'une chauve-souris-loutre." },
+  { titre: "Le Tournoi du Lesotho Démoniaque", auteur: "Jules", fichier: "recueil/tournoi-lesotho.txt", resume: "Sept épreuves présidentielles promettent un parcours du combattant mêlant Rafales, Saturne, réseaux sociaux et colle UHU." },
+  { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt", resume: "Un train de cornichons change de cargaison et d'itinéraire pour un détour où la peau devient accessoire de sketch.", affiche: "affiches/train-bolchevique.webp" },
+  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", resume: "François Bayrou lance une secte galactique à pendules, corvées impossibles et finances très peu transparentes.", affiche: "affiches/secte_hindu.webp" },
+  { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", resume: "Mille candidats entrent dans une compétition dont le règlement semble avoir été rédigé par un volcan.", affiche: "affiches/tournoi-membres.webp" },
+  { titre: "Le Podium d'Indre-et-Loire", auteur: "Jules", fichier: "recueil/indre-et-loire.txt", resume: "En Indre-et-Loire, une rivalité locale distribue des podiums à vie et des vacances très longues sous la Baltique." },
+  { titre: "La Farandole Saturnienne", auteur: "Simon", fichier: "recueil/farandole-saturnienne.txt", resume: "Des poissons kilométriques, une enquête cosmique et une méprise sur Dieu transforment la farandole en catastrophe.", affiche: "affiches/farandole.webp" },
+  { titre: "La Parade d'Astérion", auteur: "Simon", fichier: "recueil/parade-d-asterion.txt", resume: "Sylvain Durif ramène Michael Jackson pour une parade de micro-lutins, un sourire de Joker et la fin de l'Univers." },
+  { titre: "La baignoire cosmique", auteur: "Simon", fichier: "recueil/baignoire-cosmique.txt", resume: "Un projet de baignoire volante promet un ailleurs imaginaire, puis réveille deux rivaux qui n'auraient pas dû se croiser." , affiche: "affiches/baignoire_cosmique.webp" },
+  { titre: "Le Grand Mensonge de Noël", auteur: "Simon", fichier: "recueil/grand_mensonge_noel", resume: "Des enceintes Marshall géantes conduisent les enfants chez le Père Noël pour un recrutement très intensif." },
+  { titre: "L'Heure des Pros : l'Apocalypse du RN", auteur: "Simon", fichier: "recueil/heure_des_pros.txt", resume: "Une cartographie planétaire finit détournée en chronique télé où trois polémistes prétendent refaire la carte du monde." , affiche: "affiches/heures_des_pros.webp" },
+  { titre: "Le Concert de Trop", auteur: "Simon", fichier: "recueil/le_concert_de_trop.txt", resume: "Un cochon-tirelire vivant aspire l'humanité pour un concert sur UY Scuti, où la guitare finit par prendre toute la place." },
+  { titre: "Le Marché Noir de Noël", auteur: "Simon", fichier: "recueil/marche_noir_noel", resume: "Une fausse visite du village du Père Noël détourne un convoi vers une fabrique de lutins." },
+  { titre: "L'Odyssée des Boules Humaines", auteur: "Simon", fichier: "recueil/odysee_boules_humaines.txt", resume: "Une expérience sous-marine s'éternise avant de transformer ses sujets en ballons de football pour Lascaux." },
+  { titre: "Opération Cajou Polaire", auteur: "Simon", fichier: "recueil/operation_cajou_polaire", resume: "Un traîneau trop vaste emmène un continent vers la Sibérie, où l'attendent un igloo géant et un marché de cajou." },
+  { titre: "Le Tournoi Interplanétaire présidé et financé par les plus Grands bandits de ce Monde", auteur: "Simon", fichier: "recueil/tournoi_interplanétaire", resume: "Deux équipes de célébrités disputent des épreuves interplanétaires financées par un casting de sponsors peu rassurants." },
+  { titre: "Trafic de Chaud et de Froid", auteur: "Simon", fichier: "recueil/trafic_chaud_froid.txt", resume: "Une contrebasse géante relie deux trafics improbables : le sable du Sahara et la neige antarctique." },
 ];
 
 const slug = t => "texte-" + t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -175,7 +229,7 @@ function rendreSommaire() {
   const liste = TEXTES.filter(t => filtreActif === "Tous" || t.auteur === filtreActif);
   $("sommaire").innerHTML = liste.map(t => {
     const premier = paragraphes(t.contenu)[0];
-    const debut = premier ? premier.split(/\s+/).slice(0, 26).join(" ") + "…" : "Texte à venir.";
+    const debut = t.resume || (premier ? premier.split(/\s+/).slice(0, 26).join(" ") + "…" : "Texte à venir.");
     return `<li><a class="ligne" href="#${t.id}">
   <span class="num">${String(t.index + 1).padStart(2, "0")}</span>
   <h3>${echappe(t.titre)}</h3>
@@ -696,8 +750,10 @@ function textesDeLaFiche(f) {
 
 function rendreBestiaire() {
   const types = ["Tous", ...new Set(BESTIAIRE.map(f => f.type))];
-  $("filtres-bestiaire").innerHTML = types.map(ty =>
-    `<button class="filtre" type="button" aria-pressed="${ty === filtreBestiaire}" data-type="${echappe(ty)}">${echappe(ty === "Tous" ? "Tout" : ty + "s")}</button>`).join("");
+  $("filtres-bestiaire").innerHTML = types.map(ty => {
+    const libelle = ty === "Tous" ? "Tout" : ty === "Lieu" ? "Lieux" : ty + "s";
+    return `<button class="filtre" type="button" aria-pressed="${ty === filtreBestiaire}" data-type="${echappe(ty)}">${echappe(libelle)}</button>`;
+  }).join("");
   $("filtres-bestiaire").querySelectorAll("button").forEach(b => b.onclick = () => { filtreBestiaire = b.dataset.type; rendreBestiaire(); });
   const liste = BESTIAIRE.filter(f => filtreBestiaire === "Tous" || f.type === filtreBestiaire);
   $("liste-bestiaire").innerHTML = liste.map(f => {
