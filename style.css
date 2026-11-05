@@ -254,6 +254,7 @@ main {
 
 .filtres {
     display: flex;
+    flex-wrap: wrap;
     gap: .4rem;
 }
 
@@ -269,6 +270,19 @@ main {
     background: var(--encre);
     color: var(--papier);
     border-color: var(--encre);
+}
+
+.bilan-bestiaire {
+    min-height: 1.5em;
+    margin: .4rem 0 .8rem;
+    color: var(--gris);
+}
+
+.aucun-bestiaire {
+    padding: 2rem 0;
+    color: var(--gris);
+    font-family: var(--lecture);
+    font-size: 1.15rem;
 }
 
 .sommaire {

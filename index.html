@@ -107,8 +107,16 @@
         <h1 class="titre-hero titre-bestiaire" aria-label="Le bestiaire des sottises">
           <span class="mot">Le</span><span class="mot">bestiaire</span><span class="mot">des</span><span class="mot">sottises</span>
         </h1>
-        <p class="chapeau">Créatures, lieux et objets croisés au fil des textes. Les mots soulignés dans les textes mènent ici.</p>
+        <p class="chapeau">Des personnages aux substances improbables, tous les lieux, créatures, objets, groupes et détails des textes sont réunis ici. Les mots soulignés mènent à leur fiche.</p>
       </div>
+      <div class="recherche recherche-bestiaire">
+        <label for="recherche-bestiaire">Chercher dans le bestiaire</label>
+        <div class="r-champ">
+          <input type="search" id="recherche-bestiaire" placeholder="Un nom, un lieu, une substance, un texte…" autocomplete="off">
+          <button type="button" class="outil" id="recherche-bestiaire-vider">Effacer</button>
+        </div>
+      </div>
+      <p class="bilan-bestiaire" id="bilan-bestiaire" role="status" aria-live="polite"></p>
       <div class="entete-section">
         <h2>Toutes les fiches</h2>
         <div class="filtres" role="group" aria-label="Filtrer par type" id="filtres-bestiaire"></div>
