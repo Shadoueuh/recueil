@@ -30,6 +30,7 @@
       <a class="nav-accueil" id="nav-galerie" href="#galerie">Galerie</a>
       <a class="nav-accueil" id="nav-auteurs" href="#auteurs">Auteurs</a>
       <a class="nav-accueil" id="nav-bestiaire" href="#bestiaire">Bestiaire</a>
+      <a class="nav-accueil" id="nav-quiz" href="quiz.html">Quiz</a>
       <a class="outil" id="retour-barre" href="#accueil" hidden>Sommaire</a>
       <button class="outil" id="taille" type="button" hidden aria-label="Changer la taille du texte">Aa</button>
       <button class="outil" id="theme" type="button" aria-label="Passer en mode nuit">Nuit</button>
@@ -72,6 +73,15 @@
         <ul class="galerie" id="liste-galerie"></ul>
       </div>
 
+      <section class="encart-quiz" id="encart-quiz" aria-labelledby="eq-titre">
+        <div class="eq-texte">
+          <h2 class="eq-titre" id="eq-titre">Saurez-vous retrouver où se cache <span class="eq-fiche" id="eq-fiche">…</span> ?</h2>
+          <p class="eq-nb" id="eq-nb"></p>
+          <a class="outil plein eq-bouton" href="quiz.html">Lancer le quiz du bestiaire</a>
+        </div>
+        <div class="eq-cartes" id="eq-cartes" aria-hidden="true"></div>
+      </section>
+
       <div id="auteurs">
         <h2 class="titre-hero titre-auteurs" aria-label="Les deux auteurs au travail">
           <span class="mot">Les</span><span class="mot">deux</span><span class="mot">auteurs</span><span class="mot">au</span><span class="mot">travail</span>
@@ -108,6 +118,7 @@
           <span class="mot">Le</span><span class="mot">bestiaire</span><span class="mot">des</span><span class="mot">sottises</span>
         </h1>
         <p class="chapeau">Des personnages aux substances improbables, tous les lieux, créatures, objets, groupes et détails des textes sont réunis ici. Les mots soulignés mènent à leur fiche.</p>
+        <p class="lien-quiz"><a class="outil plein" href="quiz.html">Tester ses connaissances avec le quiz</a></p>
       </div>
       <div class="recherche recherche-bestiaire">
         <label for="recherche-bestiaire">Chercher dans le bestiaire</label>
@@ -123,6 +134,7 @@
       </div>
       <ul class="bestiaire" id="liste-bestiaire"></ul>
     </section>
+
   </main>
 
   <dialog class="visionneuse" id="visionneuse" aria-label="Affiche en grand">
@@ -151,6 +163,8 @@
     <p>Recueil de sottises insensées et incongrues, par Jules &amp; Simon</p>
   </footer>
 
+  <script src="donnees.js"></script>
+  <script src="commun.js"></script>
   <script src="script.js"></script>
 </body>
 

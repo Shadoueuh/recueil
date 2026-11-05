@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le quiz du bestiaire · Sottises insensées</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="barre">
+    <a class="marque" href="index.html" aria-label="Sottises insensées, retour à l'accueil">
+      <svg class="marque-saturne" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M3 32 A29 9 0 0 1 61 32" fill="none" stroke="#C6C565" stroke-width="7" stroke-linecap="round" transform="rotate(-18 32 32)"/>
+        <circle cx="32" cy="32" r="19" fill="#5B47C9"/>
+        <circle cx="26" cy="25" r="5" fill="#7A69DA"/>
+        <path d="M3 32 A29 9 0 0 0 61 32" fill="none" stroke="#C6C565" stroke-width="7" stroke-linecap="round" transform="rotate(-18 32 32)"/>
+      </svg>
+      <span>Sottises insensées</span>
+    </a>
+    <div class="outils">
+      <a class="nav-accueil" href="index.html">Sommaire</a>
+      <a class="nav-accueil" href="index.html#bestiaire">Bestiaire</a>
+      <button class="outil" id="theme" type="button" aria-label="Passer en mode nuit">Nuit</button>
+    </div>
+  </header>
+
+  <main class="page-quiz">
+    <div class="hero hero-bestiaire">
+      <h1 class="titre-hero titre-quiz" aria-label="Le quiz du bestiaire">
+        <span class="mot">Le</span><span class="mot">quiz</span><span class="mot">du</span><span class="mot">bestiaire</span>
+      </h1>
+      <p class="chapeau">Créatures, lieux, objets et châtiments tirés au sort dans le bestiaire. À vous de retrouver dans quelle histoire chacun se cache.</p>
+    </div>
+    <div class="quiz" id="quiz" aria-live="polite">
+      <p class="q-vide">Chargement des sottises…</p>
+    </div>
+  </main>
+
+  <footer>
+    <a class="logo-pied" href="index.html" aria-label="Sottises insensées et incongrues, retour à l'accueil">
+      <svg id="logo-mot" role="img" aria-label="Sottises insensées et incongrues"></svg>
+    </a>
+    <p>Recueil de sottises insensées et incongrues, par Jules &amp; Simon</p>
+  </footer>
+
+  <script src="donnees.js"></script>
+  <script src="commun.js"></script>
+  <script src="quiz.js"></script>
+</body>
+
+</html>
