@@ -72,7 +72,7 @@ function ouvrirAffiche(t) {
   img.alt = "Affiche de " + t.titre;
   img.draggable = false;
   img.onload = () => ajusterZoom(false);
-  img.onerror = () => { zoom.img = null; $("v-image").innerHTML = `<p class="vide-message">L'image « ${echappe(t.affiche)} » est introuvable. Vérifiez qu'elle est bien dans le dossier à côté de index.html.</p>`; };
+  img.onerror = () => { zoom.img = null; $("v-image").innerHTML = `<p class="vide-message">L'image « ${echappe(t.affiche)} » est introuvable. Vérifie qu’elle est bien dans le dossier à côté de index.html.</p>`; };
   zoom.img = img;
   img.src = t.affiche;
   $("v-image").replaceChildren(img);
@@ -286,7 +286,7 @@ $("taille").onclick = () => {
 function afficherErreur(message) {
   $("vue-accueil").hidden = false;
   $("sommaire").innerHTML = `<li class="erreur"><strong>Les textes n'ont pas pu être chargés.</strong> ${echappe(message)}
-${location.protocol === "file:" ? "<br>Vous avez ouvert la page par double-clic : ouvrez-la plutôt avec Live Server dans VS Code." : ""}</li>`;
+${location.protocol === "file:" ? "<br>Tu as ouvert la page par double-clic : lance-la plutôt avec Live Server dans VS Code." : ""}</li>`;
 }
 
 
@@ -357,7 +357,7 @@ function lancerRecherche() {
     .filter(r => r.occ.length || r.dansTitre);
   const total = trouves.reduce((n, r) => n + r.occ.length, 0);
   if (!trouves.length) {
-    $("resultats").innerHTML = `<li class="aucun">Aucune sottise ne contient « ${echappe(q)} ». Essayez un autre mot, sans vous soucier des accents.</li>`;
+    $("resultats").innerHTML = `<li class="aucun">Aucune sottise ne contient « ${echappe(q)} ». Essaie un autre mot ; les accents ne changent rien.</li>`;
     return;
   }
   $("resultats").innerHTML =
@@ -570,7 +570,7 @@ function majReprise() {
   const el = $("reprendre");
   el.hidden = !(t && r > 0.03);
   if (el.hidden) return;
-  el.innerHTML = `<span>Vous lisiez <strong>${echappe(t.titre)}</strong>, arrêté à ${Math.round(r * 100)} %.</span>
+  el.innerHTML = `<span>Tu lisais <strong>${echappe(t.titre)}</strong>, arrêté à ${Math.round(r * 100)} %.</span>
     <a class="outil plein" href="#${t.id}" id="reprendre-go">Reprendre la lecture</a>
     <button class="outil" type="button" id="reprendre-oublier">Oublier</button>`;
   $("reprendre-go").onclick = () => { repriseEnAttente = t.id; };
@@ -592,7 +592,7 @@ function positionnerLecture(t) {
       allerA(r);
     } else if (r > 0.03) {
       $("l-reprise").hidden = false;
-      $("l-reprise").innerHTML = `<span>Vous vous étiez arrêté à ${Math.round(r * 100)} % de ce texte.</span>
+      $("l-reprise").innerHTML = `<span>Ta lecture en était à ${Math.round(r * 100)} % de ce texte.</span>
         <button class="outil plein" type="button">Reprendre</button>`;
       $("l-reprise").querySelector("button").onclick = () => { $("l-reprise").hidden = true; allerA(r); };
     }
