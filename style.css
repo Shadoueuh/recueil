@@ -1044,3 +1044,11 @@ footer p { margin: 0; }
 .eq-carte.mystere { background: var(--moutarde); color: #22183F; font-size: 1.6rem; font-weight: 800; text-align: center; }
 [data-theme="nuit"] .eq-carte { background: var(--papier); }
 @media (max-width: 720px) { .encart-quiz { grid-template-columns: 1fr; } }
+
+/* Page du quiz : tout au centre */
+.page-quiz .hero { max-width: 56rem; margin-left: auto; margin-right: auto; text-align: center; }
+.page-quiz .hero .chapeau { margin-left: auto; margin-right: auto; }
+.page-quiz .quiz { margin-left: auto; margin-right: auto; }
+.page-quiz .q-accueil { text-align: center; }
+.page-quiz .q-accueil .q-description { margin-left: auto; margin-right: auto; }
+.page-quiz .q-mode { text-align: left; }
