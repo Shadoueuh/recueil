@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le tournoi des histoires · Sottises insensées</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="barre">
+    <a class="marque" href="index.html" aria-label="Sottises insensées, retour à l'accueil">
+      <svg class="marque-saturne" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M3 32 A29 9 0 0 1 61 32" fill="none" stroke="#C6C565" stroke-width="7" stroke-linecap="round" transform="rotate(-18 32 32)"/>
+        <circle cx="32" cy="32" r="19" fill="#5B47C9"/>
+        <circle cx="26" cy="25" r="5" fill="#7A69DA"/>
+        <path d="M3 32 A29 9 0 0 0 61 32" fill="none" stroke="#C6C565" stroke-width="7" stroke-linecap="round" transform="rotate(-18 32 32)"/>
+      </svg>
+      <span>Sottises insensées</span>
+    </a>
+    <div class="outils">
+      <a class="nav-accueil" href="index.html">Sommaire</a>
+      <a class="nav-accueil" href="index.html#bestiaire">Bestiaire</a>
+      <a class="nav-accueil" href="quiz.html">Quiz</a>
+      <a class="nav-accueil" href="tournoi.html" aria-current="page">Tournoi</a>
+      <button class="outil" id="theme" type="button" aria-label="Passer en mode nuit">Nuit</button>
+    </div>
+  </header>
+
+  <main class="page-quiz page-tournoi">
+    <div class="hero">
+      <p class="sur-titre-quiz">Classement personnel · duel après duel</p>
+      <h1 class="titre-hero titre-tournoi" aria-label="Le tournoi des histoires">
+        <span class="mot">Le</span><span class="mot">tournoi</span><span class="mot">des</span><span class="mot">histoires</span>
+      </h1>
+      <p class="chapeau">Vingt récits entrent dans l’arène. À chaque duel, choisis celui que tu préfères ; à la fin, chaque histoire aura sa place dans ton top 20.</p>
+    </div>
+
+    <p class="tournoi-annonce" id="tournoi-annonce" role="status" aria-live="polite"></p>
+    <section class="tournoi" id="tournoi" aria-label="Tournoi des histoires">
+      <p class="q-vide">Préparation du tournoi…</p>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo-pied" href="index.html" aria-label="Sottises insensées et incongrues, retour à l'accueil">
+      <svg id="logo-mot" role="img" aria-label="Sottises insensées et incongrues"></svg>
+    </a>
+    <p>Recueil de sottises insensées et incongrues, par Jules &amp; Simon</p>
+  </footer>
+
+  <script src="donnees.js"></script>
+  <script src="commun.js"></script>
+  <script src="tournoi.js"></script>
+</body>
+
+</html>

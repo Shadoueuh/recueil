@@ -1060,6 +1060,175 @@ footer p { margin: 0; }
 .page-quiz .q-accueil .q-description { margin-left: auto; margin-right: auto; }
 .page-quiz .q-mode { text-align: left; }
 
+/* ---------- Tournoi des histoires ---------- */
+.encart-tournoi {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin: 1rem 0 4.5rem;
+  padding: clamp(1.4rem, 4vw, 2.6rem);
+  background: var(--encre);
+  color: var(--papier);
+  box-shadow: 8px 8px 0 var(--moutarde);
+}
+[data-theme="nuit"] .encart-tournoi { background: var(--papier-2); color: var(--encre); }
+.et-texte .sur-titre-quiz { color: var(--moutarde); }
+.et-texte h2 {
+  max-width: 16ch;
+  margin: 0 0 .7rem;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -.035em;
+}
+.et-texte p:not(.sur-titre-quiz) {
+  max-width: 42rem;
+  margin: 0 0 1.3rem;
+  font-family: var(--lecture);
+  font-size: 1.08rem;
+  line-height: 1.5;
+  opacity: .9;
+}
+.et-bouton {
+  display: inline-flex;
+  padding: .7rem 1.2rem;
+  text-decoration: none;
+  background: var(--moutarde) !important;
+  color: #22183F !important;
+  border-color: var(--moutarde) !important;
+}
+.et-bouton:hover { background: var(--papier) !important; border-color: var(--papier) !important; }
+.et-duel {
+  display: grid;
+  justify-items: center;
+  gap: .7rem;
+  padding: 1.2rem;
+  transform: rotate(1deg);
+}
+.et-duel strong {
+  width: 100%;
+  padding: .8rem 1rem;
+  border: 1.5px solid var(--encre);
+  background: var(--papier);
+  color: var(--encre);
+  text-align: center;
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+}
+.et-legende { color: var(--moutarde); font-size: .8rem; font-weight: 800; letter-spacing: .12em; }
+.et-vs { color: var(--moutarde); font-size: 1.3rem; font-weight: 800; }
+
+.page-tournoi .hero { max-width: 64rem; margin-left: auto; margin-right: auto; text-align: center; }
+.page-tournoi .hero .chapeau { max-width: 44rem; margin-left: auto; margin-right: auto; }
+.titre-tournoi .mot { animation: none !important; }
+.titre-tournoi .mot:nth-child(1),
+.titre-tournoi .mot:nth-child(3) { color: var(--gris); transform: none; font-size: .72em; }
+.titre-tournoi .mot:nth-child(2) { color: var(--violet); transform: rotate(-2deg); }
+.titre-tournoi .mot:nth-child(4) {
+  padding: 0 .12em;
+  border-radius: .12em;
+  background: var(--moutarde);
+  color: #22183F;
+  transform: rotate(1deg);
+}
+.tournoi {
+  max-width: 76rem;
+  margin: 0 auto 5rem;
+  padding: clamp(1.2rem, 4vw, 3rem);
+  border: 1.5px solid var(--encre);
+  background: var(--papier);
+  box-shadow: 8px 8px 0 var(--moutarde);
+}
+.tournoi-accueil { max-width: 54rem; margin: 0 auto; text-align: center; }
+.tournoi-accueil h2,
+.tournoi-finale h2 { margin: 0 0 .7rem; font-size: clamp(1.7rem, 4vw, 2.8rem); letter-spacing: -.03em; }
+.tournoi-accueil p,
+.tournoi-finale-intro { color: var(--gris); font-family: var(--lecture); font-size: 1.12rem; line-height: 1.55; }
+.tournoi-nombre { margin: 0 0 .5rem; color: var(--violet); font-size: clamp(3.5rem, 12vw, 6rem); font-weight: 800; line-height: 1; letter-spacing: -.06em; }
+.tournoi-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .7rem; margin: 1.5rem 0 0; }
+.tournoi-actions .outil { padding: .65rem 1.1rem; }
+.tournoi-aide { margin: 1.2rem 0 0; color: var(--gris); font-size: .95rem; }
+.tournoi-annonce { min-height: 1.5em; margin: 0 auto 1rem; max-width: 76rem; color: var(--gris); font-size: .95rem; }
+.tournoi-entete { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; color: var(--gris); font-size: .95rem; }
+.tournoi-entete strong { color: var(--encre); }
+.tournoi-progression {
+  height: .5rem;
+  margin: .7rem 0 1.7rem;
+  overflow: hidden;
+  background: var(--papier-2);
+}
+.tournoi-progression span { display: block; height: 100%; background: var(--moutarde); }
+.tournoi-question { margin: 0 0 1.3rem; text-align: center; }
+.tournoi-question h2 { margin: 0 0 .4rem; font-size: clamp(1.5rem, 3.5vw, 2.5rem); line-height: 1.1; letter-spacing: -.03em; }
+.tournoi-question p { margin: 0; color: var(--gris); font-family: var(--lecture); }
+.tournoi-duel { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: stretch; gap: 1rem; }
+.tournoi-carte { display: flex; flex-direction: column; min-width: 0; }
+.tournoi-choix {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .75rem;
+  width: 100%;
+  min-height: 17rem;
+  padding: clamp(1.1rem, 3vw, 1.8rem);
+  border: 1.5px solid var(--encre);
+  background: var(--papier);
+  color: var(--encre);
+  text-align: left;
+  cursor: pointer;
+}
+.tournoi-choix:hover { background: var(--papier-2); box-shadow: 5px 5px 0 var(--violet); transform: translate(-2px, -2px); }
+@media (prefers-reduced-motion: no-preference) { .tournoi-choix { transition: transform .12s, box-shadow .12s, background .12s; } }
+.tournoi-auteur { color: var(--violet); font-size: .85rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.tournoi-titre-carte { font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; }
+.tournoi-resume { color: var(--gris); font-family: var(--lecture); font-size: 1.08rem; line-height: 1.5; }
+.tournoi-choix-libelle { margin-top: auto; padding-top: .7rem; color: var(--encre); font-size: .95rem; font-weight: 800; text-decoration: underline; text-decoration-color: var(--moutarde); text-decoration-thickness: .18em; text-underline-offset: .2em; }
+.tournoi-relire { align-self: flex-start; margin: .75rem .15rem 0; color: var(--gris); font-size: .9rem; text-decoration-color: var(--moutarde); text-underline-offset: .2em; }
+.tournoi-relire:hover { color: var(--violet); }
+.tournoi-vs { align-self: center; color: var(--violet); font-size: 1.2rem; font-weight: 800; }
+.tournoi-reinitialiser { margin: 2rem 0 0; }
+.tournoi-reinitialiser button { color: var(--gris); }
+.tournoi-finale { text-align: center; }
+.tournoi-vainqueur {
+  display: inline-block;
+  margin: .4rem 0 1rem;
+  padding: .3rem .5rem;
+  background: var(--moutarde);
+  color: #22183F;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  transform: rotate(-1deg);
+}
+.tournoi-finale-intro { margin: 0 auto 1.7rem; max-width: 46rem; }
+.tournoi-classement { max-width: 68rem; margin: 2rem auto 0; padding: 0; list-style: none; text-align: left; }
+.tournoi-ligne {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+  align-items: start;
+  gap: .8rem 1rem;
+  padding: 1rem .8rem;
+  border-bottom: 1px solid var(--trait);
+}
+.tournoi-ligne:nth-child(-n+3) { background: color-mix(in srgb, var(--moutarde) 16%, var(--papier)); }
+.tournoi-rang { color: var(--violet); font-size: 1.25rem; font-weight: 800; }
+.tournoi-resultat-titre { display: block; margin: 0 0 .25rem; font-size: 1.1rem; font-weight: 800; }
+.tournoi-resultat-auteur { margin-left: .4rem; color: var(--gris); font-size: .85rem; font-weight: 400; }
+.tournoi-resultat-resume { margin: 0; color: var(--gris); font-family: var(--lecture); line-height: 1.45; }
+.tournoi-lire { color: var(--encre); text-decoration-color: var(--moutarde); text-underline-offset: .2em; }
+.tournoi-lire:hover { color: var(--violet); }
+@media (max-width: 760px) {
+  .encart-tournoi { grid-template-columns: 1fr; }
+  .et-duel { max-width: 30rem; width: 100%; margin: 0 auto; }
+}
+@media (max-width: 640px) {
+  .tournoi-duel { grid-template-columns: 1fr; }
+  .tournoi-vs { justify-self: center; }
+  .tournoi-choix { min-height: 0; }
+  .tournoi-ligne { grid-template-columns: 2.3rem minmax(0, 1fr); gap: .5rem .7rem; padding: .85rem .2rem; }
+  .tournoi-lire { grid-column: 2; }
+}
+
 /* =========================================================
    QUESTIONS POUR UN CHAMPION (champion.js)
    ========================================================= */
