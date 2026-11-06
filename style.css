@@ -1059,3 +1059,52 @@ footer p { margin: 0; }
 .page-quiz .q-accueil { text-align: center; }
 .page-quiz .q-accueil .q-description { margin-left: auto; margin-right: auto; }
 .page-quiz .q-mode { text-align: left; }
+
+/* =========================================================
+   QUESTIONS POUR UN CHAMPION (champion.js)
+   ========================================================= */
+.c-intro .q-accueil-titre, .c-qualifie .q-accueil-titre { margin-bottom: .8rem; }
+.c-manches { text-align: left; max-width: 44rem; margin: 1.2rem auto; padding-left: 1.4rem; font-family: var(--lecture); font-size: 1.08rem; line-height: 1.6; }
+.c-manches li { margin-bottom: .7rem; }
+.c-manches strong { font-family: var(--display); }
+.c-option { display: block; max-width: 44rem; margin: 0 auto 1.4rem; text-align: left; cursor: pointer; }
+.c-option input { accent-color: var(--violet); width: 1.05rem; height: 1.05rem; vertical-align: -.15em; margin-right: .4rem; }
+.c-option span { display: block; color: var(--gris); font-size: .92rem; margin: .2rem 0 0 1.5rem; }
+.c-actions-intro { justify-content: center; }
+.c-actions-intro .outil { margin-left: 0; }
+
+.c-plateau { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.4rem; }
+.c-manche { font-weight: 800; font-size: 1.25rem; letter-spacing: -.02em; background: var(--encre); color: var(--papier); padding: .15rem .6rem; transform: rotate(-1.5deg); display: inline-block; }
+.c-compteur { font-size: 1.05rem; }
+.c-compteur strong { font-size: 1.6rem; font-weight: 800; color: var(--violet); }
+.c-question-n, .c-theme { color: var(--gris); margin-left: auto; }
+.c-theme { font-weight: 600; color: var(--violet); }
+.c-jauge-points { height: .55rem; background: var(--papier-2); margin: .8rem 0 1rem; overflow: hidden; }
+.c-jauge-points span { display: block; height: 100%; background: var(--violet); transition: width .4s ease; }
+
+.c-cases { display: flex; gap: .5rem; margin: .9rem 0 1rem; }
+.c-cases span { flex: 1; height: 1.1rem; border: 1.5px solid var(--encre); background: var(--papier); transition: background .2s; }
+.c-cases span.pleine { background: var(--moutarde); }
+@media (prefers-reduced-motion: no-preference) {
+  .c-cases.rate { animation: secousse .4s; }
+  @keyframes secousse { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+}
+
+.c-chrono { display: flex; align-items: center; gap: .8rem; margin: 0 0 1.2rem; }
+.c-chrono-piste { flex: 1; height: .7rem; background: var(--papier-2); border: 1px solid var(--trait); overflow: hidden; }
+.c-chrono-piste span { display: block; height: 100%; width: 100%; background: var(--moutarde); }
+.c-chrono-piste span.urgent { background: var(--violet); }
+.c-chrono-texte { font-weight: 800; font-variant-numeric: tabular-nums; min-width: 3rem; text-align: right; }
+
+.c-enonce { font-size: clamp(1.35rem, 3vw, 2rem); }
+.c-enonce strong { text-decoration: underline; text-decoration-color: var(--moutarde); text-decoration-thickness: .15em; }
+.c-indice { display: inline-block; font-size: .5em; font-weight: 600; color: var(--violet); vertical-align: middle; margin-left: .3rem; }
+.c-citation { font-size: 1.12rem; margin-bottom: 1.4rem; }
+.c-trou { display: inline-block; min-width: 4.5em; border-bottom: 3px solid var(--violet); color: var(--violet); font-style: normal; text-align: center; margin: 0 .15em; }
+.c-detail { font-size: .7em; font-weight: 600; color: var(--gris); margin-left: .3rem; }
+
+.c-themes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.4rem 0 .4rem; }
+@media (max-width: 560px) { .c-themes { grid-template-columns: 1fr; } }
+.c-theme-choix { align-items: center; justify-content: center; min-height: 6rem; text-align: center !important; }
+.c-theme-choix .q-mode-nom { font-size: 1.5rem; }
+.q-mode[data-mode="champion"] .q-mode-nb { font-size: 2.6rem; }

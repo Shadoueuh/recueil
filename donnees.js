@@ -22,7 +22,7 @@
    ========================================================= */
 
 const AUTEURS = {
-  Jules: "Jules, un être humain sans vergogne, aux intentions néfastes envers tout els sujets qui lui trainent sous la plume. Il adore inventer des systèmes aussi gigantesques que frauduleux, et se complaît dans le fait d'imposer à des individus parfois innocents, aussi blancs que neiges, parfois des personnes qu'on ne qualifierait pas d'être à la moralité humaine. Ses punitions sont des corvées éternelles plongeait les personnes qui doivent les effectuer dans un enfer réel et sasn échappatoire.",
+  Jules: "Jules est un être humain sans vergogne, aux intentions néfastes envers tous les sujets qui lui tombent sous la plume. Il adore inventer des systèmes aussi gigantesques que frauduleux, et se complaît à imposer ses châtiments à des individus tantôt innocents, blancs comme neige, tantôt si peu recommandables qu'on hésiterait à leur prêter la moindre moralité humaine. Ses punitions sont des corvées éternelles qui plongent ceux qui doivent les accomplir dans un enfer bien réel et sans échappatoire.",
   Simon: "Simon n’est pas Simon. C’est en réalité une nuée de lutins-mouches souriantes qui forment, de loin, la silhouette d’un étudiant. Chacune de ses phrases cache une autre phrase, qui cache elle-même un cochon-tirelire, qui s’avère être son grand frère. Il écrit comme il respire, c’est-à-dire en révélant à chaque inspiration que l’air est quelqu’un d’autre. Tous ses textes finissent de la même façon : l’espace et le temps sont détruits à jamais, mais seulement après le goûter."
 };
 

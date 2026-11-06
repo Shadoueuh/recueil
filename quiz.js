@@ -1,14 +1,16 @@
 /* =========================================================
    QUIZ DU BESTIAIRE (page quiz.html)
    Trois modes tirent leurs questions du bestiaire et des textes.
-   Le quatrième reprend dix questions écrites à la main.
+   Le quatrième, le jeu télé, est dans champion.js : ses questions
+   sont fabriquées par un générateur (les questions écrites à la
+   main ci-dessous y servent de « questions du jury »).
    ========================================================= */
 
 const MODES = [
   { id: "express", nom: "Express", nb: 5, description: "Cinq questions, le temps d'un café." },
   { id: "classique", nom: "Classique", nb: 10, description: "Dix questions, la partie normale." },
   { id: "marathon", nom: "Marathon", nb: 20, description: "Vingt questions, pour les vrais érudits." },
-  { id: "champion", nom: "Champion du n’importe quoi", nb: 10, description: "Dix questions piochées dans les histoires. Le jury est une passoire." },
+  { id: "champion", nom: "Champion du n’importe quoi", nb: "9+4", description: "Le jeu télé : neuf points gagnants, puis quatre à la suite contre la montre." },
 ];
 
 const BRAVO = ["Bien vu.", "Exactement.", "Évidemment.", "Hmmm. Approbation stoïcienne.", "Parfait, et je dis bien parfait."];
@@ -230,23 +232,24 @@ function rendreAccueilQuiz() {
   $("quiz").innerHTML = `
     <div class="q-accueil">
       <h2 class="q-accueil-titre">Choisis ta partie</h2>
-      <p class="q-description">En mode bestiaire, retrouve l’histoire liée à chaque fiche. En mode Champion, réponds aux questions écrites à la main dans le recueil.</p>
+      <p class="q-description">En mode bestiaire, retrouve l’histoire liée à chaque fiche. En mode Champion, affronte le jeu télé : des questions de tous les genres, fabriquées à partir des textes.</p>
       <div class="q-modes">
         ${MODES.map(m => `
           <button type="button" class="q-mode" data-mode="${m.id}">
             <span class="q-mode-nb">${m.nb}</span>
             <span class="q-mode-nom">${m.nom}</span>
             <span class="q-mode-desc">${m.description}</span>
-            <span class="q-mode-record">${record(m) ? `Record : ${record(m)}/${m.nb}` : "Pas encore de record"}</span>
+            <span class="q-mode-record">${m.id === "champion" ? texteRecordChampion() : record(m) ? `Record : ${record(m)}/${m.nb}` : "Pas encore de record"}</span>
           </button>`).join("")}
       </div>
       <p class="q-memoire">
         Le bestiaire privilégie les fiches que tu n’as pas encore croisées.
         <button type="button" class="q-oubli" id="q-oubli">Tout oublier</button>
-        <br>Le mode Champion du n’importe quoi tire dix questions au hasard parmi celles des histoires.
+        <br>Le mode Champion fabrique ses questions à la volée : textes à trous, chiffres exacts, intrus, portraits…
       </p>
     </div>`;
   $("quiz").querySelectorAll(".q-mode").forEach(b => b.onclick = () => {
+    if (b.dataset.mode === "champion") { ouvrirChampion(); focaliserQuiz(); return; }
     preparerQuiz(MODES.find(m => m.id === b.dataset.mode));
     rendreQuestion();
     focaliserQuiz();
