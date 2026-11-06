@@ -107,6 +107,22 @@ const BESTIAIRE = [
     description: "Punition des perdants d'Indre-et-Loire : de l'apnée au fond de la mer Baltique, pour toujours. Aucune remontée n'est prévue au règlement."
   },
   {
+    nom: "Le passage à tabac jusqu'à la fin des temps", type: "Châtiment", mots: ["rouer de coups indéfiniment", "roués de coups"],
+    description: "Le tarif officiel pour avoir arrêté le mauvais suspect : l'humanité entière tabasse les enquêteurs sur un radeau qui fait le tour de la Terre, sans date de fin."
+  },
+  {
+    nom: "La prison du filet multiversel", type: "Châtiment", mots: ["en emprisonnant le vilain"],
+    description: "Une prison sans barreaux mais plus grande que le multivers. Petit souci : le prisonnier n'était pas le vilain mais Dieu, son frère jumeau. Le vrai coupable, lui, profite de sa retraite."
+  },
+  {
+    nom: "La sanction de la fausse note", type: "Châtiment", mots: ["fausse note"],
+    description: "Au concert sur UY Scuti, chaque fausse note vaut une aiguille d'une année-lumière plantée dans un atome du musicien. Sur la partition la plus dure de l'Univers, personne ne tient plus de quelques secondes."
+  },
+  {
+    nom: "Le collage éternel au cochon", type: "Châtiment", mots: ["resteront collés jusqu'à la fin des temps"],
+    description: "Pas vraiment une punition, plutôt un défaut de visée du cochon-tirelire aspirateur. Mais pour ceux qui s'écrasent sur sa peau et y restent collés pour l'éternité, la nuance est mince."
+  },
+  {
     nom: "Les gargouilles mangeuses de migrants", type: "Créature", mots: ["gargouilles cannibales géantes mangeuses de migrants"],
     description: "Des gargouilles sauvages sans pitié, robustes et extrêmement dangereuses. Elles se nourrissent uniquement de migrants, c'est à se demander comment elles sont encore en vie !"
   },
@@ -473,7 +489,7 @@ const BESTIAIRE = [
   { nom: "Les dimensions des usines confiseuses", type: "Détail", mots: ["8245 km de large"], description: "Chaque usine doit mesurer au minimum 8 245 km de large, 1,30 m de long et 35 cm de haut." },
   { nom: "Le chemin de fer à 9 000 km par milliseconde", type: "Détail", mots: ["9000 km/ms"], description: "Vitesse du chemin de fer construit par les enfants avec les confiseries du tournoi." },
   { nom: "La ronde des enfants du tournoi", type: "Événement", mots: ["une grande ronde"], description: "Ronde organisée par les enfants après la construction du chemin de fer en confiseries." },
-  { nom: "Les rendez-vous amoureux des perdants", type: "Détail", mots: ["2 rendez-vous romantiques"], description: "Rendez-vous imposés aux perdants du tournoi avec des femmes de leur âge." },
+  { nom: "Les rendez-vous amoureux des perdants", type: "Châtiment", mots: ["2 rendez-vous romantiques", "démanteler leur usines"], description: "La pire sanction du tournoi : deux rendez-vous galants avec des femmes de leur âge. Et comme si ça ne suffisait pas, il faut démonter son usine et reverser les bénéfices à Maître Gims et Kev Adams." },
   { nom: "Les personnes atteintes de trisomie 21 du trafic", type: "Groupe", mots: ["personnes atteintes de trisomie 21 du monde entier"], description: "Personnes attirées par la contrebasse vers le Sahara pour organiser le trafic de sable." },
   { nom: "La Terre", type: "Lieu", mots: ["la Terre", "sur Terre", "planète bleue", "planète entière"], description: "Planète dont les habitants, les paysages et les infrastructures sont détournés dans plusieurs textes." },
   { nom: "L'Univers", type: "Lieu", mots: ["univers"], description: "Échelle récurrente des tournois, des catastrophes et des déplacements les plus absurdes du recueil." },

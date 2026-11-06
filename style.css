@@ -1281,3 +1281,144 @@ footer p { margin: 0; }
 /* Affiche centrée dans la page de lecture */
 .affiche-texte { flex-direction: column; align-items: center; text-align: center; gap: .8rem; }
 .affiche-texte button { width: min(14rem, 60%); }
+
+/* =========================================================
+   HASARD, SOTTISE DU JOUR, PALMARÈS
+   ========================================================= */
+.hero-actions { margin: 2rem 0 0; }
+.hero-actions .outil { padding: .7rem 1.4rem; font-weight: 600; }
+.fin { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .8rem 1.4rem; }
+.fin .outil { padding: .55rem 1.1rem; }
+
+/* La sottise du jour */
+.citation-jour { margin: 0 0 3.5rem; padding: 0 0 0 clamp(1rem, 3vw, 2rem); border-left: 6px solid var(--moutarde); max-width: 60rem; }
+.cj-titre { font-weight: 800; color: var(--violet); margin: 0 0 .6rem; }
+.cj-texte { margin: 0; font-family: var(--lecture); font-style: italic; font-size: clamp(1.35rem, 2.6vw, 1.9rem); line-height: 1.4; color: var(--encre); }
+.cj-texte::before { content: "« "; }
+.cj-texte::after { content: " »"; }
+.cj-source { margin: .9rem 0 0; color: var(--gris); }
+.cj-source a { color: var(--encre); font-weight: 600; text-decoration-color: var(--moutarde); text-decoration-thickness: .15em; text-underline-offset: .2em; }
+.cj-source a:hover { color: var(--violet); }
+
+/* Palmarès : titre */
+.titre-palmares .mot { animation: none !important; }
+.titre-palmares .mot:nth-child(2) { transform: rotate(-3deg) translateY(.05em); background: var(--moutarde); color: #22183F; padding: 0 .12em; border-radius: .12em; }
+.titre-palmares .mot:nth-child(4) { transform: rotate(2deg); color: var(--violet); }
+
+/* Palmarès : le duel */
+.duel { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; margin: 0 0 4rem; }
+@media (max-width: 760px) { .duel { grid-template-columns: 1fr; } }
+.duel-auteur { position: relative; padding: 1.6rem 1.7rem; background: var(--papier); border: 1.5px solid var(--encre); box-shadow: 5px 5px 0 var(--trait); }
+.duel-auteur.en-tete { box-shadow: 7px 7px 0 var(--moutarde); }
+.duel-badge { position: absolute; top: -.85rem; right: 1.2rem; background: var(--moutarde); color: #22183F; font-weight: 800; padding: .15rem .6rem; transform: rotate(3deg); }
+.duel-auteur h2 { font-size: 2.6rem; letter-spacing: -.03em; margin: 0; font-weight: 800; }
+.duel-moyenne { margin: .2rem 0 1rem; }
+.duel-moyenne strong { font-size: 3.4rem; font-weight: 800; letter-spacing: -.04em; color: var(--violet); }
+.duel-moyenne small { color: var(--gris); margin-left: .3rem; }
+.duel-auteur dl { margin: 0; display: grid; gap: .7rem; }
+.duel-auteur dt { color: var(--gris); font-size: .9rem; }
+.duel-auteur dd { margin: .1rem 0 0; font-weight: 600; }
+.duel-auteur dd a { color: var(--encre); text-decoration-color: var(--moutarde); text-decoration-thickness: .15em; }
+.duel-contre { font-family: var(--lecture); font-style: italic; font-size: 1.6rem; color: var(--gris); margin: 0; text-align: center; }
+
+/* Palmarès : le classement */
+.palmares { list-style: none; padding: 0; margin: 1rem 0 5rem; }
+.palmares li {
+  display: grid; grid-template-columns: 3rem minmax(0, 1fr) 5rem minmax(6rem, 14rem) 3.2rem 11rem; align-items: center; gap: .4rem 1.2rem;
+  padding: 1rem 0; border-bottom: 1px solid var(--trait);
+}
+.p-rang { font-size: 1.5rem; font-weight: 800; color: var(--gris); font-variant-numeric: tabular-nums; }
+.p-titre { font-size: 1.2rem; font-weight: 600; letter-spacing: -.01em; color: var(--encre); text-decoration: none; }
+.p-titre:hover { color: var(--violet); }
+.p-auteur { color: var(--gris); }
+.p-jauge { height: .7rem; background: var(--papier-2); border: 1px solid var(--trait); position: relative; overflow: hidden; }
+.p-jauge span { position: absolute; inset: 0 auto 0 0; background: repeating-linear-gradient(-45deg, var(--violet) 0 6px, var(--moutarde) 6px 12px); }
+.p-score { font-weight: 800; font-size: 1.2rem; text-align: right; font-variant-numeric: tabular-nums; }
+.p-verdict { font-family: var(--lecture); font-style: italic; color: var(--violet); }
+.palmares .podium-1 .p-rang, .palmares .podium-2 .p-rang, .palmares .podium-3 .p-rang { color: var(--encre); }
+.palmares .podium-1 .p-rang { background: var(--moutarde); color: #22183F; text-align: center; transform: rotate(-4deg); }
+.palmares .podium-1 .p-titre { font-size: 1.5rem; font-weight: 800; }
+@media (max-width: 760px) {
+  .palmares li { grid-template-columns: 2.4rem minmax(0, 1fr) 2.8rem; }
+  .p-auteur, .p-verdict { grid-column: 2; }
+  .p-jauge { grid-column: 2; }
+  .p-score { grid-column: 3; grid-row: 1; }
+}
+
+/* =========================================================
+   CARTE DES LIENS ET PARCOURS DE LECTURE
+   ========================================================= */
+.titre-carte .mot { animation: none !important; }
+.titre-carte .mot:nth-child(2) { transform: rotate(3deg) translateY(.05em); background: var(--moutarde); color: #22183F; padding: 0 .12em; border-radius: .12em; }
+.titre-carte .mot:nth-child(4) { transform: rotate(-2deg); color: var(--violet); }
+
+.carte { display: grid; grid-template-columns: minmax(0, 1fr) 22rem; gap: 1.5rem; align-items: start; margin: 0 0 3.5rem; }
+@media (max-width: 860px) { .carte { grid-template-columns: 1fr; } }
+.carte-plan { background: var(--papier); border: 1.5px solid var(--encre); box-shadow: 6px 6px 0 var(--moutarde); padding: .5rem; }
+#carte-svg { display: block; width: 100%; height: auto; }
+#carte-svg line { stroke: var(--trait); stroke-linecap: round; transition: opacity .2s, stroke .2s; }
+#carte-svg line.avec-fiches { stroke: color-mix(in srgb, var(--violet) 45%, var(--trait)); }
+#carte-svg .c-noeud { cursor: pointer; outline: none; transition: opacity .2s; }
+#carte-svg .c-noeud circle { stroke: var(--encre); stroke-width: 1.5; transition: r .2s; }
+#carte-svg .c-noeud.jules circle { fill: var(--violet); }
+#carte-svg .c-noeud.simon circle { fill: var(--moutarde); }
+#carte-svg .c-noeud.autre circle { fill: var(--gris); }
+#carte-svg .c-noeud text { font-family: var(--display); font-size: 13px; font-weight: 600; fill: var(--encre); text-anchor: middle; paint-order: stroke; stroke: var(--papier); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+#carte-svg .c-noeud:hover circle, #carte-svg .c-noeud:focus-visible circle, #carte-svg .c-noeud.choisi circle { stroke-width: 4; }
+#carte-svg .c-noeud:focus-visible circle { stroke: var(--violet); }
+#carte-svg.focalise line { opacity: .12; }
+#carte-svg.focalise line.actif { opacity: 1; stroke: var(--violet); }
+#carte-svg.focalise .c-noeud { opacity: .25; }
+#carte-svg.focalise .c-noeud.actif { opacity: 1; }
+#carte-svg .c-noeud.choisi text { font-size: 15px; font-weight: 800; }
+.carte-legende { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .7rem; margin: .4rem .6rem .5rem; color: var(--gris); font-size: .9rem; }
+.pastille { width: .9rem; height: .9rem; border-radius: 50%; border: 1.5px solid var(--encre); display: inline-block; }
+.pastille.jules { background: var(--violet); }
+.pastille.simon { background: var(--moutarde); margin-left: .6rem; }
+.carte-legende .trait { width: 2rem; height: 4px; background: var(--violet); margin-left: .6rem; display: inline-block; }
+
+.carte-panneau { background: var(--papier); border: 1.5px solid var(--encre); padding: 1.3rem 1.4rem; scroll-margin-top: 5rem; }
+.cp-aide { font-family: var(--lecture); font-size: 1.05rem; line-height: 1.55; margin: 0 0 1rem; color: var(--gris); }
+.cp-aide strong { color: var(--encre); font-family: var(--display); }
+.cp-auteur { margin: 0; font-weight: 800; }
+.cp-auteur.jules { color: var(--violet); }
+.cp-auteur.simon { color: color-mix(in srgb, var(--moutarde) 55%, var(--encre)); }
+.cp-titre { font-size: 1.6rem; letter-spacing: -.02em; line-height: 1.1; margin: .2rem 0 1rem; }
+.cp-lire { display: inline-flex; padding: .5rem 1.1rem; text-decoration: none; }
+.cp-sous-titre { margin: 1.5rem 0 .6rem; font-size: 1rem; }
+.cp-voisins { list-style: none; padding: 0; margin: 0; }
+.cp-voisins li { padding: .7rem 0; border-top: 1px solid var(--trait); }
+.cp-voisin { font: inherit; font-weight: 600; color: var(--encre); background: none; border: 0; padding: 0; cursor: pointer; text-align: left; text-decoration: underline; text-decoration-color: var(--moutarde); text-decoration-thickness: .15em; text-underline-offset: .2em; }
+.cp-voisin:hover { color: var(--violet); }
+.cp-force { display: block; height: .35rem; background: var(--papier-2); margin: .4rem 0; }
+.cp-force span { display: block; height: 100%; background: var(--violet); }
+.cp-commun { display: block; font-family: var(--lecture); color: var(--gris); font-size: .98rem; line-height: 1.45; }
+.cp-commun a, .pa-commun a { color: var(--encre); }
+
+.carte-voyageurs { list-style: none; padding: 0; margin: 1rem 0 5rem; display: flex; flex-wrap: wrap; gap: .7rem; }
+.carte-voyageurs li { border: 1.5px solid var(--encre); padding: .45rem .8rem; background: var(--papier); }
+.carte-voyageurs a { font-weight: 600; color: var(--encre); }
+.carte-voyageurs span { color: var(--gris); font-size: .9rem; margin-left: .3rem; }
+
+/* Parcours de lecture */
+.parcours { margin: 3.5rem 0 0; padding-top: 1.8rem; border-top: 2px solid var(--encre); }
+.pa-titre { font-size: 1.5rem; letter-spacing: -.02em; margin: 0 0 1.2rem; }
+.pa-titre em { font-style: normal; background: var(--moutarde); color: #22183F; padding: 0 .2em; }
+.pa-liste { list-style: none; padding: 0; margin: 0; display: grid; gap: .9rem; }
+.pa-carte { padding: 1rem 1.2rem; background: var(--papier); border: 1.5px solid var(--encre); border-left-width: 6px; }
+.pa-carte.jules { border-left-color: var(--violet); }
+.pa-carte.simon { border-left-color: var(--moutarde); }
+.pa-lien { display: block; font-size: 1.2rem; font-weight: 800; letter-spacing: -.01em; color: var(--encre); text-decoration: none; }
+.pa-lien:hover { color: var(--violet); }
+.pa-auteur { color: var(--gris); font-size: .92rem; }
+.pa-commun { display: block; margin-top: .4rem; font-family: var(--lecture); color: var(--gris); }
+.pa-carte-lien { margin: 1.1rem 0 0; }
+.pa-carte-lien a { color: var(--encre); font-weight: 600; text-decoration-color: var(--moutarde); text-decoration-thickness: .15em; text-underline-offset: .2em; }
+
+/* Sur téléphone, les titres seraient illisibles : on ne montre que ceux de l'histoire touchée et de ses voisines */
+@media (max-width: 600px) {
+  #carte-svg .c-noeud text { font-size: 34px; stroke-width: 8px; display: none; }
+  #carte-svg.focalise .c-noeud.actif text { display: block; }
+  #carte-svg .c-noeud.choisi text { font-size: 36px; }
+  #carte-svg .c-noeud circle { stroke-width: 3; }
+}

@@ -30,6 +30,8 @@
       <a class="nav-accueil" id="nav-galerie" href="#galerie">Galerie</a>
       <a class="nav-accueil" id="nav-auteurs" href="#auteurs">Auteurs</a>
       <a class="nav-accueil" id="nav-bestiaire" href="#bestiaire">Bestiaire</a>
+      <a class="nav-accueil" id="nav-palmares" href="#palmares">Palmarès</a>
+      <a class="nav-accueil" id="nav-carte" href="#carte">Carte</a>
       <a class="nav-accueil" id="nav-quiz" href="quiz.html">Quiz</a>
       <a class="nav-accueil" id="nav-tournoi" href="tournoi.html">Tournoi</a>
       <a class="outil" id="retour-barre" href="#accueil" hidden>Sommaire</a>
@@ -49,7 +51,14 @@
         </h1>
         <p class="chapeau">Des textes longs, démesurés et parfaitement inutiles, écrits à quatre mains par Jules et
           Simon. Choisis ton histoire, installe-toi, et ne cherche surtout pas de logique.</p>
+        <p class="hero-actions"><button type="button" class="outil plein bouton-hasard">Une sottise au hasard</button></p>
       </div>
+
+      <figure class="citation-jour" id="citation-jour" hidden>
+        <figcaption class="cj-titre">La sottise du jour</figcaption>
+        <blockquote class="cj-texte" id="cj-texte"></blockquote>
+        <p class="cj-source" id="cj-source"></p>
+      </figure>
 
       <div class="reprendre" id="reprendre" hidden></div>
 
@@ -122,10 +131,43 @@
         <div class="affiche-texte" id="l-affiche" hidden></div>
         <div class="corps" id="l-corps"></div>
         <p class="signature" id="l-signature"></p>
+        <aside class="parcours" id="l-parcours" hidden></aside>
       </div>
       <nav class="suite" id="l-suite" aria-label="Autres textes"></nav>
-      <p class="fin"><a class="retour" href="#accueil">Retour au sommaire</a></p>
+      <p class="fin"><button type="button" class="outil bouton-hasard">Une autre sottise au hasard</button> <a class="retour" href="#accueil">Retour au sommaire</a></p>
     </article>
+
+    <!-- CARTE DES LIENS -->
+    <section id="vue-carte" hidden>
+      <div class="hero hero-bestiaire">
+        <h1 class="titre-hero titre-carte" aria-label="La carte des sottises">
+          <span class="mot">La</span><span class="mot">carte</span><span class="mot">des</span><span class="mot">sottises</span>
+        </h1>
+        <p class="chapeau">Les vingt histoires et tout ce qui les relie : les éléments du bestiaire qu'elles partagent, et les mots rares qu'elles sont seules à employer.</p>
+      </div>
+      <div class="carte">
+        <div class="carte-plan">
+          <svg id="carte-svg" role="group" aria-label="Carte des liens entre les histoires"></svg>
+          <p class="carte-legende"><span class="pastille jules"></span> Jules <span class="pastille simon"></span> Simon <span class="trait"></span> plus le trait est épais, plus les histoires se ressemblent</p>
+        </div>
+        <div class="carte-panneau" id="carte-panneau" aria-live="polite"></div>
+      </div>
+      <div class="entete-section"><h2>Les éléments qui voyagent d'une histoire à l'autre</h2></div>
+      <ul class="carte-voyageurs" id="carte-voyageurs"></ul>
+    </section>
+
+    <!-- PALMARÈS -->
+    <section id="vue-palmares" hidden>
+      <div class="hero hero-bestiaire">
+        <h1 class="titre-hero titre-palmares" aria-label="Le palmarès des sottises">
+          <span class="mot">Le</span><span class="mot">palmarès</span><span class="mot">des</span><span class="mot">sottises</span>
+        </h1>
+        <p class="chapeau">Toutes les histoires passées au sottisomètre, de la plus raisonnable à la plus démesurée. Et le duel qui compte vraiment : Jules contre Simon.</p>
+      </div>
+      <div class="duel" id="duel"></div>
+      <div class="entete-section"><h2>Le classement</h2></div>
+      <ol class="palmares" id="palmares"></ol>
+    </section>
 
     <!-- BESTIAIRE -->
     <section id="vue-bestiaire" hidden>

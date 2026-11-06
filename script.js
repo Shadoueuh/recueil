@@ -244,17 +244,25 @@ function router() {
   const h = location.hash.slice(1);
   const t = TEXTES.find(x => x.id === h);
   const best = h === "bestiaire" || h.startsWith("fiche-");
+  const palm = h === "palmares";
+  const carte = h === "carte";
   arreterEcoute();
-  $("vue-accueil").hidden = !!t || best;
+  $("vue-accueil").hidden = !!t || best || palm || carte;
+  $("vue-carte").hidden = !carte;
   $("vue-lecture").hidden = !t;
   $("vue-bestiaire").hidden = !best;
+  $("vue-palmares").hidden = !palm;
   $("taille").hidden = !t;
-  $("retour-barre").hidden = !t && !best;
-  $("nav-auteurs").hidden = !!t || best;
-  $("nav-galerie").hidden = !!t || best || !TEXTES.some(x => x.affiche);
+  $("retour-barre").hidden = !t && !best && !palm && !carte;
+  $("nav-auteurs").hidden = !!t || best || palm || carte;
+  $("nav-galerie").hidden = !!t || best || palm || carte || !TEXTES.some(x => x.affiche);
+  $("nav-carte").hidden = carte;
   $("nav-bestiaire").hidden = best;
+  $("nav-palmares").hidden = palm;
   if (t) rendreLecture(t);
   else if (best) document.title = "Le bestiaire · Sottises insensées";
+  else if (palm) { document.title = "Le palmarès · Sottises insensées"; rendrePalmares(); }
+  else if (carte) { document.title = "La carte des sottises · Sottises insensées"; rendreCarte(); }
   else { document.title = "Recueil de sottises insensées et incongrues"; majReprise(); }
   const ancre = (h === "galerie" || h === "auteurs" || h.startsWith("fiche-")) && document.getElementById(h);
   if (ancre) {
@@ -459,7 +467,7 @@ function sottisometre(texte) {
   const precision = Math.min(specificite(texte) / mots * 100 / 8, 1);       // 8 points pour 100 mots = plafond
   const score = Math.round((0.25 * densiteChiffres + 0.15 * densiteCosmique + 0.25 * demesure + 0.35 * precision) * 100) / 10;
   const verdict = score < 3 ? "Presque raisonnable" : score < 6 ? "Franchement insensé" : score < 8.5 ? "Délire cosmique" : "Au-delà du multivers";
-  return { score, verdict, nb, cosmos, maxTxt, propres: nomsPropres(texte) };
+  return { score, verdict, nb, cosmos, maxTxt, max, propres: nomsPropres(texte) };
 }
 
 function rendreSottisometre(t) {
@@ -553,7 +561,7 @@ function memoriserPosition() {
     const max = document.documentElement.scrollHeight - innerHeight;
     if (max <= 0) return;
     const r = scrollY / max;
-    if (r > 0.97) { try { localStorage.removeItem(clePos(id)); } catch (e) { } }
+    if (r > 0.97) { try { localStorage.removeItem(clePos(id)); } catch (e) { } marquerLue(id); }
     else if (r > 0.03) { ecrire(clePos(id), r.toFixed(3)); ecrire("derniere-lecture", id); }
   }, 300);
 }
@@ -680,6 +688,7 @@ function initEcoute() {
 
 /* Appelé à chaque ouverture d'un texte. */
 function apresRenduLecture(t) {
+  rendreParcours(t);
   rendreSottisometre(t);
   $("l-ecoute").hidden = !voixDispo || !paragraphes(t.contenu).length;
 }
@@ -708,6 +717,367 @@ function surlignageDepuisQuiz() {
   } catch (e) { }
 }
 
+/* ---------- Une sottise au hasard ----------
+   Pioche d'abord parmi les histoires pas encore lues jusqu'au bout. */
+function histoiresLues() {
+  try { return new Set(JSON.parse(lire("histoires-lues")) || []); } catch (e) { return new Set(); }
+}
+function marquerLue(id) {
+  const lues = histoiresLues();
+  lues.add(id);
+  ecrire("histoires-lues", JSON.stringify([...lues]));
+}
+function sottiseAuHasard() {
+  const actuel = location.hash.slice(1);
+  const lues = histoiresLues();
+  const remplies = TEXTES.filter(t => nbMots(t.contenu) && t.id !== actuel);
+  const jamais = remplies.filter(t => !lues.has(t.id));
+  const t = auHasard(jamais.length ? jamais : remplies);
+  if (t) location.hash = t.id;
+}
+function initHasard() {
+  document.querySelectorAll(".bouton-hasard").forEach(b => b.onclick = sottiseAuHasard);
+}
+
+/* ---------- La sottise du jour ----------
+   Une phrase des textes, la même pour tout le monde le même jour. */
+function hacher(chaine) {
+  let h = 2166136261;
+  for (const c of chaine) { h ^= c.codePointAt(0); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function phrasesDe(texte) {
+  // Découpe en phrases sans couper les nombres décimaux (13.7, 1.63…)
+  return texte.replace(/\s+/g, " ").split(/(?<=[.!?])(?!\d)\s+/).map(p => p.trim());
+}
+function rendreCitationDuJour() {
+  const candidates = [];
+  for (const t of TEXTES) {
+    for (const p of phrasesDe(t.contenu || "")) {
+      if (p.length >= 70 && p.length <= 230 && /[.!?]$/.test(p)) candidates.push({ t, p });
+    }
+  }
+  if (!candidates.length) return;
+  const aujourdhui = new Date().toLocaleDateString("fr-CA");   // 2026-11-06
+  const { t, p } = candidates[hacher(aujourdhui) % candidates.length];
+  $("cj-texte").textContent = p;
+  $("cj-source").innerHTML = `Extrait de <a href="#${t.id}" id="cj-lien">${echappe(t.titre)}</a>, par ${echappe(t.auteur)}`;
+  $("cj-lien").onclick = () => { rechercheEnCours = { id: t.id, terme: p.slice(0, 60) }; };
+  $("citation-jour").hidden = false;
+}
+
+/* ---------- Le palmarès du sottisomètre ---------- */
+let palmaresCalcule = null;
+function calculerPalmares() {
+  if (palmaresCalcule) return palmaresCalcule;
+  const lignes = TEXTES.map(t => ({ t, r: sottisometre(t.contenu || "") })).filter(x => x.r);
+  lignes.sort((a, b) => b.r.score - a.r.score);
+  palmaresCalcule = lignes;
+  return lignes;
+}
+function rendrePalmares() {
+  const lignes = calculerPalmares();
+  const fmt = n => n.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  // Le duel des auteurs
+  const auteurs = Object.keys(AUTEURS).map(nom => {
+    const siens = lignes.filter(x => x.t.auteur === nom);
+    if (!siens.length) return null;
+    const moyenne = siens.reduce((s, x) => s + x.r.score, 0) / siens.length;
+    const meilleur = siens[0];
+    const demesure = siens.reduce((m, x) => (x.r.max > m.r.max ? x : m), siens[0]);
+    return { nom, n: siens.length, moyenne, meilleur, demesure };
+  }).filter(Boolean);
+  const gagnant = auteurs.length === 2 ? (auteurs[0].moyenne >= auteurs[1].moyenne ? 0 : 1) : -1;
+  $("duel").innerHTML = auteurs.map((a, i) => `
+    <article class="duel-auteur${i === gagnant ? " en-tete" : ""}">
+      ${i === gagnant ? '<span class="duel-badge">En tête</span>' : ""}
+      <h2>${echappe(a.nom)}</h2>
+      <p class="duel-moyenne"><strong>${fmt(a.moyenne)}</strong><small>/10 de moyenne</small></p>
+      <dl>
+        <div><dt>Histoires</dt><dd>${a.n}</dd></div>
+        <div><dt>Sa plus démesurée</dt><dd><a href="#${a.meilleur.t.id}">${echappe(a.meilleur.t.titre)}</a> (${fmt(a.meilleur.r.score)})</dd></div>
+        <div><dt>Son nombre le plus fou</dt><dd>${echappe(a.demesure.r.maxTxt || "aucun")}</dd></div>
+      </dl>
+    </article>`).join(auteurs.length === 2 ? '<p class="duel-contre" aria-hidden="true">contre</p>' : "");
+  // Le classement
+  $("palmares").innerHTML = lignes.map((x, i) => `
+    <li class="${i < 3 ? "podium-" + (i + 1) : ""}">
+      <span class="p-rang">${i + 1}</span>
+      <a class="p-titre" href="#${x.t.id}">${echappe(x.t.titre)}</a>
+      <span class="p-auteur">${echappe(x.t.auteur)}</span>
+      <span class="p-jauge" aria-hidden="true"><span style="width:${x.r.score * 10}%"></span></span>
+      <span class="p-score">${fmt(x.r.score)}</span>
+      <span class="p-verdict">${echappe(x.r.verdict)}</span>
+    </li>`).join("");
+}
+
+/* ---------- Les liens entre histoires ----------
+   Deux sources, combinées :
+   1. les éléments du bestiaire qu'elles partagent (lien fort) ;
+   2. le vocabulaire rare qu'elles ont en commun (TF-IDF) : un mot
+      présent partout ne compte presque pas, un mot que seules deux
+      histoires utilisent compte beaucoup. */
+
+const MOTS_VIDES = new Set(("alors aussi autre autres avant avec avoir bien cela celle celles celui cent ceux chaque " +
+  "comme comment dans depuis deux doit donc dont elle elles encore entre etre fait faire fois font jusqu leur leurs " +
+  "lors mais meme memes moins notre nous parce pendant peut plus pour pourra pourront puis quand quel quelle quelles " +
+  "quels qu'il sans selon seront serait seulement sera sont sous tous tout toute toutes tres trop une vers votre vous " +
+  "etait etaient ainsi apres afin chez cette ceci leurs devra devront doivent ensuite enfin grace tant tandis ayant " +
+  "auront aura avait avaient sera dont celui ainsi personne personnes ceux mise mettre faut fera feront partir part " +
+  "premier premiere deuxieme troisieme quatrieme cinquieme sixieme septieme epreuve epreuves objet objets egalement " +
+  "permettant permettra toujours jamais rien grand grande grands grandes petit petite petits petites total totale " +
+  "entier entiere entiers entieres plusieurs moment monde fin nombre type facon maniere suite cours etant lequel laquelle " +
+  "trois quatre cinq pouvant pouvoir allait allaient arriva faudra faudrait notamment cause permettrait permettre permet " +
+  "travaillent travailler dessus dessous haut temps mesure mesures totalite demi main mains ville mouvement transformer " +
+  "emmener attirer atteindre tire tires immense extreme mur murs aller venir rendre prendre donner mettant faisant etc " +
+  "certain certaine certains certaines chacun chacune lorsque lorsqu toutefois cependant pourtant presque environ juste " +
+  "vraiment ensemble face cote dela coup coups fuite plaisir humain humains intention intentions mission vergogne").split(" "));
+
+function motsDe(texte) {
+  const formes = new Map();   // mot normalisé -> forme écrite la plus fréquente
+  const compte = new Map();
+  for (const brut of texte.match(/[\p{L}][\p{L}'’-]{3,}/gu) || []) {
+    const sansElision = brut.replace(/^[a-z]['’]/i, "");
+    let n = normaliser(sansElision).n.replace(/['’-]/g, "");
+    if (n.length < 4 || MOTS_VIDES.has(n)) continue;
+    if (n.length > 4) n = n.replace(/(s|x)$/, "");          // pluriels simples
+    compte.set(n, (compte.get(n) || 0) + 1);
+    if (!formes.has(n)) formes.set(n, sansElision);
+  }
+  return { compte, formes };
+}
+
+let liensCalcules = null;
+
+function calculerLiens() {
+  if (liensCalcules) return liensCalcules;
+  const textes = TEXTES.filter(t => nbMots(t.contenu));
+  // 1. Le vocabulaire
+  const vocab = textes.map(t => motsDe(t.contenu));
+  const df = new Map();
+  vocab.forEach(v => v.compte.forEach((_, m) => df.set(m, (df.get(m) || 0) + 1)));
+  const N = textes.length;
+  const vecteurs = vocab.map(v => {
+    const vec = new Map();
+    let norme = 0;
+    v.compte.forEach((c, m) => {
+      const d = df.get(m);
+      if (d < 2 || d > N * 0.5) return;                       // mots uniques ou trop communs : ignorés
+      const poids = (1 + Math.log(c)) * Math.log(N / d);
+      vec.set(m, poids); norme += poids * poids;
+    });
+    return { vec, norme: Math.sqrt(norme) || 1 };
+  });
+  // 2. Le bestiaire
+  const fichesPar = new Map(textes.map(t => [t, []]));
+  const partagees = [];
+  for (const f of BESTIAIRE) {
+    const tx = textesDeLaFiche(f).filter(t => fichesPar.has(t));
+    tx.forEach(t => fichesPar.get(t).push(f));
+    if (tx.length >= 2) partagees.push({ f, textes: tx });
+  }
+  partagees.sort((a, b) => b.textes.length - a.textes.length);
+  // 3. Chaque paire d'histoires
+  const paires = [];
+  for (let i = 0; i < N; i++) {
+    for (let j = i + 1; j < N; j++) {
+      const a = vecteurs[i], b = vecteurs[j];
+      let produit = 0;
+      const communs = [];
+      a.vec.forEach((p, m) => {
+        const q = b.vec.get(m);
+        if (q) { produit += p * q; if (df.get(m) <= 3 && m.length >= 5) communs.push({ m, poids: p * q }); }
+      });
+      const cosinus = produit / (a.norme * b.norme);
+      const fiches = fichesPar.get(textes[i]).filter(f => fichesPar.get(textes[j]).includes(f));
+      // Un élément du bestiaire partagé par peu d'histoires vaut plus qu'un élément partagé partout
+      const bonus = fiches.reduce((s, f) => s + 1 / (partagees.find(x => x.f === f).textes.length - 1), 0);
+      const force = cosinus + 0.12 * bonus;
+      if (force <= 0) continue;
+      communs.sort((x, y) => y.poids - x.poids);
+      paires.push({
+        a: textes[i], b: textes[j], force, fiches,
+        mots: communs.slice(0, 4).map(c => vocab[i].formes.get(c.m) || c.m)
+          .filter(m => !fiches.some(f => normaliser(f.nom).n.includes(normaliser(m).n))),
+      });
+    }
+  }
+  paires.sort((x, y) => y.force - x.force);
+  liensCalcules = { textes, paires, partagees, fichesPar };
+  return liensCalcules;
+}
+
+/* Les histoires les plus proches d'une histoire donnée. */
+function voisinsDe(t, n = 3) {
+  const { paires } = calculerLiens();
+  return paires.filter(p => p.a === t || p.b === t).slice(0, n)
+    .map(p => ({ t: p.a === t ? p.b : p.a, force: p.force, fiches: p.fiches, mots: p.mots }));
+}
+
+/* ---------- La carte des liens ---------- */
+let carteSelection = null;
+let carteDessinee = false;
+
+function aleaDepuis(graine) {
+  let s = graine >>> 0;
+  return () => { s = Math.imul(s ^ (s >>> 15), 2246822507) ^ Math.imul(s ^ (s >>> 13), 3266489909); s ^= s >>> 16; return (s >>> 0) / 4294967296; };
+}
+
+function grapheDesLiens() {
+  const { textes, paires } = calculerLiens();
+  const choisies = new Set();
+  // Chaque histoire garde ses 3 liens les plus forts, plus tous les liens très forts
+  for (const t of textes) paires.filter(p => p.a === t || p.b === t).slice(0, 3).forEach(p => choisies.add(p));
+  paires.filter(p => p.force >= 0.25).forEach(p => choisies.add(p));
+  const aretes = [...choisies];
+  const maxMots = Math.max(...textes.map(t => nbMots(t.contenu)));
+  const L = 1000, H = 640, alea = aleaDepuis(hacher(textes.map(t => t.id).join("|")));
+  const noeuds = textes.map((t, i) => {
+    const angle = (i / textes.length) * Math.PI * 2;
+    return { t, x: L / 2 + Math.cos(angle) * 250 + alea() * 20, y: H / 2 + Math.sin(angle) * 200 + alea() * 20, vx: 0, vy: 0,
+      r: 9 + 13 * Math.sqrt(nbMots(t.contenu) / maxMots) };
+  });
+  const parT = new Map(noeuds.map(n => [n.t, n]));
+  // Simulation de forces : les histoires se repoussent, les liens les rapprochent
+  for (let it = 0; it < 900; it++) {
+    const refroidissement = 1 - it / 900;
+    for (let i = 0; i < noeuds.length; i++) {
+      for (let j = i + 1; j < noeuds.length; j++) {
+        const a = noeuds[i], b = noeuds[j];
+        let dx = b.x - a.x, dy = b.y - a.y, d2 = dx * dx + dy * dy || 1, d = Math.sqrt(d2);
+        const f = 9000 / d2;
+        dx /= d; dy /= d;
+        a.vx -= dx * f; a.vy -= dy * f; b.vx += dx * f; b.vy += dy * f;
+      }
+    }
+    for (const p of aretes) {
+      const a = parT.get(p.a), b = parT.get(p.b);
+      let dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const voulu = 260 - 170 * Math.min(p.force / 0.5, 1);
+      const f = (d - voulu) * 0.012;
+      dx /= d; dy /= d;
+      a.vx += dx * f; a.vy += dy * f; b.vx -= dx * f; b.vy -= dy * f;
+    }
+    for (const n of noeuds) {
+      n.vx += (L / 2 - n.x) * 0.004; n.vy += (H / 2 - n.y) * 0.006;
+      n.x += Math.max(-12, Math.min(12, n.vx)) * refroidissement;
+      n.y += Math.max(-12, Math.min(12, n.vy)) * refroidissement;
+      n.vx *= 0.6; n.vy *= 0.6;
+      n.x = Math.max(80, Math.min(L - 80, n.x)); n.y = Math.max(40, Math.min(H - 50, n.y));
+    }
+  }
+  // On étire le dessin pour qu'il remplisse tout le cadre
+  const xs = noeuds.map(n => n.x), ys = noeuds.map(n => n.y);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  for (const n of noeuds) {
+    n.x = 120 + (n.x - x0) / ((x1 - x0) || 1) * (L - 240);
+    n.y = 40 + (n.y - y0) / ((y1 - y0) || 1) * (H - 100);
+  }
+  return { noeuds, aretes, L, H, parT };
+}
+
+const titreCourt = (titre, n = 26) => titre.length > n ? titre.slice(0, titre.lastIndexOf(" ", n)) + "…" : titre;
+const couleurAuteur = auteur => ({ Jules: "jules", Simon: "simon" })[auteur] || "autre";
+
+function rendreCarte() {
+  if (!carteDessinee) {
+    const { noeuds, aretes, L, H, parT } = grapheDesLiens();
+    const maxForce = Math.max(...aretes.map(a => a.force));
+    $("carte-svg").setAttribute("viewBox", `0 0 ${L} ${H}`);
+    $("carte-svg").innerHTML = `
+      <g class="c-aretes">${aretes.map(p => {
+        const a = parT.get(p.a), b = parT.get(p.b);
+        return `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" data-a="${p.a.id}" data-b="${p.b.id}"
+          stroke-width="${(1 + 6 * p.force / maxForce).toFixed(1)}" class="${p.fiches.length ? "avec-fiches" : ""}"/>`;
+      }).join("")}</g>
+      <g class="c-noeuds">${noeuds.map(n => `
+        <g class="c-noeud ${couleurAuteur(n.t.auteur)}" data-id="${n.t.id}" tabindex="0" role="button" aria-label="${echappe(n.t.titre)}, par ${echappe(n.t.auteur)}">
+          <circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(1)}" r="${n.r.toFixed(1)}"/>
+          <text x="${n.x.toFixed(1)}" y="${(n.y + n.r + 17).toFixed(1)}">${echappe(titreCourt(n.t.titre))}</text>
+        </g>`).join("")}</g>`;
+    $("carte-svg").querySelectorAll(".c-noeud").forEach(g => {
+      g.onmouseenter = g.onfocus = () => surbrillance(g.dataset.id);
+      g.onmouseleave = g.onblur = () => surbrillance(carteSelection);
+      g.onclick = () => choisirSurCarte(g.dataset.id);
+      g.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choisirSurCarte(g.dataset.id); } };
+    });
+    // Les éléments du bestiaire qui voyagent d'une histoire à l'autre
+    const { partagees } = calculerLiens();
+    $("carte-voyageurs").innerHTML = partagees.length
+      ? partagees.map(x => `<li><a href="#${x.f.id}">${echappe(x.f.nom)}</a> <span>${x.textes.length} histoires</span></li>`).join("")
+      : `<li>Aucun élément du bestiaire n'apparaît encore dans plusieurs histoires.</li>`;
+    carteDessinee = true;
+  }
+  choisirSurCarte(carteSelection, true);
+}
+
+function surbrillance(id) {
+  const svg = $("carte-svg");
+  if (!id) { svg.classList.remove("focalise"); svg.querySelectorAll(".actif").forEach(e => e.classList.remove("actif")); return; }
+  svg.classList.add("focalise");
+  const voisins = new Set([id]);
+  svg.querySelectorAll("line").forEach(l => {
+    const lie = l.dataset.a === id || l.dataset.b === id;
+    l.classList.toggle("actif", lie);
+    if (lie) { voisins.add(l.dataset.a); voisins.add(l.dataset.b); }
+  });
+  svg.querySelectorAll(".c-noeud").forEach(g => g.classList.toggle("actif", voisins.has(g.dataset.id)));
+}
+
+function enCommun(v, max = 4) {
+  const elements = [...v.fiches.map(f => `<a href="#${f.id}">${echappe(f.nom)}</a>`), ...v.mots.map(m => `« ${echappe(m)} »`)].slice(0, max);
+  return elements.length ? elements.join(", ") : "un air de famille dans le vocabulaire";
+}
+
+function choisirSurCarte(id, silencieux) {
+  carteSelection = id;
+  const t = TEXTES.find(x => x.id === id);
+  $("carte-svg").querySelectorAll(".c-noeud").forEach(g => g.classList.toggle("choisi", g.dataset.id === id));
+  surbrillance(id);
+  if (!t) {
+    $("carte-panneau").innerHTML = `
+      <p class="cp-aide">Chaque point est une histoire : violet pour Jules, moutarde pour Simon, et plus il est gros, plus le texte est long.
+      Plus un trait est épais, plus les deux histoires se ressemblent : éléments du bestiaire en commun, vocabulaire rare partagé.</p>
+      <p class="cp-aide"><strong>Clique sur une histoire</strong> pour voir ses plus proches voisines.</p>`;
+    return;
+  }
+  const voisins = voisinsDe(t, 5);
+  const maxF = Math.max(...voisins.map(v => v.force), 0.01);
+  $("carte-panneau").innerHTML = `
+    <p class="cp-auteur ${couleurAuteur(t.auteur)}">${echappe(t.auteur)}</p>
+    <h3 class="cp-titre">${echappe(t.titre)}</h3>
+    <a class="outil plein cp-lire" href="#${t.id}">Lire l'histoire</a>
+    <h4 class="cp-sous-titre">Ses plus proches voisines</h4>
+    <ol class="cp-voisins">${voisins.map(v => `
+      <li>
+        <button type="button" class="cp-voisin" data-id="${v.t.id}">${echappe(v.t.titre)}</button>
+        <span class="cp-force"><span style="width:${(v.force / maxF * 100).toFixed(0)}%"></span></span>
+        <span class="cp-commun">En commun : ${enCommun(v)}</span>
+      </li>`).join("")}</ol>`;
+  $("carte-panneau").querySelectorAll(".cp-voisin").forEach(b => b.onclick = () => choisirSurCarte(b.dataset.id));
+  if (!silencieux && matchMedia("(max-width: 860px)").matches) $("carte-panneau").scrollIntoView({ block: "start", behavior: "smooth" });
+}
+
+/* ---------- Les parcours de lecture (en bas de chaque texte) ---------- */
+function rendreParcours(t) {
+  const el = $("l-parcours");
+  if (!el) return;
+  const voisins = nbMots(t.contenu) ? voisinsDe(t, 3) : [];
+  el.hidden = !voisins.length;
+  if (!voisins.length) return;
+  el.innerHTML = `
+    <h2 class="pa-titre">Si tu as aimé <em>${echappe(t.titre)}</em>, lis aussi…</h2>
+    <ul class="pa-liste">${voisins.map(v => `
+      <li class="pa-carte ${couleurAuteur(v.t.auteur)}">
+        <a class="pa-lien" href="#${v.t.id}">${echappe(v.t.titre)}</a>
+        <span class="pa-auteur">par ${echappe(v.t.auteur)}</span>
+        <span class="pa-commun">En commun : ${enCommun(v, 3)}</span>
+      </li>`).join("")}</ul>
+    <p class="pa-carte-lien"><a href="#carte" id="pa-voir-carte">Voir toutes les ressemblances sur la carte</a></p>`;
+  $("pa-voir-carte").onclick = () => { carteSelection = t.id; };
+}
+
+
 /* =========================================================
    4. DÉMARRAGE
    ========================================================= */
@@ -721,5 +1091,5 @@ addEventListener("pagehide", () => { if (voixDispo) speechSynthesis.cancel(); })
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => dessinerLogo($("logo-mot")));
 
 chargerTextes()
-  .then(() => { rendreFiltres(); rendreSommaire(); rendreGalerie(); rendreAuteurs(); rendreBestiaire(); rendreEncartQuiz(); initRecherche(); initEcoute(); surlignageDepuisQuiz(); router(); })
+  .then(() => { rendreFiltres(); rendreSommaire(); rendreGalerie(); rendreAuteurs(); rendreBestiaire(); rendreEncartQuiz(); rendreCitationDuJour(); initHasard(); initRecherche(); initEcoute(); surlignageDepuisQuiz(); router(); })
   .catch(e => afficherErreur(location.protocol === "file:" ? "Le navigateur bloque la lecture des fichiers .txt en local." : e.message));
