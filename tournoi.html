@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Le tournoi des histoires · Sottises insensées</title>
+  <title>La Mêlée des sottises · Sottises insensées</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -26,25 +26,32 @@
       <span>Sottises insensées</span>
     </a>
     <div class="outils">
+      <nav class="menu" id="menu" aria-label="Navigation principale">
       <a class="nav-accueil" href="index.html">Sommaire</a>
       <a class="nav-accueil" href="index.html#bestiaire">Bestiaire</a>
+      <a class="nav-accueil" href="index.html#carte">Carte</a>
+      <a class="nav-accueil" href="index.html#palmares">Palmarès</a>
       <a class="nav-accueil" href="quiz.html">Quiz</a>
-      <a class="nav-accueil" href="tournoi.html" aria-current="page">Tournoi</a>
+      <a class="nav-accueil" href="tournoi.html" aria-current="page">La Mêlée</a>
+      </nav>
       <button class="outil" id="theme" type="button" aria-label="Passer en mode nuit">Nuit</button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
+        <span class="burger-barres" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
     </div>
   </header>
 
   <main class="page-quiz page-tournoi">
     <div class="hero">
-      <p class="sur-titre-quiz">Classement personnel · duel après duel</p>
-      <h1 class="titre-hero titre-tournoi" aria-label="Le tournoi des histoires">
-        <span class="mot">Le</span><span class="mot">tournoi</span><span class="mot">des</span><span class="mot">histoires</span>
+      <p class="sur-titre-quiz">Tournoi intergalactique · duel après duel</p>
+      <h1 class="titre-hero titre-tournoi" aria-label="La Mêlée des sottises">
+        <span class="mot">La</span><span class="mot">Mêlée</span><span class="mot">des</span><span class="mot">sottises</span>
       </h1>
-      <p class="chapeau">Vingt récits entrent dans l’arène. À chaque duel, choisis celui que tu préfères ; à la fin, chaque histoire aura sa place dans ton top 20.</p>
+      <p class="chapeau">Vingt sottises entrent dans la mêlée, une seule en ressort couronnée. À chaque duel, choisis celle que tu préfères : elle passe au tour suivant, l’autre reste à l’étage où elle est tombée.</p>
     </div>
 
     <p class="tournoi-annonce" id="tournoi-annonce" role="status" aria-live="polite"></p>
-    <section class="tournoi" id="tournoi" aria-label="Tournoi des histoires">
+    <section class="tournoi" id="tournoi" aria-label="La Mêlée des sottises">
       <p class="q-vide">Préparation du tournoi…</p>
     </section>
   </main>

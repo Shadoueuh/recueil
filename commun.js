@@ -143,3 +143,23 @@ const melanger = liste => {
   return a;
 };
 const auHasard = liste => liste[Math.floor(Math.random() * liste.length)];
+
+
+/* ---------- Menu burger (téléphone) ---------- */
+(function initMenu() {
+  const burger = $("burger"), menu = $("menu");
+  if (!burger || !menu) return;
+  const barre = burger.closest(".barre");
+  const ouvrir = oui => {
+    barre.classList.toggle("menu-ouvert", oui);
+    burger.setAttribute("aria-expanded", oui);
+    burger.setAttribute("aria-label", oui ? "Fermer le menu" : "Ouvrir le menu");
+  };
+  burger.onclick = () => ouvrir(!barre.classList.contains("menu-ouvert"));
+  menu.addEventListener("click", e => { if (e.target.closest("a")) ouvrir(false); });
+  addEventListener("hashchange", () => ouvrir(false));
+  addEventListener("keydown", e => {
+    if (e.key === "Escape" && barre.classList.contains("menu-ouvert")) { ouvrir(false); burger.focus(); }
+  });
+  document.addEventListener("click", e => { if (!barre.contains(e.target)) ouvrir(false); });
+})();

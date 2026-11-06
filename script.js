@@ -466,12 +466,50 @@ function sottisometre(texte) {
   const demesure = max > 0 ? Math.min(Math.log10(max) / 30, 1) : 0;         // 10^30 et au-delà = plafond
   const precision = Math.min(specificite(texte) / mots * 100 / 8, 1);       // 8 points pour 100 mots = plafond
   const score = Math.round((0.25 * densiteChiffres + 0.15 * densiteCosmique + 0.25 * demesure + 0.35 * precision) * 100) / 10;
-  const verdict = score < 3 ? "Presque raisonnable" : score < 6 ? "Franchement insensé" : score < 8.5 ? "Délire cosmique" : "Au-delà du multivers";
+  const verdict = verdictDe(score);
   return { score, verdict, nb, cosmos, maxTxt, max, propres: nomsPropres(texte) };
 }
 
+/* La note d'un texte : l'analyse du sens (LECTURES) quand elle existe,
+   sinon le calcul automatique sur les chiffres et les noms propres. */
+const CRITERES = [
+  ["demesure", "Démesure", "À quel point les échelles explosent"],
+  ["collisions", "Collisions", "Des choses qui n'ont rien à faire ensemble"],
+  ["serieux", "Sérieux imperturbable", "L'aplomb avec lequel l'absurde est présenté comme logique"],
+  ["precision", "Précision inutile", "Les détails beaucoup trop exacts"],
+  ["chute", "Chute", "La fin, et ce qu'elle fait exploser"]
+];
+const verdictDe = score => score < 3 ? "Presque raisonnable" : score < 6 ? "Franchement insensé" : score < 8.5 ? "Délire cosmique" : "Au-delà du multivers";
+function lectureDe(t) {
+  if (typeof LECTURES === "undefined" || !t.fichier) return null;
+  const cle = t.fichier.normalize("NFC");
+  return Object.entries(LECTURES).find(([f]) => f.normalize("NFC") === cle)?.[1] || null;
+}
+function noteSottise(t) {
+  const r = sottisometre(t.contenu || "");
+  if (!r) return null;
+  const lecture = lectureDe(t);
+  if (lecture) {
+    r.score = Math.round(CRITERES.reduce((s, [k]) => s + lecture[k], 0) / CRITERES.length * 10) / 10;
+    r.verdict = verdictDe(r.score);
+  }
+  r.lecture = lecture;
+  return r;
+}
+
+function montrerPassage(phrase) {
+  const net = s => normaliser(s.replace(/\s+/g, " ")).n;
+  const cible = net(phrase);
+  const p = [...$("l-corps").querySelectorAll("p")].find(x => net(x.textContent).includes(cible));
+  if (!p) return;
+  p.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+  p.classList.remove("s-eclair");
+  void p.offsetWidth;
+  p.classList.add("s-eclair");
+}
+
 function rendreSottisometre(t) {
-  const r = sottisometre(t.contenu);
+  const r = noteSottise(t);
   const el = $("l-sottise");
   el.hidden = !r;
   if (!r) { el.innerHTML = ""; return; }
@@ -482,12 +520,22 @@ function rendreSottisometre(t) {
       <strong class="s-score">${r.score.toLocaleString("fr-FR")}<small>/10</small></strong>
       <span class="s-verdict">${r.verdict}</span>
     </div>
+    ${r.lecture ? `
+    <p class="s-avis">${echappe(r.lecture.avis)}</p>
+    <ul class="s-criteres">${CRITERES.map(([k, nom, aide]) => `
+      <li title="${echappe(aide)}"><span class="s-c-nom">${nom}</span>
+        <span class="s-c-barre" aria-hidden="true"><span style="width:${r.lecture[k] * 10}%"></span></span>
+        <span class="s-c-note">${r.lecture[k]}</span></li>`).join("")}</ul>
+    <div class="s-cles"><p class="s-c-titre">Les sommets de la sottise</p>
+      ${r.lecture.cles.map((c, i) => `<button type="button" class="s-cle" data-i="${i}">« ${echappe(c)} »</button>`).join("")}
+    </div>` : `<p class="s-avis s-auto">Ce texte n'a pas encore été analysé : sa note est calculée automatiquement à partir des chiffres, des mesures et des noms propres.</p>`}
     <dl class="s-stats">
       ${r.maxTxt ? `<div><dt>Le chiffre le plus démesuré</dt><dd>${echappe(r.maxTxt)}</dd></div>` : ""}
       <div><dt>Chiffres cités</dt><dd>${r.nb}</dd></div>
       <div><dt>Références cosmiques</dt><dd>${r.cosmos}</dd></div>
       <div><dt>Noms propres</dt><dd title="${echappe(r.propres.join(", "))}">${r.propres.length}</dd></div>
     </dl>`;
+  if (r.lecture) el.querySelectorAll(".s-cle").forEach(b => b.onclick = () => montrerPassage(r.lecture.cles[b.dataset.i]));
 }
 
 /* ---------- Bestiaire ---------- */
@@ -770,7 +818,7 @@ function rendreCitationDuJour() {
 let palmaresCalcule = null;
 function calculerPalmares() {
   if (palmaresCalcule) return palmaresCalcule;
-  const lignes = TEXTES.map(t => ({ t, r: sottisometre(t.contenu || "") })).filter(x => x.r);
+  const lignes = TEXTES.map(t => ({ t, r: noteSottise(t) })).filter(x => x.r);
   lignes.sort((a, b) => b.r.score - a.r.score);
   palmaresCalcule = lignes;
   return lignes;

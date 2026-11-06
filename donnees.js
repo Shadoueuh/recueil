@@ -537,3 +537,107 @@ const TEXTES = [
   { titre: "Le Tournoi Interplanétaire présidé et financé par les plus Grands bandits de ce Monde", auteur: "Simon", fichier: "recueil/tournoi_interplanétaire", resume: "Deux équipes de célébrités s’affrontent en direct, avec des usines de confiseries assez grandes pour mériter leur propre service postal. Les bonbons doivent aider trois pays à construire un chemin de fer jusqu’aux usines ; la camionnette promise aux vainqueurs est à peine plus petite que l’Équateur." },
   { titre: "Trafic de Chaud et de Froid", auteur: "Simon", fichier: "recueil/trafic_chaud_froid.txt", resume: "Une contrebasse de huit mètres attire les foules vers le Sahara ; le reste du dispositif prévoit du sable à vendre et, en option, un bateau lancé à 1 000 km/h pour la neige antarctique. Pour la logistique, le bon sens n’a pas été convoqué." },
 ];
+
+/* =========================================================
+   LECTURES : l'analyse du sens de chaque texte
+   Faite une fois pour toutes (par Claude). Cinq critères notés sur 10 :
+   - demesure  : à quel point les échelles explosent
+   - collisions: des choses qui n'ont rien à faire ensemble
+   - serieux   : l'aplomb avec lequel l'absurde est présenté comme logique
+   - precision : les détails inutilement exacts
+   - chute     : la fin, et ce qu'elle fait exploser
+   « cles » : des passages recopiés tels quels du texte (les sommets de la sottise).
+   Un texte absent d'ici garde la note calculée automatiquement.
+   ========================================================= */
+const LECTURES = {
+  "recueil/chasse-a-l-homme-cosmique.txt": {
+    demesure: 9, collisions: 10, serieux: 8, precision: 10, chute: 8,
+    avis: "Un inventaire en quinze nombrils où la tour Montparnasse délocalisée à Nantes côtoie des cacahuètes à 1,63 €. La précision maniaque de chaque objet fait tout le sel.",
+    cles: ["ayant précisément 78 ans et 17 jours", "Le cinquième objet est la tour Montparnasse, présente à Nantes.", "qu’on trouve aisément à seulement 1.63€ dans le Netto du centre-ville de Poitiers"]
+  },
+  "recueil/route-infernale.txt": {
+    demesure: 4, collisions: 6, serieux: 9, precision: 9, chute: 7,
+    avis: "Peu de cosmos, mais un sérieux de rapport de la DDE : la limitation à 50 pour cause de nids-de-poule est si réaliste qu'elle rend le reste encore plus absurde.",
+    cles: ["100 personnes par m²", "la D341, départementale faisant la liaison entre Calais et Lens"]
+  },
+  "recueil/demantelement-galactique.txt": {
+    demesure: 7, collisions: 9, serieux: 8, precision: 10, chute: 7,
+    avis: "Le code hexadécimal c6c565 est peut-être le détail le plus inutile du recueil, et c'est exactement pour ça qu'il marche. La loutre à dix-sept nageoires n'est pas loin derrière.",
+    cles: ["correspondant au code hexadécimal suivant : c6c565", "une loutre de mer à trois pattes et 17 nageoires"]
+  },
+  "recueil/tournoi-lesotho.txt": {
+    demesure: 10, collisions: 10, serieux: 8, precision: 9, chute: 9,
+    avis: "Sept épreuves (dont deux troisièmes), une mule sur Saturne et un trombone contre l'extinction des dinosaures : c'est l'escalade la plus longue et la plus tenue du recueil.",
+    cles: ["en un temps record de 13.7s, minimum", "un jacuzzi gigantesque capable de contenir 54 tartillion de croissants beurré", "avec l'aide précieuse d'un trombone à papier"]
+  },
+  "recueil/train-cornichon.txt": {
+    demesure: 4, collisions: 9, serieux: 7, precision: 6, chute: 8,
+    avis: "Court mais d'une logique implacable : quitte à transformer des passagers en peaux de banane, autant que ça serve à faire des gags.",
+    cles: ["une vaste gamme de cornichons de mer", "ensuite désignées à créer des sketchs et gags de personnes glissant dessus"]
+  },
+  "recueil/tournoi-des-membres.txt": {
+    demesure: 7, collisions: 6, serieux: 7, precision: 4, chute: 8,
+    avis: "Un tournoi qui déclenche l'apocalypse dès la première épreuve. La transformation finale en châteaux de sable dispersés au vent est presque poétique.",
+    cles: ["se placer au sommet d'un volcan et de résister à son éruption", "changeant alors les hommes en chateaux de sables éternel, s'éparpillant dans l'air au gré du vent"]
+  },
+  "recueil/indre-et-loire.txt": {
+    demesure: 5, collisions: 7, serieux: 7, precision: 7, chute: 8,
+    avis: "Une seule phrase pour un concept de jeu télévisé complet. Rester sur le podium à vie, c'est la récompense qui ressemble le plus à une punition.",
+    cles: ["sur lesquels ils devront rester dessus pendant toute leur vie", "faire de l'apnée éternelle dans la mer Baltique"]
+  },
+  "recueil/farandole-saturnienne.txt": {
+    demesure: 9, collisions: 9, serieux: 8, precision: 7, chute: 10,
+    avis: "Le retournement est la meilleure chute du recueil : l'enquête est réussie, sauf que les héros ont arrêté Dieu, le frère jumeau du coupable.",
+    cles: ["en poissons longs de 1 km et large de 1 mm", "chaussures de lutins pointus, longues de 2 années-lumière", "avoir capturer Dieu et non le méchant personnage, Dieu étant son frère jumeau"]
+  },
+  "recueil/parade-d-asterion.txt": {
+    demesure: 8, collisions: 9, serieux: 6, precision: 4, chute: 8,
+    avis: "Des lutins-mouches qui forment le visage géant d'un youtubeur : l'image est folle. Tout va très vite, et la fin de l'Univers tient en une demi-phrase.",
+    cles: ["des lutins-mouches souriantes", "afficherait son fameux sourire de Joker"]
+  },
+  "recueil/baignoire-cosmique.txt": {
+    demesure: 10, collisions: 9, serieux: 8, precision: 6, chute: 10,
+    avis: "François Hollande dix fois plus grand qu'un trou noir, qui réveille Sarkozy d'un sommeil de milliards d'années : la montée en puissance façon manga est parfaitement assumée.",
+    cles: ["1 quintilliard d'êtres extraordinaires totalement dénués d'une morphologie humanoïde", "à la manière de la technique de la déesse au 1000 paumes de Netero"]
+  },
+  "recueil/grand_mensonge_noel": {
+    demesure: 6, collisions: 8, serieux: 6, precision: 5, chute: 6,
+    avis: "Les enceintes Marshall volantes sont le détail qui fait tout. Le reste suit un schéma qu'on retrouve ailleurs dans le recueil.",
+    cles: ["en voyageant à l'intérieur d'enceintes Marshall géantes qui volent"]
+  },
+  "recueil/heure_des_pros.txt": {
+    demesure: 10, collisions: 9, serieux: 7, precision: 9, chute: 7,
+    avis: "Le calcul du nombre de pinceaux est un sommet de précision inutile. La seconde moitié enchaîne les massacres, qui prennent le pas sur l'absurde.",
+    cles: ["soit 3,6 × 10⁸⁹ pinceaux", "en 13 picosecondes sur un voile de 1 milliard de kilomètre de haut et de 15cm de large"]
+  },
+  "recueil/le_concert_de_trop.txt": {
+    demesure: 10, collisions: 9, serieux: 9, precision: 8, chute: 10,
+    avis: "Un voyage à un mètre par an, et une guitare qui doit « rester une guitare, cela va de soi » : le sérieux pédant face à l'énormité atteint ici son sommet.",
+    cles: ["à la vitesse démente de 1 m par an", "il faut que ça reste une guitare, cela va de soit", "une aiguille de 1 année lumière de long et 1 nanomètre de large"]
+  },
+  "recueil/marche_noir_noel": {
+    demesure: 3, collisions: 6, serieux: 5, precision: 4, chute: 4,
+    avis: "Très court : l'absurde repose surtout sur le détour par la Laponie, une idée déjà mieux exploitée dans Le Grand Mensonge de Noël.",
+    cles: ["en Laponie au village du Père Noël"]
+  },
+  "recueil/odysee_boules_humaines.txt": {
+    demesure: 6, collisions: 9, serieux: 7, precision: 7, chute: 8,
+    avis: "Une baleine bleue comme moyen de transport et une Coupe du monde dans les grottes de Lascaux : la collision géographique et historique est parfaite.",
+    cles: ["à bord d'une baleine bleue de 1km3 de volume", "ballon de foot de la Coupe du Monde de Football dans le grottes de Lascaux"]
+  },
+  "recueil/operation_cajou_polaire": {
+    demesure: 6, collisions: 8, serieux: 5, precision: 6, chute: 6,
+    avis: "Tout ce chantier pour un trafic de noix de cajou dans un igloo sibérien : l'objectif final est si dérisoire qu'il en devient drôle.",
+    cles: ["un igloo gigantesque plus haute que la Burj Khalifa", "faire un trafic de noix de cajou"]
+  },
+  "recueil/tournoi_interplanétaire": {
+    demesure: 7, collisions: 10, serieux: 8, precision: 9, chute: 9,
+    avis: "Une usine de 8245 km de large sur 35 cm de haut, des candidats préparés comme des pizzas et une punition finale qui ne dit pas son nom : c'est le texte le plus sournois du recueil.",
+    cles: ["italiens badigeonnés de sauce tomate, de basilic et de mozzarella", "chaque usine mesurera au minimum 8245 km de large et 1,30m de long et de 35 cm de hauteur", "2 rendez-vous romantiques avec des femmes de leur âge"]
+  },
+  "recueil/trafic_chaud_froid.txt": {
+    demesure: 5, collisions: 7, serieux: 6, precision: 6, chute: 6,
+    avis: "Organiser un trafic de sable au Sahara, puis de neige en Antarctique : vendre ce qui est déjà partout, c'est un modèle économique absurde à souhait.",
+    cles: ["Jouer de la contrebasse géante (8 m)", "un bateau géant pouvant atteindre les 1000 km/h"]
+  }
+};

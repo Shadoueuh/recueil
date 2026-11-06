@@ -27,16 +27,21 @@
       <span>Sottises insensées</span>
     </a>
     <div class="outils">
+      <nav class="menu" id="menu" aria-label="Navigation principale">
       <a class="nav-accueil" id="nav-galerie" href="#galerie">Galerie</a>
       <a class="nav-accueil" id="nav-auteurs" href="#auteurs">Auteurs</a>
       <a class="nav-accueil" id="nav-bestiaire" href="#bestiaire">Bestiaire</a>
       <a class="nav-accueil" id="nav-palmares" href="#palmares">Palmarès</a>
       <a class="nav-accueil" id="nav-carte" href="#carte">Carte</a>
       <a class="nav-accueil" id="nav-quiz" href="quiz.html">Quiz</a>
-      <a class="nav-accueil" id="nav-tournoi" href="tournoi.html">Tournoi</a>
+      <a class="nav-accueil" id="nav-tournoi" href="tournoi.html">La Mêlée</a>
+      </nav>
       <a class="outil" id="retour-barre" href="#accueil" hidden>Sommaire</a>
       <button class="outil" id="taille" type="button" hidden aria-label="Changer la taille du texte">Aa</button>
       <button class="outil" id="theme" type="button" aria-label="Passer en mode nuit">Nuit</button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
+        <span class="burger-barres" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
     </div>
     <div class="progression" id="progression"></div>
   </header>
@@ -94,10 +99,10 @@
 
       <section class="encart-tournoi" aria-labelledby="et-titre">
         <div class="et-texte">
-          <p class="sur-titre-quiz">Le tournoi du recueil</p>
-          <h2 id="et-titre">Vingt histoires entrent. Ton top 20 ressort.</h2>
+          <p class="sur-titre-quiz">La Mêlée des sottises</p>
+          <h2 id="et-titre">Vingt histoires entrent. Une seule ressort couronnée.</h2>
           <p>Départage les récits un duel après l’autre. Même les perdantes auront leur place au classement — sans être condamnées à rester sur un podium à vie.</p>
-          <a class="outil plein et-bouton" href="tournoi.html">Lancer le tournoi</a>
+          <a class="outil plein et-bouton" href="tournoi.html">Entrer dans la mêlée</a>
         </div>
         <div class="et-duel" aria-hidden="true">
           <span class="et-legende">PROCHAIN DUEL</span>

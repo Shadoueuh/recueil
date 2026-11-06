@@ -1422,3 +1422,91 @@ footer p { margin: 0; }
   #carte-svg .c-noeud.choisi text { font-size: 36px; }
   #carte-svg .c-noeud circle { stroke-width: 3; }
 }
+
+
+/* =========================================================
+   MENU DE NAVIGATION ET BURGER
+   ========================================================= */
+.menu { display: flex; align-items: center; gap: .1rem; }
+.nav-accueil[aria-current="page"] { color: var(--encre); font-weight: 700; }
+.burger { display: none; }
+
+@media (max-width: 960px) {
+  .outils { align-items: center; }
+  .burger {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2.6rem; height: 2.3rem; padding: 0; cursor: pointer;
+    background: var(--encre); color: var(--papier); border: 0; border-radius: 999px;
+  }
+  .burger-barres { position: relative; width: 1.1rem; height: .8rem; }
+  .burger-barres span { position: absolute; left: 0; width: 100%; height: 2px; border-radius: 2px; background: currentColor; transition: transform .2s, opacity .2s, top .2s; }
+  .burger-barres span:nth-child(1) { top: 0; }
+  .burger-barres span:nth-child(2) { top: calc(50% - 1px); }
+  .burger-barres span:nth-child(3) { top: calc(100% - 2px); }
+  .menu-ouvert .burger-barres span:nth-child(1) { top: calc(50% - 1px); transform: rotate(45deg); }
+  .menu-ouvert .burger-barres span:nth-child(2) { opacity: 0; }
+  .menu-ouvert .burger-barres span:nth-child(3) { top: calc(50% - 1px); transform: rotate(-45deg); }
+
+  .menu {
+    display: none;
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: .6rem var(--marge, 1.2rem) 1.2rem;
+    background: var(--papier);
+    border-bottom: 1.5px solid var(--encre);
+    box-shadow: 0 6px 0 var(--moutarde);
+  }
+  .menu-ouvert .menu { display: flex; }
+  .menu .nav-accueil,
+  .menu .nav-accueil:not([hidden]) {
+    display: block;
+    padding: .85rem .2rem;
+    font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em;
+    color: var(--encre);
+    border-bottom: 1px solid var(--trait);
+  }
+  .menu .nav-accueil:last-child { border-bottom: 0; }
+  .menu .nav-accueil:hover, .menu .nav-accueil[aria-current="page"] { color: var(--violet); }
+  .menu .nav-accueil[aria-current="page"]::after { content: " ←"; color: var(--moutarde); }
+}
+@media (max-width: 960px) and (prefers-reduced-motion: reduce) {
+  .burger-barres span { transition: none; }
+}
+
+/* =========================================================
+   LA MÊLÉE : élimination directe
+   ========================================================= */
+.tournoi-ligne { grid-template-columns: 5.2rem minmax(0, 1fr) auto; }
+.tournoi-ligne:nth-child(-n+3) { background: transparent; }
+.tournoi-ligne.tournoi-podium { background: color-mix(in srgb, var(--moutarde) 16%, var(--papier)); }
+.tournoi-rang { font-size: 1.1rem; white-space: nowrap; }
+.tournoi-serie { align-self: flex-start; margin: -.2rem 0 .1rem; padding: .1rem .5rem; background: var(--moutarde); color: #22183F; font-size: .78rem; font-weight: 800; letter-spacing: .02em; }
+.tournoi-revoir { max-width: 68rem; margin: 2rem auto 0; text-align: left; }
+.tournoi-revoir summary { cursor: pointer; font-weight: 800; padding: .6rem 0; }
+.tournoi-tableau { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.2rem 1.5rem; margin-top: .8rem; }
+.tt-tour h4 { margin: 0 0 .5rem; color: var(--violet); font-size: .95rem; text-transform: uppercase; letter-spacing: .06em; }
+.tt-tour ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.tt-tour li { display: flex; flex-direction: column; padding: .45rem .6rem; border: 1px solid var(--trait); background: var(--papier); font-size: .92rem; line-height: 1.3; }
+.tt-gagnant { font-weight: 800; color: var(--encre); }
+.tt-gagnant::before { content: "✓ "; color: var(--violet); }
+.tt-perdant { color: var(--gris); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--gris) 50%, transparent); }
+.tt-vs { color: var(--gris); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; margin: .1rem 0; }
+@media (max-width: 640px) { .tournoi-ligne { grid-template-columns: 4.6rem minmax(0, 1fr); } }
+.tournoi-annonce { scroll-margin-top: 5rem; }
+
+/* Sottisomètre : l'analyse du sens */
+.s-avis { font-family: var(--lecture); font-size: 1.12rem; line-height: 1.55; margin: 1rem 0 0; }
+.s-avis.s-auto { color: var(--gris); font-size: 1rem; font-style: italic; }
+.s-criteres { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .45rem; }
+.s-criteres li { display: grid; grid-template-columns: 11.5rem 1fr 1.6rem; align-items: center; gap: .8rem; cursor: help; }
+.s-c-nom { font-size: .95rem; font-weight: 600; }
+.s-c-barre { height: .45rem; background: var(--papier-2); }
+.s-c-barre span { display: block; height: 100%; background: var(--violet); }
+.s-c-note { font-weight: 800; text-align: right; }
+@media (max-width: 520px) { .s-criteres li { grid-template-columns: 1fr 1.6rem; gap: .2rem .8rem; } .s-c-nom { grid-column: 1 / -1; } }
+.s-cles { margin: 1.2rem 0 0; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
+.s-c-titre { margin: 0 0 .1rem; color: var(--gris); font-size: .9rem; }
+.s-cle { font: italic 1.02rem/1.45 var(--lecture); color: var(--encre); text-align: left; background: color-mix(in srgb, var(--moutarde) 35%, transparent); border: 0; border-left: 3px solid var(--moutarde); padding: .3rem .6rem; cursor: pointer; }
+.s-cle:hover, .s-cle:focus-visible { background: color-mix(in srgb, var(--moutarde) 60%, transparent); }
+@keyframes s-eclair { 0%, 40% { background: color-mix(in srgb, var(--moutarde) 55%, transparent); } 100% { background: transparent; } }
+.s-eclair { animation: s-eclair 2.2s ease-out; }
