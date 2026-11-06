@@ -226,7 +226,7 @@ function rendreLecture(t) {
   $("l-infos").innerHTML = `Par <strong>${echappe(t.auteur)}</strong>, ${m.toLocaleString("fr-FR")} mots, environ ${tempsLecture(t.contenu)} min de lecture`;
   $("l-affiche").hidden = !t.affiche;
   if (t.affiche) {
-    $("l-affiche").innerHTML = `<button type="button" aria-label="Agrandir l'affiche">${cadre(t)}</button><span>L'affiche de ce texte. Cliquez pour l'agrandir.</span>`;
+    $("l-affiche").innerHTML = `<button type="button" aria-label="Agrandir l'affiche">${cadre(t)}</button><span>L'affiche de ce texte. Clique dessus pour l'agrandir.</span>`;
     $("l-affiche").querySelector("button").onclick = () => ouvrirAffiche(t);
   }
   const paras = paragraphes(t.contenu);

@@ -1108,3 +1108,7 @@ footer p { margin: 0; }
 .c-theme-choix { align-items: center; justify-content: center; min-height: 6rem; text-align: center !important; }
 .c-theme-choix .q-mode-nom { font-size: 1.5rem; }
 .q-mode[data-mode="champion"] .q-mode-nb { font-size: 2.6rem; }
+
+/* Affiche centrée dans la page de lecture */
+.affiche-texte { flex-direction: column; align-items: center; text-align: center; gap: .8rem; }
+.affiche-texte button { width: min(14rem, 60%); }
