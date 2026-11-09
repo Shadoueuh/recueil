@@ -105,14 +105,18 @@ async function partager() {
   if (navigator.share && matchMedia("(pointer: coarse)").matches) {
     try { await navigator.share({ title: titre, url }); return; } catch (e) { if (e.name === "AbortError") return; }
   }
+  // Le lien s'affiche toujours sous les boutons, pour pouvoir le voir et le recopier
+  const champ = $("tl-lien"), bouton = $("tl-partager");
+  champ.hidden = false;
+  champ.value = url;
   try {
     await navigator.clipboard.writeText(url);
+    bouton.textContent = "Lien copié ✓";
+    bouton.classList.add("tl-copie");
     annoncer("Lien copié ! Envoie-le pour montrer ta tier list.");
-    $("tl-lien").hidden = true;
+    setTimeout(() => { bouton.textContent = "Partager ma tier list"; bouton.classList.remove("tl-copie"); }, 2500);
   } catch (e) {
-    const champ = $("tl-lien");
-    champ.hidden = false;
-    champ.value = url;
+    champ.focus();
     champ.select();
     annoncer("Copie le lien ci-dessous pour partager ta tier list.");
   }
