@@ -187,15 +187,15 @@ const BESTIAIRE = [
     description: "Instrument de huit mètres utilisé pour lancer un trafic qui joue sur deux extrêmes météorologiques."
   },
   // Personnages et noms cités
-  { nom: "Charlie Kirk", type: "Personnage", mots: ["Charlie Kirk"], description: "Au centre du Kirkversary, il se transforme pendant des années avant de pousser un cochon-tirelire jusqu'à UY Scuti pour un concert cosmique." },
-  { nom: "François, chef des gargouilles", type: "Personnage", mots: ["grands chefs des gargouilles, François"], description: "Chef des gargouilles dans le récit du Kirkversary." },
+  { nom: "Charlie Kirk", type: "Personnage", mots: ["Charlie Kirk"], description: "Après une longue transformation, il pousse un cochon-tirelire jusqu'à UY Scuti et y joue le plus grand solo de l'Univers." },
+  { nom: "François, chef des gargouilles", type: "Personnage", mots: ["grands chefs des gargouilles, François"], description: "Chef des gargouilles, assassiné par son grand frère… plus jeune que lui de 173 ans." },
   { nom: "Le frère de François", type: "Personnage", mots: ["我想吃中国菜"], description: "Frère cadet de François, désigné par une phrase en chinois dans le récit." },
-  { nom: "Hugo Décrypte", type: "Personnage", mots: ["Hugo Décrypte"], description: "Magnat de la décoration de Noël dans le Kirkversary." },
+  { nom: "Hugo Décrypte", type: "Personnage", mots: ["Hugo Décrypte"], description: "Magnat de la décoration festive qui vend les boules de Noël morbides, et sénateur vénézuélien à ses heures perdues." },
   { nom: "Elon Musk", type: "Personnage", mots: ["Elon Musk"], description: "Sa fortune sert d'unité de comparaison dans la chasse cosmique." },
   { nom: "Sylvain-Pierre Durif, Christ Cosmique", type: "Personnage", mots: ["Sylvain-Pierre Durif", "Sylvain Durif", "Christ Cosmique", "Grand Monarque"], description: "Figure cosmique invoquée dans la chasse à l'homme et la parade d'Astérion." },
   { nom: "Galactus", type: "Personnage", mots: ["Galactus"], description: "Entité cosmique dont les toilettes constituent une destination punitive." },
   { nom: "Michael Jackson, alias Belzébuth", type: "Personnage", mots: ["Michael Jackson", "Belzébuth"], description: "Figure de plusieurs récits, notamment la parade d'Astérion et le concert sur UY Scuti." },
-  { nom: "François Bayrou", type: "Personnage", mots: ["François Bayrou"], description: "Gourou au centre de la secte hindoue et de ses corvées." },
+  { nom: "François Bayrou", type: "Personnage", mots: ["François Bayrou"], description: "Ancien homme politique exilé après le vol d'un emmental affiné 110 ans, reconverti en gourou galactique pour financer sa consommation de Burger King." },
   { nom: "Baptiste Vrigneau", type: "Personnage", mots: ["Baptiste Vrigneau"], description: "Voix qui prononce les oracles des pendules de la secte." },
   { nom: "Justin Trudeau", type: "Personnage", mots: ["Justin Trudeau"], description: "Dirige le Canada autour duquel se trouve le laboratoire du démantèlement galactique." },
   { nom: "Jeffrey Epstein", type: "Personnage", mots: ["Jeffrey Epstein"], description: "Nom cité dans le démantèlement galactique et le tournoi interplanétaire." },
@@ -227,7 +227,6 @@ const BESTIAIRE = [
   { nom: "Le groupe Mastodon", type: "Groupe", mots: ["Mastodon"], description: "Groupe auquel appartient le batteur Brann Dailor." },
   { nom: "Le Père Noël", type: "Personnage", mots: ["Père Noël"], description: "Personnage au centre de plusieurs détournements de Noël dans les textes." },
   // Lieux, pays et institutions
-  { nom: "L'Utah", type: "Lieu", mots: ["Utah"], description: "État américain où se déroule le discours du Kirkversary." },
   { nom: "Le Sud-Soudan", type: "Lieu", mots: ["Sud-Soudan"], description: "Pays qui finance l'émission de chasse à l'homme." },
   { nom: "Le Vatican et les papes", type: "Institution", mots: ["pays tout entier du Vatican", "totalité des papes"], description: "Le Vatican et l'ensemble de ses papes deviennent un objet de survie intergalactique." },
   { nom: "La tour Montparnasse de Nantes", type: "Lieu", mots: ["tour Montparnasse, présente à Nantes"], description: "Tour parisienne déplacée par le texte jusqu'à Nantes." },
@@ -265,7 +264,7 @@ const BESTIAIRE = [
   { nom: "Les Trois Petits Cochons", type: "Œuvre", mots: ["3 petits cochons"], description: "Conte auquel le récit de L'Heure des Pros compare le souffle d'Alain Soral." },
   { nom: "Le tableau La Vague de Hokusai", type: "Œuvre", mots: ["La Vague", "Hokusai"], description: "Estampe reproduite par la transformation des victimes de la secte." },
   // Groupes, organisations et événements
-  { nom: "La Grande Guerre Spatiale Migratoire", type: "Événement", mots: ["Grande Guerre Spatiale Migratoire"], description: "Conflit déclenché lorsque les migrants du Kirkversary se révèlent être des sauterelles." },
+  { nom: "La Grande Guerre Spatiale Migratoire", type: "Événement", mots: ["Grande Guerre Spatiale Migratoire"], description: "Conflit déclenché lorsque les invités du Festival se révèlent être des sauterelles." },
   { nom: "Les enfants croates et libanais", type: "Groupe", mots: ["enfants croates et libanais"], description: "Enfants mentionnés dans le récit du mur et des barres d'acier." },
   { nom: "Le parti conservateur d'extrême droite du Venezuela", type: "Organisation", mots: ["parti conservateur d'extrême droite du Venezuela"], description: "Parti auquel le texte rattache Hugo Décrypte." },
   { nom: "Les spéculateurs de la D341", type: "Groupe", mots: ["acheté des terrains vagues"], description: "Spéculateurs immobiliers convoqués dans la Route de la Pénitence." },
@@ -275,7 +274,7 @@ const BESTIAIRE = [
   { nom: "Les enfants entomologistes", type: "Groupe", mots: ["métier de rêve de devenir entomologue"], description: "Public devant lequel les candidats récitent textes religieux et conditions d'utilisation." },
   { nom: "Le culte de la batterie de Brann Dailor", type: "Organisation", mots: ["culte de la batterie de Brann Dailor"], description: "Culte recherché dans le tournoi du Lesotho pour y trouver une potion." },
   { nom: "L'Angoulême's Portal To an Imminent and Painful Death", type: "Événement", mots: ["Angoulême's Portal To an Imminent and Painful Death"], description: "Festival métal mentionné dans l'épreuve consacrée au culte de la batterie." },
-  { nom: "Les Grandes Corvées Suprêmes et Irrévocables", type: "Événement", mots: ["Grandes Corvées Suprêmes et Irrévocables"], description: "Série de cinq tâches imposées aux disciples de la secte de Bayrou." },
+  { nom: "Les Grandes Corvées Suprêmes et Irrévocables", type: "Événement", mots: ["Grandes Corvées Suprêmes et Irrévocables"], description: "Série de cinq tâches imposées aux disciples de la secte de François Bayrou." },
   { nom: "Les Fidèles Destroyeurs de l'Espace Multi Planétaire", type: "Groupe", mots: ["Fidèles Destroyeurs de l’Espace Multi Planétaire", "Fidèles Destroyeurs"], description: "Grade supérieur attribué aux adeptes après des décennies de manipulations." },
   { nom: "L'équipe d'enquêteurs de la farandole", type: "Groupe", mots: ["équipe d'enquêteurs"], description: "Groupe composé de Grégoire Cliquet, Pierre Bueno, Raphaël Glucksmann et Adolf Hitler." },
   { nom: "Dieu et son frère jumeau", type: "Personnage", mots: ["Dieu étant son frère jumeau"], description: "Le récit révèle que le criminel et Dieu sont frères jumeaux." },
@@ -298,7 +297,7 @@ const BESTIAIRE = [
   { nom: "Les banques à sperme du monde entier", type: "Institution", mots: ["banques à sperme accessibles"], description: "Cibles du braquage destiné à financer la secte de François Bayrou." },
   { nom: "Les deux personnes derrière Pégase", type: "Groupe", mots: ["deux individus en situation critique"], description: "Personnes endettées révélées derrière la créature mythique Pégase." },
   { nom: "Les gourous rivaux de la secte", type: "Groupe", mots: ["rival gourou philippin"], description: "Rivalité entre François Bayrou et un gourou philippin." },
-  { nom: "L'armée nucléaire de François Bayrou", type: "Organisation", mots: ["arsenal nucléaire détenu par ses soins"], description: "Arsenal qui explose après la chute du gourou." },
+  { nom: "L'arsenal nucléaire de François Bayrou", type: "Organisation", mots: ["arsenal nucléaire détenu par ses soins"], description: "Arsenal qui explose après la chute du gourou." },
   { nom: "La famine de la Voie lactée", type: "Événement", mots: ["famine d’ampleur planétaire"], description: "Catastrophe déclenchée par la détonation de l'arsenal nucléaire." },
   { nom: "La Voie lactée", type: "Lieu", mots: ["Voie lactée"], description: "Galaxie touchée par plusieurs catastrophes des récits." },
   { nom: "Andromède", type: "Lieu", mots: ["Andromède"], description: "Galaxie qui abrite des planètes contrôlées par le cartel." },
@@ -306,13 +305,11 @@ const BESTIAIRE = [
   { nom: "Le Système solaire", type: "Lieu", mots: ["Système Solaire"], description: "Système dont la secte tente de compter les soleils." },
   { nom: "La destruction de l'espace et du temps", type: "Événement", mots: ["Espace et le Temps à jamais"], description: "Dénouement cosmique de plusieurs histoires du recueil." },
   // Objets, créatures, œuvres et détails singuliers
-  { nom: "La bille de métal pointue", type: "Objet", mots: ["grosse bille de métal pointue"], description: "Projectile lancé à 3 650 km/h à l'origine de l'hommage du Kirkversary." },
-  { nom: "Le lance-pierre à zoom × 6", type: "Objet", mots: ["lance pierre extrêmement moderne"], description: "Lance-pierre équipé d'une lunette avec zoom × 6." },
   { nom: "Le paquet-trampoline géant", type: "Objet", mots: ["paquet cadeau en forme de trampoline géant"], description: "Cadeau-trampoline haut de 500 milliards de kilomètres et large de 17 mètres." },
-  { nom: "Les sauterelles à tête de tronçonneuse", type: "Créature", mots: ["grandes sauterelles avec une tronçonneuse à la place de la tête"], description: "Les prétendus migrants du Kirkversary, dotés d'une tronçonneuse en guise de tête." },
+  { nom: "Les sauterelles à tête de tronçonneuse", type: "Créature", mots: ["grandes sauterelles avec une tronçonneuse à la place de la tête"], description: "Les prétendus invités du Festival, dotés d'une tronçonneuse en guise de tête." },
   { nom: "Le mur de béton et d'acier", type: "Objet", mots: ["murs de 154 892 m d'épaisseur"], description: "Mur de dimensions absurdes bâti avec du béton armé et des barres d'acier." },
   { nom: "La toilette de 666 kilomètres", type: "Objet", mots: ["toilette de 666 km"], description: "Construction des enfants rebelles pour y envoyer les vieilles dames de Montceau-les-Mines." },
-  { nom: "La fiente de pigeon sans ailes ni pattes", type: "Substance", mots: ["fiente de pigeon sans ailes ni pattes"], description: "Encre imposée pour la longue punition d'écriture du Kirkversary." },
+  { nom: "La fiente de pigeon sans ailes ni pattes", type: "Substance", mots: ["fiente de pigeon sans ailes ni pattes"], description: "Seule encre autorisée pour la punition des 21 519 818 lignes." },
   { nom: "L'hybride chat-mille-pattes", type: "Créature", mots: ["hybride chat-mille pattes"], description: "Adversaire des pigeons qui auraient perdu leur bec dans un affrontement." },
   { nom: "La fosse beurrée de 500 kilomètres", type: "Lieu", mots: ["fosse de 500 km de profondeur"], description: "Gouffre huilé où les personnes réhabilitées sont envoyées après leurs punitions." },
   { nom: "La chaise criblée de pics", type: "Objet", mots: ["chaise criblée de pics"], description: "Siège placé au fond de la fosse pour recevoir les postérieurs des condamnés." },
@@ -396,13 +393,13 @@ const BESTIAIRE = [
   { nom: "L'Afghanistan", type: "Lieu", mots: ["Afghanistan"], description: "Pays touché par le souffle d'Alain Soral dans L'Heure des Pros." },
   { nom: "La poudre de cuivre nano-robotique", type: "Substance", mots: ["poudre de nano-robot pacifique"], description: "Poudre respirée par les habitants des mondes du multivers de la chasse cosmique." },
   // Références secondaires et détails singuliers relevés dans les vingt textes
-  { nom: "Montceau-les-Mines", type: "Lieu", mots: ["Montceau-les-Mines"], description: "Ville où vivent les vieilles dames envoyées dans les toilettes du Kirkversary." },
+  { nom: "Montceau-les-Mines", type: "Lieu", mots: ["Montceau-les-Mines"], description: "Ville d'où partent les voyageurs envoyés dans les canalisations de la toilette géante." },
   { nom: "Les vieilles dames de Montceau-les-Mines", type: "Groupe", mots: ["vieilles dames gâteuses"], description: "Elles traversent les canalisations avant d'être jugées pour des investissements frauduleux." },
-  { nom: "Les spéculateurs boursiers", type: "Groupe", mots: ["spéculateurs boursiers"], description: "Condamnés à la rédaction interminable du Kirkversary après leurs investissements frauduleux." },
+  { nom: "Les spéculateurs boursiers", type: "Groupe", mots: ["spéculateurs boursiers"], description: "Condamnés à une rédaction interminable après leurs investissements frauduleux." },
   { nom: "Les pigeons sans ailes, pattes ni bec", type: "Créature", mots: ["perdu leurs becs"], description: "Pigeons mutilés à l'encre desquels les spéculateurs doivent écrire." },
   { nom: "Les plantes carnivores des sabots", type: "Créature", mots: ["plantes carnivore"], description: "Plantes qui doivent pousser dans les grands sabots vendus par téléphone." },
   { nom: "Les personnes vulnérables appelées depuis la fosse", type: "Groupe", mots: ["personnes vulnérables"], description: "Cibles des appels commerciaux passés au fond de la fosse beurrée." },
-  { nom: "Les barres d'acier des mines indiennes", type: "Objet", mots: ["bars en acier inoxydable", "mines indiennes"], description: "Barres forgées dans les mines indiennes pour compléter le mur du Kirkversary." },
+  { nom: "Les barres d'acier des mines indiennes", type: "Objet", mots: ["bars en acier inoxydable", "mines indiennes"], description: "Barres forgées dans les mines indiennes pour compléter le mur de Mr Hugo Décrypte." },
   { nom: "La feuille A5", type: "Objet", mots: ["feuille A5"], description: "Support de la punition d'écriture infligée aux spéculateurs." },
   { nom: "Le fugitif innocent", type: "Personnage", mots: ["personne absolument innocente"], description: "Homme recherché dans l'émission cosmique, équipé de quinze nombrils et de nombreux outils." },
   { nom: "Les poursuivants âgés de 78 ans et 17 jours", type: "Groupe", mots: ["78 ans et 17 jours"], description: "Chasseurs auxquels le récit retire le lobe frontal et le fémur droit." },
@@ -436,7 +433,7 @@ const BESTIAIRE = [
   { nom: "Les films et séries avec des youtubeurs français", type: "Œuvre", mots: ["films et séries dans lesquels des Youtubeurs français"], description: "Corpus audiovisuel que les candidats doivent regarder intégralement." },
   { nom: "La salopette trop grande ou trop petite", type: "Objet", mots: ["salopette soit trop grande soit trop petite"], description: "Tenue imposée aux candidats pendant le saut sans parachute." },
   { nom: "Les Enfers du Grand Monarque", type: "Lieu", mots: ["enfers du grands monarques infernal"], description: "Lieu où les perdants du tournoi du Lesotho portent les orangs-outans d'Amazonie." },
-  { nom: "La secte hindoue de François Bayrou", type: "Organisation", mots: ["secte hindoue notoirement célèbre"], description: "Organisation galactique fondée par Bayrou, qui impose cinq Grandes Corvées à ses adeptes." },
+  { nom: "La secte de François Bayrou", type: "Organisation", mots: ["secte hindoue notoirement célèbre"], description: "Organisation galactique fondée par François Bayrou, qui impose cinq Grandes Corvées à ses adeptes." },
   { nom: "Les enfants du Moyen-Orient ciblés par la secte", type: "Groupe", mots: ["population infantile située", "ciblée à attribuer la crédibilité"], description: "Enfants que la secte cherche à convaincre de suivre son gourou." },
   { nom: "Le carburant de fusée", type: "Substance", mots: ["carburant de fusée récolté"], description: "Carburant transmis pendant l'opération des fondateurs de Papouasie-Nouvelle-Guinée." },
   { nom: "La lobotomie et le changement d'identité", type: "Châtiment", mots: ["lobotomie totale ainsi qu’à une procédure de changement d’identité"], description: "Procédure infligée aux nouvelles recrues pour les soumettre au gourou." },
@@ -502,7 +499,7 @@ const BESTIAIRE = [
   { nom: "La Norvège", type: "Lieu", mots: ["Norvégien"], description: "Pays associé au jumeau intergalactique de Raphaël Glucksmann." },
   { nom: "Malte", type: "Lieu", mots: ["maltais"], description: "Pays où sont situés les comptes bancaires de François Bayrou." },
   { nom: "La Somalie", type: "Lieu", mots: ["somaliens"], description: "Pays dont la monnaie sert de prix plancher à la vente de biomasse génétique par la secte." },
-  { nom: "Le Venezuela", type: "Lieu", mots: ["du Venezuela"], description: "Pays dont le Kirkversary invente un parti conservateur d'extrême droite." },
+  { nom: "Le Venezuela", type: "Lieu", mots: ["du Venezuela"], description: "Pays dont le Festival invente un parti conservateur d'extrême droite." },
   { nom: "Nantes", type: "Lieu", mots: ["présente à Nantes"], description: "Ville où la tour Montparnasse est déplacée dans la chasse cosmique." },
   { nom: "Poitiers", type: "Lieu", mots: ["de Poitiers"], description: "Ville dont le Netto vend la chaussure d'une entité cosmique pour 1,63 €." },
   { nom: "Calais", type: "Lieu", mots: ["entre Calais et Lens"], description: "Une extrémité de la D341 où se rassemblement les spéculateurs immobiliers." },
@@ -516,13 +513,13 @@ const BESTIAIRE = [
 ];
 
 const TEXTES = [
-  { titre: "Le Kirkversary", auteur: "Jules", fichier: "recueil/kirkversary.txt", resume: "Une bille lancée à 3 650 km/h, un anniversaire galactique et un trampoline emballé comme un cadeau : le Kirkversary a tout prévu, sauf un programme de festivités raisonnable. Des gargouilles, des sauterelles à tronçonneuse et un mammouth radioactif attendent déjà leur tour.", affiche: "affiches/kirkversary.webp" },
+  { titre: "Le Kirkversary", auteur: "Jules", fichier: "recueil/kirkversary.txt", resume: "Un trampoline de 500 milliards de kilomètres emballé comme un cadeau, une planète de gargouilles affamées et des invités qui se révèlent être des sauterelles à tronçonneuse : la fête tourne vite à la Grande Guerre Spatiale Migratoire. La suite passe par des mammouths radioactifs, du papier à bulles et une punition de 21 519 818 lignes.", affiche: "affiches/kirkversary.webp" },
   { titre: "Chasse à l'Homme Cosmique", auteur: "Jules", fichier: "recueil/chasse-a-l-homme-cosmique.txt", resume: "Quinze nombrils, chacun mieux équipé que le précédent, et une émission financée par tout le Sud-Soudan : voilà le dispositif pour retrouver un fugitif d’une innocence éclatante. Entre nanorobots, argile mauritanienne et tour Montparnasse déplacée à Nantes, la fuite s’annonce bien équipée.", affiche: "affiches/chasse-a-l-homme.webp" },
   { titre: "La Route de la Pénitence Infernale", auteur: "Jules", fichier: "recueil/route-infernale.txt", resume: "Sur la D341, des promoteurs immobiliers découvrent qu’un chantier peut aussi servir de pénitence. Nids-de-poule, bitume et nouvelle recette de béton sont au programme ; pour la touche finale, il faudra mettre la main à la pâte au sens le plus littéral.", affiche: "affiches/route-infernale.webp" },
-  { titre: "Le Démantèlement Galactique", auteur: "Jules", fichier: "recueil/demantelement-galactique.txt", resume: "Un caporal presque paralysé contre mille chefs criminels galactiques : le rapport de forces n’a pas été relu. Pour faire tomber l’organisation, il mise sur une pipistrelle à psoriasis, une loutre à dix-sept nageoires et un laboratoire canadien qui a perdu le formulaire de consentement." },
+  { titre: "Le Démantèlement Galactique", auteur: "Jules", fichier: "recueil/demantelement-galactique.txt", resume: "Un caporal presque paralysé contre mille chefs criminels galactiques : le rapport de forces n’a pas été relu. Pour faire tomber l’organisation, il mise sur une pipistrelle à psoriasis, une loutre à dix-sept nageoires et un laboratoire canadien qui a perdu le formulaire de consentement.", affiche: "affiches/operation-angola.webp"},
   { titre: "Le Tournoi du Lesotho Démoniaque", auteur: "Jules", fichier: "recueil/tournoi-lesotho.txt", resume: "Pour la présidentielle du Lesotho, pas de débat télévisé : sept épreuves attendent les candidats. Mules indonésiennes sur les anneaux de Saturne, mini-frigos volants et tube de colle UHU à économiser… Le programme électoral a visiblement été rédigé en plein vol.", affiche: "affiches/tournoi-du-lesotho.webp" },
   { titre: "Le Train Bolchévique aux Cornichons", auteur: "Jules", fichier: "recueil/train-cornichon.txt", resume: "Les cornichons de mer occupaient tranquillement les wagons quand un changement de cargaison et d’itinéraire est tombé. Direction un laboratoire indo-pakistanais, où l’on cherche à transformer des passagers en peaux de banane pour fabriquer le gag du siècle.", affiche: "affiches/train-bolchevique.webp" },
-  { titre: "La Secte Hindu de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", resume: "Chez François Bayrou, les pendules antiques rendent leurs oracles, les disciples comptent les soleils en poirier et les corvées sont irrévocables. Le programme fidélité s’étale sur 57 ans ; garde un œil sur les peaux de banane et l’interrupteur d’urgence.", affiche: "affiches/secte_hindu.webp" },
+  { titre: "La Secte de François Bayrou", auteur: "Jules", fichier: "recueil/secte-hindu.txt", resume: "Chez François Bayrou, les pendules antiques rendent leurs oracles, les disciples comptent les soleils en poirier et les corvées sont irrévocables. Le programme fidélité s’étale sur 57 ans ; garde un œil sur les peaux de banane et l’interrupteur d’urgence.", affiche: "affiches/secte_hindu.webp" },
   { titre: "Le Tournoi des Membres", auteur: "Jules", fichier: "recueil/tournoi-des-membres.txt", resume: "Mille candidats, un volcan en éruption et des récompenses anatomiques qui réclament une vitrine sur mesure : le tournoi a déjà dépassé le niveau échauffement. Son règlement semble avoir été rédigé au bord du cratère, sans prévoir de sortie de secours.", affiche: "affiches/tournoi-membres.webp" },
   { titre: "Le Podium d'Indre-et-Loire", auteur: "Jules", fichier: "recueil/indre-et-loire.txt", resume: "En Indre-et-Loire, les vainqueurs montent sur le podium pour y rester à vie ; les perdants découvrent la mer Baltique en apnée. Une compétition locale où la cérémonie de remise des médailles risque de durer un peu plus longtemps que prévu." },
   { titre: "La Farandole Saturnienne", auteur: "Simon", fichier: "recueil/farandole-saturnienne.txt", resume: "Souliers de lutins longs de deux années-lumière, humains transformés en poissons-filaments et farandole autour de Saturne : l’enquête a déjà dépassé les capacités du filet standard. Quatre détectives se lancent à la poursuite d’un suspect ; reste à savoir qui mène vraiment la danse.", affiche: "affiches/farandole.webp" },
@@ -533,9 +530,9 @@ const TEXTES = [
   { titre: "Le Concert de Trop", auteur: "Simon", fichier: "recueil/le_concert_de_trop.txt", resume: "Un cochon-tirelire vivant aspire tout le monde et prend la route d’UY Scuti à la vitesse d’un escargot administratif. Là-bas, une guitare géante attend son public, ses gradins et son dossier de réservation d’étoile, toujours coincé au service orbital." },
   { titre: "Le Marché Noir de Noël", auteur: "Simon", fichier: "recueil/marche_noir_noel", resume: "La visite du village du Père Noël prend un virage imprévu et dépose ses voyageurs en Laponie, devant une fabrique de lutins. Pour les cadeaux, c’est moins un marché de Noël qu’une orientation professionnelle sans préavis." },
   { titre: "L'Odyssée des Boules Humaines", auteur: "Simon", fichier: "recueil/odysee_boules_humaines.txt", resume: "Une expérience sous-marine devait tenir dans un protocole ; elle s’étire jusqu’à produire des boules humaines recrutées comme ballons pour la Coupe du monde de Lascaux. Les règles du match sont en cours de déterrage, avec le reste du terrain." },
-  { titre: "Opération Cajou Polaire", auteur: "Simon", fichier: "recueil/operation_cajou_polaire", resume: "Un traîneau d’une taille déraisonnable met un continent en route vers la Sibérie. Au bout du voyage : un igloo monumental et un marché de noix de cajou, probablement le premier dont le rayon frais s’étend sur plusieurs fuseaux horaires." },
+  { titre: "Opération Cajou Polaire", auteur: "Simon", fichier: "recueil/operation_cajou_polaire", resume: "Un traîneau d’une taille déraisonnable met un continent en route vers la Sibérie. Au bout du voyage : un igloo monumental et un marché de noix de cajou, probablement le premier dont le rayon frais s’étend sur plusieurs fuseaux horaires.", affiche: "affiches/operation-cajou.webp" },
   { titre: "Le Tournoi Interplanétaire présidé et financé par les plus Grands bandits de ce Monde", auteur: "Simon", fichier: "recueil/tournoi_interplanétaire", resume: "Deux équipes de célébrités s’affrontent en direct, avec des usines de confiseries assez grandes pour mériter leur propre service postal. Les bonbons doivent aider trois pays à construire un chemin de fer jusqu’aux usines ; la camionnette promise aux vainqueurs est à peine plus petite que l’Équateur." },
-  { titre: "Trafic de Chaud et de Froid", auteur: "Simon", fichier: "recueil/trafic_chaud_froid.txt", resume: "Une contrebasse de huit mètres attire les foules vers le Sahara ; le reste du dispositif prévoit du sable à vendre et, en option, un bateau lancé à 1 000 km/h pour la neige antarctique. Pour la logistique, le bon sens n’a pas été convoqué." },
+  { titre: "Trafic de Chaud et de Froid", auteur: "Simon", fichier: "recueil/trafic_chaud_froid.txt", resume: "Une contrebasse de huit mètres attire les foules vers le Sahara ; le reste du dispositif prévoit du sable à vendre et, en option, un bateau lancé à 1 000 km/h pour la neige antarctique. Pour la logistique, le bon sens n’a pas été convoqué.", affiche: "affiches/trafic-chaud-froid.webp" },
 ];
 
 /* =========================================================
@@ -554,6 +551,16 @@ const LECTURES = {
     demesure: 9, collisions: 10, serieux: 8, precision: 10, chute: 8,
     avis: "Un inventaire en quinze nombrils où la tour Montparnasse délocalisée à Nantes côtoie des cacahuètes à 1,63 €. La précision maniaque de chaque objet fait tout le sel.",
     cles: ["ayant précisément 78 ans et 17 jours", "Le cinquième objet est la tour Montparnasse, présente à Nantes.", "qu’on trouve aisément à seulement 1.63€ dans le Netto du centre-ville de Poitiers"]
+  },
+  "recueil/kirkversary.txt": {
+    demesure: 10, collisions: 10, serieux: 8, precision: 10, chute: 7,
+    avis: "Une escalade sans frein : un trampoline-cadeau, une guerre spatiale, des mammouths radioactifs qui changent la peau en papier à bulles, puis une punition à la fiente de pigeon. « 17 minutes et 512 secondes et trois quart » est un chef-d'œuvre de précision inutile.",
+    cles: ["un gigantesque paquet cadeau en forme de trampoline géant", "le temps record de 17 minutes et 512 secondes et trois quart", "transformant la peau qui les absorbe se transforme en papier à bulles"]
+  },
+  "recueil/secte-hindu.txt": {
+    demesure: 10, collisions: 9, serieux: 10, precision: 10, chute: 9,
+    avis: "Le jargon le plus solennel du recueil, digne d'un rapport ministériel, au service d'un gourou exilé pour le vol d'un emmental affiné 110 ans. Et tout cet empire galactique s'effondre sur une peau de banane posée par un gourou rival.",
+    cles: ["la subtilisation d’un fromage très rare (emmental affiné durant 110 années)", "à un prix plancher minimum de 116818,62 shillings somaliens", "il trébuche sur une peau de banane usagée, déposée clandestinement par un rival gourou philippin"]
   },
   "recueil/route-infernale.txt": {
     demesure: 4, collisions: 6, serieux: 9, precision: 9, chute: 7,

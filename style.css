@@ -1672,3 +1672,16 @@ a.tl-carte { cursor: pointer; }
 .pt-actions .outil { padding: .65rem 1.1rem; }
 .pt-resultat .tl-lien { margin: 1rem auto 0; display: block; width: 100%; }
 .pt-resultat .tl-lien[hidden] { display: none; }
+
+.pt-affinites li { display: grid; grid-template-columns: minmax(0, 1fr) 7rem 3rem; align-items: center; gap: .8rem; }
+.pt-affinites li::before { display: none; }
+.pt-affinites strong { text-align: right; color: var(--gris); }
+.pt-a-barre { height: .45rem; background: var(--papier-2); }
+.pt-a-barre span { display: block; height: 100%; background: var(--violet); }
+.pt-affinites li.pt-premier { background: color-mix(in srgb, var(--moutarde) 22%, transparent); padding-left: .5rem; padding-right: .5rem; }
+.pt-affinites li.pt-premier strong { color: var(--encre); }
+.pt-affinites li.pt-premier .pt-a-barre span { background: var(--moutarde); }
+.pt-affinites:not(.pt-tout) li.pt-loin { display: none; }
+.pt-tout-voir { margin: .9rem 0 0; }
+.pt-note { margin: 1.2rem auto 0 !important; font-size: .9rem !important; }
+@media (max-width: 520px) { .pt-affinites li { grid-template-columns: minmax(0, 1fr) 3rem; } .pt-a-barre { grid-column: 1 / -1; grid-row: 2; } }
