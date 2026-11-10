@@ -216,8 +216,22 @@ function rendreAuteurs() {
       ? `<img class="portrait" src="${echappe(PHOTOS[nom])}" alt="Photo de ${echappe(nom)}" loading="lazy" onerror="this.remove()">`
       : "";
     return `<div class="auteur">${photo}<div><h3>${echappe(nom)}</h3><p>${echappe(bio)}</p>
-  <span class="compte">${n} texte${n > 1 ? "s" : ""} dans le recueil</span></div></div>`;
+  <span class="compte">${n} texte${n > 1 ? "s" : ""} dans le recueil</span>
+  ${n ? `<button type="button" class="outil plein voir-textes" data-nom="${echappe(nom)}">Voir ses textes</button>` : ""}</div></div>`;
   }).join("");
+  $("liste-auteurs").querySelectorAll(".voir-textes").forEach(b => b.onclick = () => voirTextesDe(b.dataset.nom));
+}
+
+/* « Voir ses textes » : filtre le sommaire sur l'auteur et remonte jusqu'à lui */
+function voirTextesDe(nom) {
+  const champ = $("recherche");
+  if (champ && champ.value) { champ.value = ""; lancerRecherche(); }
+  filtreActif = nom;
+  rendreFiltres();
+  rendreSommaire();
+  const cible = $("filtres").closest(".entete-section") || $("sommaire");
+  cible.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  $("filtres").querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
 }
 
 function rendreLecture(t) {

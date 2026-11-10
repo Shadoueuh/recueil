@@ -1685,3 +1685,6 @@ a.tl-carte { cursor: pointer; }
 .pt-tout-voir { margin: .9rem 0 0; }
 .pt-note { margin: 1.2rem auto 0 !important; font-size: .9rem !important; }
 @media (max-width: 520px) { .pt-affinites li { grid-template-columns: minmax(0, 1fr) 3rem; } .pt-a-barre { grid-column: 1 / -1; grid-row: 2; } }
+
+.voir-textes { display: flex; width: fit-content; margin-top: 1rem; padding: .55rem 1.1rem; font-weight: 600; }
+.entete-section:has(#filtres) { scroll-margin-top: 5rem; }
