@@ -510,6 +510,17 @@ const BESTIAIRE = [
   { nom: "La biomasse génétique", type: "Substance", mots: ["biomasse génétique"], description: "Substance revendue par la secte pour financer François Bayrou." },
   { nom: "Le lobe frontal", type: "Objet", mots: ["lobe frontal"], description: "Partie du cerveau retirée aux poursuivants de l'émission mondiale de chasse à l'homme." },
   { nom: "Le fémur droit", type: "Objet", mots: ["fémur droit"], description: "Os retiré aux hommes et aux femmes qui poursuivent le fugitif cosmique." },
+  { nom: "Grégoire Cliquet", type: "Personnage", mots: ["Grégoire Cliquet"], description: "Sénateur du cosmos et glouton ultra-stellaire : trois repas toutes les 13 picosecondes, chacun plus copieux que tout ce que l'univers a jamais mangé." },
+  { nom: "La Wrinklinston", type: "Objet", mots: ["Wrinklinston"], description: "Machine qui mesure les rides selon des critères très précis (longueur, profondeur) avant de les revendre aux forains." },
+  { nom: "Le Mastonkebab", type: "Lieu", mots: ["Mastonkebab"], description: "Kebab englouti tout entier par Grégoire Cliquet, pour une commande livrée avec cinq minutes de retard." },
+  { nom: "Le dromadaire à 186 bosses", type: "Créature", mots: ["dromandaire impétueux"], description: "Monture de cavale rare et prisée : 186 bosses, de 50 cm à 27 000 km chacune." },
+  { nom: "Les soucoupes de la taille d'un grain de sel", type: "Châtiment", mots: ["soucoupe miniscule"], description: "Les coupables y sont compactés en poussière, puis cachés dans la salière de Grégoire Cliquet, qui sale ses frites à 50 kg près." },
+  { nom: "L'orbite à contresens autour de Saturne", type: "Châtiment", mots: ["sens inverse de la rotation"], description: "Le condamné tourne autour de Saturne à rebours, et percute un à un tous les cailloux de ses anneaux." },
+  { nom: "La pince à épine du Christ Cosmique", type: "Objet", mots: ["gigantesque pince"], description: "Pince géante qui servait à retirer une épine grande comme un amas de galaxies sous l'ongle de Sylvain-Pierre Duriff." },
+  { nom: "Le Super U de Normandie", type: "Lieu", mots: ["Super U de Normandie"], description: "Magasin qui ose une ristourne record de -5 % sur toute la gamme des épices locales." },
+  { nom: "L'Airbus A400M", type: "Objet", mots: ["Airbus A400M"], description: "Avion militaire qui grimpe à 500 années-lumière d'altitude pour un saut sans parachute." },
+  { nom: "Bourg-Saint-Maurice", type: "Lieu", mots: ["Bourg-Saint-Maurice"], description: "Ville des enquêteurs qui ont classé l'affaire du Mastonkebab en cold case." },
+  { nom: "Les Incas", type: "Groupe", mots: ["les Inca"], description: "Seuls survivants des atterrissages de Grégoire Cliquet, grâce à leur super-pouvoir d'apnée dans la boue." },
 ];
 
 const TEXTES = [
@@ -533,7 +544,7 @@ const TEXTES = [
   { titre: "Opération Cajou Polaire", auteur: "Simon", fichier: "recueil/operation_cajou_polaire", resume: "Un traîneau d’une taille déraisonnable met un continent en route vers la Sibérie. Au bout du voyage : un igloo monumental et un marché de noix de cajou, probablement le premier dont le rayon frais s’étend sur plusieurs fuseaux horaires.", affiche: "affiches/operation-cajou.webp" },
   { titre: "Le Tournoi Interplanétaire présidé et financé par les plus Grands bandits de ce Monde", auteur: "Simon", fichier: "recueil/tournoi_interplanétaire", resume: "Deux équipes de célébrités s’affrontent en direct, avec des usines de confiseries assez grandes pour mériter leur propre service postal. Les bonbons doivent aider trois pays à construire un chemin de fer jusqu’aux usines ; la camionnette promise aux vainqueurs est à peine plus petite que l’Équateur." },
   { titre: "Trafic de Chaud et de Froid", auteur: "Simon", fichier: "recueil/trafic_chaud_froid.txt", resume: "Une contrebasse de huit mètres attire les foules vers le Sahara ; le reste du dispositif prévoit du sable à vendre et, en option, un bateau lancé à 1 000 km/h pour la neige antarctique. Pour la logistique, le bon sens n’a pas été convoqué.", affiche: "affiches/trafic-chaud-froid.webp" },
-  { tritre: "Grégoire CLiquet : Chronique d'un glouton ultra-stellaire", auteur : "Jules", fichier:"gregoire-cliquet", resume:"Un homme. Un appétit. Des milliards de victimes potentielles. Grégoire Cliquet, sénateur du cosmos, est au cœur de la plus grande menace jamais connue. Pour usurper son identité, les candidats devront accomplir des missions défiant l'entendement, traverser les frontières du temps et de l'espace et affronter des conséquences dépassant l'imagination. Leur destination finale ? Les anneaux de Saturne.", affiche :"gregoire-cliqet.webp"}
+  { titre: "Grégoire Cliquet : Chronique d'un glouton ultra-stellaire", auteur: "Jules", fichier: "recueil/gregoire-cliquet.txt", resume: "Un homme. Un appétit. Des milliards de victimes potentielles. Grégoire Cliquet, sénateur du cosmos, est au cœur de la plus grande menace jamais connue. Pour usurper son identité, les candidats devront accomplir des missions défiant l'entendement, traverser les frontières du temps et de l'espace et affronter des conséquences dépassant l'imagination. Leur destination finale ? Les anneaux de Saturne.", affiche:"gregoire-cliquet.webp"}
 ];
 
 /* =========================================================
@@ -562,6 +573,11 @@ const LECTURES = {
     demesure: 10, collisions: 9, serieux: 10, precision: 10, chute: 9,
     avis: "Le jargon le plus solennel du recueil, digne d'un rapport ministériel, au service d'un gourou exilé pour le vol d'un emmental affiné 110 ans. Et tout cet empire galactique s'effondre sur une peau de banane posée par un gourou rival.",
     cles: ["la subtilisation d’un fromage très rare (emmental affiné durant 110 années)", "à un prix plancher minimum de 116818,62 shillings somaliens", "il trébuche sur une peau de banane usagée, déposée clandestinement par un rival gourou philippin"]
+  },
+  "recueil/gregoire-cliquet.txt": {
+    demesure: 10, collisions: 9, serieux: 8, precision: 9, chute: 8,
+    avis: "Le portrait-robot d'un glouton cosmique, du régime à trois repas toutes les 13 picosecondes au kebab englouti pour cinq minutes de retard. La machine Wrinklinston et la promo à -5 % du Super U sont des sommets de détail inutile.",
+    cles: ["trois repas toutes les 13 picosecondes", "une nouvelle technologie appelée Wrinklinston", "avec une ristourne record de -5% sur toute la gamme des épices locales"]
   },
   "recueil/route-infernale.txt": {
     demesure: 4, collisions: 6, serieux: 9, precision: 9, chute: 7,
