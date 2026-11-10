@@ -135,7 +135,7 @@ main {
 
 /* Accueil */
 .hero {
-    padding: clamp(3rem, 9vw, 7rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+    padding: clamp(1.5rem, 4vw, 3.5rem) 0 clamp(2.5rem, 6vw, 4.5rem);
     max-width: 1100px;
 }
 
